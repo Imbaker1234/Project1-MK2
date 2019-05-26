@@ -1,1 +1,2 @@
-# Project1-MK2
+# Project1
+Revature Expense Reimbursement Full Stack Application
