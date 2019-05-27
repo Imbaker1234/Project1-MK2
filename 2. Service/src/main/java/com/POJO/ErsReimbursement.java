@@ -1,5 +1,5 @@
 package com.POJO;
-
+import java.sql.Blob;
 import java.sql.Timestamp;
 
 public class ErsReimbursement {
@@ -9,15 +9,15 @@ public class ErsReimbursement {
 	private java.sql.Timestamp reimbSubmitted;
 	private java.sql.Timestamp reimbResolved;
 	private String reimbDescription;
-	private String reimbReceipt;
+	private Blob reimbReceipt;
 	private String reimbAuthor;
 	private String reimbResolver;
 	private String reimbStatusId;
 	private String reimbTypeId;
 
 	public ErsReimbursement(String reimbId, String reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved,
-			String reimbDescription, String reimbReceipt, String reimbAuthor, String reimbResolver,
-			String reimbStatusId, String reimbTypeId) {
+                            String reimbDescription, Blob reimbReceipt, String reimbAuthor, String reimbResolver,
+                            String reimbStatusId, String reimbTypeId) {
 		super();
 		this.reimbId = reimbId;
 		this.reimbAmount = reimbAmount;
@@ -71,11 +71,11 @@ public class ErsReimbursement {
 		this.reimbDescription = reimbDescription;
 	}
 
-	public String getReimbReceipt() {
+	public Blob getReimbReceipt() {
 		return reimbReceipt;
 	}
 
-	public void setReimbReceipt(String reimbReceipt) {
+	public void setReimbReceipt(Blob reimbReceipt) {
 		this.reimbReceipt = reimbReceipt;
 	}
 

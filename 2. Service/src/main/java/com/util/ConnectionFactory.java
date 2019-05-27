@@ -25,7 +25,7 @@ public class ConnectionFactory {
 		Properties prop = new Properties();
 		
 		try {
-			prop.load(new FileReader("src/main/resources/application.properties"));
+			prop.load(new FileReader("src/main/resources/Application.properties"));
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("pass"));
 			
 		} catch (SQLException sale){

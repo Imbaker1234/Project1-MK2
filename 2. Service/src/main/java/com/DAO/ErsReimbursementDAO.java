@@ -1,10 +1,6 @@
 package com.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 
 import com.POJO.ErsReimbursement;
@@ -20,32 +16,9 @@ public class ErsReimbursementDAO {
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement_status");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement");
 
-			if (rs != null) {
-
-				while (rs.next()) {
-
-					String reimbId = rs.getString(1);
-					String reimbAmount = rs.getString(2);
-					Timestamp reimbSubmitted = rs.getTimestamp(3);
-					Timestamp reimbResolved = rs.getTimestamp(4);
-					String reimbDescription = rs.getString(5);
-					String reimbReceipt = rs.getString(6);
-					String reimbAuthor = rs.getString(7);
-					String reimbResolver = rs.getString(8);
-					String reimbStatusId = rs.getString(9);
-					String reimbTypeId = rs.getString(10);
-
-					ErsReimbursement reimb = new ErsReimbursement(reimbId, reimbAmount, reimbSubmitted, reimbResolved,
-							reimbDescription, reimbReceipt, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId);
-					reimbursementlist.add(reimb);
-
-				}
-				return reimbursementlist;
-			}
-
-			return null;
+			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
 
@@ -63,76 +36,29 @@ public class ErsReimbursementDAO {
 			Statement stmt = connect.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement WHERE reimb_author = " + ersUsersId);
 
-			if (rs != null) {
-
-				while (rs.next()) {
-
-					String reimbId = rs.getString(1);
-					String reimbAmount = rs.getString(2);
-					Timestamp reimbSubmitted = rs.getTimestamp(3);
-					Timestamp reimbResolved = rs.getTimestamp(4);
-					String reimbDescription = rs.getString(5);
-					String reimbReceipt = rs.getString(6);
-					String reimbAuthor = rs.getString(7);
-					String reimbResolver = rs.getString(8);
-					String reimbStatusId = rs.getString(9);
-					String reimbTypeId = rs.getString(10);
-
-					ErsReimbursement reimb = new ErsReimbursement(reimbId, reimbAmount, reimbSubmitted, reimbResolved,
-							reimbDescription, reimbReceipt, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId);
-					reimbursementlist.add(reimb);
-
-				}
-				return reimbursementlist;
-			}
-
-			return null;
+			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
 			System.out.println("Something interesting happened.");
+			return reimbursementlist;
 		}
-		return reimbursementlist;
 	}
 
-	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbStatus) {
+	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbId) {
 
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt
-					.executeQuery("SELECT * FROM ers_reimbursement_status WHERE reimb_author = " + reimbStatus);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement WHERE reimb_id = " + reimbId);
 
-			if (rs != null) {
-
-				while (rs.next()) {
-
-					String reimbId = rs.getString(1);
-					String reimbAmount = rs.getString(2);
-					Timestamp reimbSubmitted = rs.getTimestamp(3);
-					Timestamp reimbResolved = rs.getTimestamp(4);
-					String reimbDescription = rs.getString(5);
-					String reimbReceipt = rs.getString(6);
-					String reimbAuthor = rs.getString(7);
-					String reimbResolver = rs.getString(8);
-					String reimbStatusId = rs.getString(9);
-					String reimbTypeId = rs.getString(10);
-
-					ErsReimbursement reimb = new ErsReimbursement(reimbId, reimbAmount, reimbSubmitted, reimbResolved,
-							reimbDescription, reimbReceipt, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId);
-					reimbursementlist.add(reimb);
-
-				}
-				return reimbursementlist;
-			}
-
-			return null;
+			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
 			System.out.println("Something interesting happened.");
+			return reimbursementlist;
 		}
-		return reimbursementlist;
 	}
 
 	public boolean addReimbursement(ErsReimbursement reimb) {
@@ -148,7 +74,7 @@ public class ErsReimbursementDAO {
 			stmt.setTimestamp(3, reimb.getReimbSubmitted());
 			stmt.setTimestamp(4, reimb.getReimbResolved());
 			stmt.setString(5, reimb.getReimbDescription());
-			stmt.setString(6, reimb.getReimbReceipt());
+			stmt.setBlob(6, reimb.getReimbReceipt());
 			stmt.setString(7, reimb.getReimbAuthor());
 			stmt.setString(8, reimb.getReimbResolver());
 			stmt.setString(9, reimb.getReimbStatusId());
@@ -160,11 +86,10 @@ public class ErsReimbursementDAO {
 
 		} catch (Exception e) {
 			System.out.println("Something interesting happened.");
+			return false;
 		}
-
-		return false;
 	}
-	
+
 	public boolean updateReimbursementStatus(ErsReimbursement reimb, ErsUsers user) {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
@@ -183,9 +108,35 @@ public class ErsReimbursementDAO {
 
 		} catch (Exception e) {
 			System.out.println("Something interesting happened.");
+			return false;
 		}
+	}
 
-		return false;
+	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs)
+			throws SQLException {
+		if (rs != null) {
+
+			while (rs.next()) {
+
+				String reimbId = rs.getString(1);
+				String reimbAmount = rs.getString(2);
+				Timestamp reimbSubmitted = rs.getTimestamp(3);
+				Timestamp reimbResolved = rs.getTimestamp(4);
+				String reimbDescription = rs.getString(5);
+				Blob reimbReceipt = rs.getBlob(6);
+				String reimbAuthor = rs.getString(7);
+				String reimbResolver = rs.getString(8);
+				String reimbStatusId = rs.getString(9);
+				String reimbTypeId = rs.getString(10);
+
+				ErsReimbursement reimb = new ErsReimbursement(reimbId, reimbAmount, reimbSubmitted, reimbResolved,
+						reimbDescription, reimbReceipt, reimbAuthor, reimbResolver, reimbStatusId, reimbTypeId);
+				reimbursementlist.add(reimb);
+
+			}
+			return reimbursementlist;
+		}
+		return null;
 	}
 
 }

@@ -72,4 +72,17 @@ CREATE TABLE ers_reimbursement (
     REFERENCES ers_reimbursement_type (reimb_type_id)
 );
 
+INSERT INTO ers_user_roles VALUES (1, 'employee');
+INSERT INTO ers_user_roles VALUES (2, 'admin');
+SELECT * FROM ers_user_roles;
 
+INSERT INTO ers_reimbursement_type VALUES (1, 'Lodging');
+INSERT INTO ers_reimbursement_type VALUES (2, 'Travel');
+INSERT INTO ers_reimbursement_type VALUES (3, 'Food');
+INSERT INTO ers_reimbursement_type VALUES (4, 'Other');
+SELECT * FROM ers_reimbursement_type;
+
+INSERT INTO ers_reimbursement_status VALUES (1, 'Pending');
+INSERT INTO ers_reimbursement_status VALUES (2, 'Approved');
+INSERT INTO ers_reimbursement_status VALUES (3, 'Denied');
+SELECT * FROM ers_reimbursement_status;
