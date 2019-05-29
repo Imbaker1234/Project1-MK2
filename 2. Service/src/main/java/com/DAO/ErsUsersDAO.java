@@ -5,10 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.POJO.ErsUsers;
 import com.util.ConnectionFactory;
 
 public class ErsUsersDAO {
+	
+	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
 

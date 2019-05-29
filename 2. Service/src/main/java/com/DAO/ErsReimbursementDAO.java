@@ -3,11 +3,17 @@ package com.DAO;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.POJO.ErsReimbursement;
 import com.POJO.ErsUsers;
+import com.menus.LoginMenu;
 import com.util.ConnectionFactory;
 
 public class ErsReimbursementDAO {
+	
+	private static Logger log = LogManager.getLogger(ErsReimbursementDAO.class);
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbs() {
 

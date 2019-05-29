@@ -1,8 +1,8 @@
 package com.util;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,7 +25,12 @@ public class ConnectionFactory {
 		Properties prop = new Properties();
 		
 		try {
-			prop.load(new FileReader("src/main/resources/Application.properties"));
+			
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			InputStream input = loader.getResourceAsStream("application.properties");
+			prop.load(input);
+			Class.forName(prop.getProperty("driver"));
+			
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("pass"));
 			
 		} catch (SQLException sale){
@@ -37,6 +42,8 @@ public class ConnectionFactory {
 		} catch (IOException ioe) {
 			System.out.println("[ERROR] - Unable to read from file:" + ioe.getMessage());
 			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return conn;
 	}
