@@ -12,7 +12,7 @@ import com.POJO.ErsUsers;
 import com.util.ConnectionFactory;
 
 public class ErsUsersDAO {
-	
+
 	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
@@ -21,7 +21,7 @@ public class ErsUsersDAO {
 
 			Statement stmt = connect.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM ers_users WHERE ers_username = " + username + "AND ers_password = " + password);
+					"SELECT * FROM ers_users WHERE ers_username = '" + username + "' AND ers_password = '" + password + "'");
 
 			if (rs != null) {
 
@@ -39,11 +39,11 @@ public class ErsUsersDAO {
 					return user;
 				}
 			}
-			return null;
-
 		} catch (Exception e) {
-			return null;
+			e.printStackTrace();
 		}
+
+		return null;
 	}
 
 	public boolean addUser(ErsUsers user) {
