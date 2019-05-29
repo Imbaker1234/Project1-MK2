@@ -20,8 +20,9 @@ public class ErsReimbursementDAO {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement");
+			String sql = "SELECT * FROM ers_reimbursement";
+			PreparedStatement stmt = connect.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
 
 			return mapResultSet(reimbursementlist, rs);
 
@@ -38,8 +39,10 @@ public class ErsReimbursementDAO {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement WHERE reimb_author = " + ersUsersId);
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+			PreparedStatement stmt = connect.prepareStatement(sql);
+			stmt.setString(1, ersUsersId);
+			ResultSet rs = stmt.executeQuery();
 
 			return mapResultSet(reimbursementlist, rs);
 
@@ -55,8 +58,10 @@ public class ErsReimbursementDAO {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM ers_reimbursement WHERE reimb_id = " + reimbId);
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
+			PreparedStatement stmt = connect.prepareStatement(sql);
+			stmt.setString(1, reimbId);
+			ResultSet rs = stmt.executeQuery();
 
 			return mapResultSet(reimbursementlist, rs);
 

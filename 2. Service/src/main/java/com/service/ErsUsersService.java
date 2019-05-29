@@ -8,8 +8,8 @@ public class ErsUsersService {
 	private ErsUsersDAO udao = new ErsUsersDAO();
 	
 	public ErsUsers validateCredentials() {
-		String username = "CookieMonster";
-		String password = "COOKIECOOKIECOOKIE!!!";
+		String username = "Kerr007";
+		String password = "Forward123";
 		ErsUsers user = udao.getUserByCredentials(username, password);
 		return user;
 	}

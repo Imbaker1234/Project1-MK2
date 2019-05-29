@@ -3,7 +3,6 @@ package com.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,9 +18,11 @@ public class ErsUsersDAO {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			Statement stmt = connect.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM ers_users WHERE ers_username = '" + username + "' AND ers_password = '" + password + "'");
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?";
+			PreparedStatement stmt = connect.prepareStatement(sql);
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
 
 			if (rs != null) {
 
