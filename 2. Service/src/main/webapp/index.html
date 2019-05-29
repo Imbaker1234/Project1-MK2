@@ -1,47 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Benis</title>
+<meta charset="UTF-8">
+<title>ExExpense Login</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="CSS/home.css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 <body>
 
-<div>
-<h1>BENIS</h1>
+	<!--BEGIN NAVBAR--------------------------------------------------------------------------------------->
+	<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ExExpense</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<form action="dashboard" method="get">
-			<fieldset>
-				<legend>Number 1:</legend>
-				<input name="operand1" type="number" />
-			</fieldset>
-			<fieldset>
-				<legend>Number 2:</legend>
-				<input name="operand2" type="number" />
-			</fieldset>
-			<br /> <input class="btn btn-primary" type="submit"
-				value="Get Benis!" />
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+-->
+	<!--BEGIN LOGIN/REGISTER FORM--------------------------------------------------------------------------------------->
 
-</form>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Login</h3>
 
-<form action="dashboard" method="post">
-			<fieldset>
-				<legend>Number 1:</legend>
-				<input name="operand1" type="number" />
-			</fieldset>
-			<fieldset>
-				<legend>Number 2:</legend>
-				<input name="operand2" type="number" />
-			</fieldset>
-			<br /> <input class="btn btn-primary" type="submit"
-				value="Post Benis!" />
+            <div class="form-group">
+                <input id="loginusername" type="text" class="form-control" placeholder="Your Username *" value="" />
+            </div>
+            <div class="form-group">
+                <input id="loginpassword" type="password" class="form-control" placeholder="Your Password *" value="" />
+            </div>
+            <div class="form-group">
+                <input id="loginsubmitbutton" type="submit" class="btnSubmit" value="Login" />
+            </div>
 
-</form>
+        </div>
+        <div class="col-md-6 login-form-2">
+            <div class="login-logo">
+                <img src="https://i.ibb.co/HHTrbyJ/XXPENSE.png" alt=""/>
+            </div>
+            <h3>New User</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Email" value="" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Your New Password" value="" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name" value="" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name" value="" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btnSubmit" value="Start Getting Paid" />
+            </div>
+            <div class="form-group">
 
+            </div>
+        </div>
+    </div>
 </div>
 
+<script src="JS/script.js"></script>
 
-
-<script src="script.js"></script>
 </body>
-
 </html>

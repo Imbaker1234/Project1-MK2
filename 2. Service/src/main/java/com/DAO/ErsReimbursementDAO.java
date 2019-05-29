@@ -27,7 +27,7 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return reimbursementlist;
 	}
@@ -47,9 +47,9 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-			System.out.println("Something interesting happened.");
-			return reimbursementlist;
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbId) {
@@ -66,9 +66,9 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-			System.out.println("Something interesting happened.");
-			return reimbursementlist;
+			e.printStackTrace();;
 		}
+		return null;
 	}
 
 	public boolean addReimbursement(ErsReimbursement reimb) {
@@ -95,9 +95,9 @@ public class ErsReimbursementDAO {
 			return true;
 
 		} catch (Exception e) {
-			System.out.println("Something interesting happened.");
-			return false;
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	public boolean updateReimbursementStatus(ErsReimbursement reimb, ErsUsers user) {
@@ -117,9 +117,9 @@ public class ErsReimbursementDAO {
 			return true;
 
 		} catch (Exception e) {
-			System.out.println("Something interesting happened.");
-			return false;
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs)
