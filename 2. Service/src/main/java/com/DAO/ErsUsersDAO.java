@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -74,16 +75,15 @@ public class ErsUsersDAO {
 			return true;
 
 		} catch (Exception e) {
-			return false;
+			e.printStackTrace();
 		}
-
+		return false;
 	}
 	
 	private List<ErsUsers> mapResultSet(ResultSet rs) throws SQLException {
 		if (rs != null) {
-			List<ErsUsers> users = null;
+			List<ErsUsers> users = new ArrayList<>();
 			while (rs.next()) {
-
 				String ersUsersId = rs.getString(1);
 				String ersUsername = rs.getString(2);
 				String ersPassword = rs.getString(3);
@@ -94,6 +94,7 @@ public class ErsUsersDAO {
 				ErsUsers user = new ErsUsers(ersUsersId, ersUsername, ersPassword, userFirstName, userLastName,
 						userEmail, userRoleId);
 				users.add(user);
+				
 			}
 			return users;
 		}

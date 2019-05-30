@@ -27,39 +27,46 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LogManager.getLogger(LoginServlet.class);
 	private final ErsUsersService userService = new ErsUsersService();
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		doPost(request,response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		doPost(request, response);
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
-		
 		response.setContentType("application/json");
-		
-		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
-		String[] results = new String[rootNode.size()];
-		for(int i = 0; i < rootNode.size(); i++) {
-			results[i] = rootNode.get(i).asText();
-		}
-		
-		if(results.length == 2) {
-			
-			ErsUsers user = userService.validateCredentials(results[0], results[1]);
-			
-			String userJSON = mapper.writeValueAsString(user);
-			
-			writer.write(userJSON);
-		} else if(results.length == 5) {
-			
-		} else {
-			
-		}
 
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] userinput = nodeToArray(rootNode);
+		
+		if (userinput.length == 2) {
+			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
+			String userJSON = mapper.writeValueAsString(user);
+			writer.write(userJSON);
+			
+		} else if (userinput.length == 5) {
+			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
+			String userJSON = mapper.writeValueAsString(user);
+			writer.write(userJSON);
+
+		} 
+	}
+
+	public String[] nodeToArray(ArrayNode rootNode) {
+
+		String[] array = new String[rootNode.size()];
+
+		for (int i = 0; i < rootNode.size(); i++) {
+			array[i] = rootNode.get(i).asText();
+
+		}
+		return array;
 	}
 
 }

@@ -1,15 +1,18 @@
+//Button action listeners
 
 let loginbutton = document.getElementById("loginsubmitbutton");
 loginbutton.addEventListener("click", login);
 
-function login() {
-	console.log("in login()");
+let registerbutton = document.getElementById("registersubmitbutton");
+registerbutton.addEventListener("click", register);
 
+//Functionalities
+
+function login() {
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
+	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
-	console.log(username);
-	console.log(password);
 	let credentials = [ username, password ];
 	let credentialsJSON = JSON.stringify(credentials);
 
@@ -21,16 +24,101 @@ function login() {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			let user = JSON.parse(xhr.responseText);
+
 			if (user) {
 				alert("Login successful!");
 				window.localStorage.setItem("user", xhr.responseText);
-				console.log(`User id: ${user.id} login successful`);
+
 			} else {
-				//$('#login-message').show();
-				//$('#login-message').html('Invalid credentials');
+				alert("Login failed!");
+
 			}
 		}
 	}
+}
+
+function register() {
+
+	let username = document.getElementById("registerusername").value;
+	let password = document.getElementById("registerpassword").value;
+	let firstname = document.getElementById("registerfirst").value;
+	let lastname = document.getElementById("registerlast").value;
+	let email = document.getElementById("registeremail").value;
+
+	if (verifyUsername(username) == false|| verifyPassword(password) == false || verifyName(firstname, lastname) == false
+			|| verifyEmail(email) == false) return;
+
+	let credentials = [ username, password, firstname, lastname, email ];
+	let credentialsJSON = JSON.stringify(credentials);
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "login", true);
+	xhr.send(credentialsJSON);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let user = JSON.parse(xhr.responseText);
+			if (user) {
+				alert("Account registration successful!");
+				window.localStorage.setItem("user", xhr.responseText);
+			} else {
+				alert("That username/email already exists!");
+			}
+		}
+	}
+}
+
+//Support methods for verifying credentials
+
+function verifyUsername(username) {
+
+	if (username == "" || username.includes(" ") || username.length < 3
+			|| username.length > 12) {
+		document.getElementById("loginusername").value = "";
+		document.getElementById("registerusername").value = "";
+		alert("Invalid username syntax.");
+		return false;
+	}
+	return true;
+}
+
+function verifyPassword(password) {
+
+	if (password == "" || password.includes(" ") || password.length < 3
+			|| password.length > 12) {
+		document.getElementById("loginpassword").value = "";
+		document.getElementById("registerpassword").value = "";
+		alert("Invalid password syntax.");
+		return false;
+	}
+	return true;
+}
+
+function verifyName(firstname, lastname) {
+	if (firstname.length < 3 || lastname.length < 3) {
+		document.getElementById("registerfirst").value = "";
+		document.getElementById("registerlast").value = "";
+		alert("Name cannot be less than 3 characters.");
+		return false;
+	}
+	return true;
+}
+
+function verifyPhone(phone) {
+	if ((/^\d{10}$/.test(phone))) {
+		return true;
+	}
+	return false;
+}
+
+function verifyEmail(email) {
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+		return true;
+	}
+	document.getElementById("loginemail").value = "";
+	alert("Invalid email syntax.");
+	return false;
 }
 
 /*
