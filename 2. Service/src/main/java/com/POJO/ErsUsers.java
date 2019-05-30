@@ -12,6 +12,7 @@ public class ErsUsers {
 
 	public ErsUsers(String ersUsersId, String ersUsername, String ersPassword, String userFirstName,
 			String userLastName, String userEmail, String userRoleId) {
+		
 		super();
 		this.ersUsersId = ersUsersId;
 		this.ersUsername = ersUsername;
@@ -20,6 +21,19 @@ public class ErsUsers {
 		this.userLastName = userLastName;
 		this.userEmail = userEmail;
 		this.userRoleId = userRoleId;
+		
+	}
+
+	//THIS IS ONLY CALLED WHEN WE CREATE A NEW USER FROM THE REGISTER SCREEN
+	//USER ID AND ROLE ARE APPLIED AUTOMATICALLY BY THE DATABASE.
+	public ErsUsers(String ersUsername, String ersPassword, String userFirstName, String userLastName, String userEmail) {
+		
+		this.ersUsername = ersUsername;
+		this.ersPassword = ersPassword;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.userEmail = userEmail;
+		
 	}
 
 	public String getErsUsersId() {

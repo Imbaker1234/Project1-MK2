@@ -14,7 +14,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.POJO.ErsUsers;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsUsersService;
 
 @WebServlet("/login")
@@ -31,24 +35,31 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		System.out.println("Login doPost reached.");
 		
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		
 		response.setContentType("application/json");
-		String requestURI = request.getRequestURI();
-		System.out.println(requestURI);
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] results = new String[rootNode.size()];
+		for(int i = 0; i < rootNode.size(); i++) {
+			results[i] = rootNode.get(i).asText();
+		}
 		
-		ErsUsers user = userService.validateCredentials(username, password);
-		
-		String userJSON = mapper.writeValueAsString(user);
-		
-		writer.write(userJSON);
-		
+		if(results.length == 2) {
+			
+			ErsUsers user = userService.validateCredentials(results[0], results[1]);
+			
+			String userJSON = mapper.writeValueAsString(user);
+			
+			writer.write(userJSON);
+		} else if(results.length == 5) {
+			
+		} else {
+			
+		}
+
 	}
 
 }

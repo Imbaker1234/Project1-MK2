@@ -8,6 +8,8 @@ function login() {
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
 
+	console.log(username);
+	console.log(password);
 	let credentials = [ username, password ];
 	let credentialsJSON = JSON.stringify(credentials);
 
