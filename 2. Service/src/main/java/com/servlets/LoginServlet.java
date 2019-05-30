@@ -25,7 +25,7 @@ import com.service.ErsUsersService;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = LogManager.getLogger(LoginServlet.class);
+	//private static Logger log = LogManager.getLogger(LoginServlet.class);
 	private final ErsUsersService userService = new ErsUsersService();
 
 	@Override

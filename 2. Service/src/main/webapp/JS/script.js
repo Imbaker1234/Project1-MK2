@@ -8,6 +8,26 @@ registerbutton.addEventListener("click", register);
 
 //Functionalities
 
+window.onload = function() {
+	loadLogin();
+}
+
+function loadLogin() {
+	 console.log('in loadLogin()');
+	
+	 let xhr = new XMLHttpRequest();
+	
+	 xhr.open('GET', 'login.view', true);
+	 xhr.send();
+	
+	 xhr.onreadystatechange = function() {
+		 if(xhr.readyState == 4 && xhr.status == 200) {
+			 document.getElementById('wholepage').innerHTML = xhr.responseText;
+			 loadLoginInfo();
+		 }
+	 }
+}
+
 function login() {
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
@@ -26,7 +46,9 @@ function login() {
 			let user = JSON.parse(xhr.responseText);
 
 			if (user) {
+				console.log(user);
 				alert("Login successful!");
+				document.getElementById("wholepage").innerHTML = xhr.responseText;
 				window.localStorage.setItem("user", xhr.responseText);
 
 			} else {
@@ -53,7 +75,7 @@ function register() {
 
 	let xhr = new XMLHttpRequest();
 
-	xhr.open("POST", "login", true);
+	xhr.open("POST", "register", true);
 	xhr.send(credentialsJSON);
 
 	xhr.onreadystatechange = function() {
@@ -61,6 +83,7 @@ function register() {
 			let user = JSON.parse(xhr.responseText);
 			if (user) {
 				alert("Account registration successful!");
+				document.getElementById("wholepage").innerHTML = xhr.responseText;
 				window.localStorage.setItem("user", xhr.responseText);
 			} else {
 				alert("That username/email already exists!");
@@ -164,22 +187,22 @@ function verifyEmail(email) {
  }
 
  function loadLogin() {
- console.log('in loadLogin()');
-
- let isAuth = isAuthenticated();
- updateNav(isAuth);
-
- let xhr = new XMLHttpRequest();
-
- xhr.open('GET', 'login.view', true);
- xhr.send();
-
- xhr.onreadystatechange = function() {
- if(xhr.readyState == 4 && xhr.status == 200) {
- document.getElementById('view').innerHTML = xhr.responseText;
- loadLoginInfo();
- }
- }
+	 console.log('in loadLogin()');
+	
+	 let isAuth = isAuthenticated();
+	 updateNav(isAuth);
+	
+	 let xhr = new XMLHttpRequest();
+	
+	 xhr.open('GET', 'login.view', true);
+	 xhr.send();
+	
+	 xhr.onreadystatechange = function() {
+		 if(xhr.readyState == 4 && xhr.status == 200) {
+			 document.getElementById('view').innerHTML = xhr.responseText;
+			 loadLoginInfo();
+		 }
+	 }
  }
 
  function loadRegister() {

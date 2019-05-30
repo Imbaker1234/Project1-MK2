@@ -26,10 +26,12 @@ public class ErsUsersService {
 			String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
 					+ "A-Z]{2,7}$";
 			Pattern pat = Pattern.compile(emailRegex);
-			
+
 			if (pat.matcher(incoming[4]).matches()) {
+				System.out.println("test1");
 				ErsUsers user = new ErsUsers(incoming[0], incoming[1], incoming[2], incoming[3], incoming[4]);
 				Boolean insert = udao.addUser(user);
+				System.out.println(user);
 				return insert == true ? user : null;
 
 			}

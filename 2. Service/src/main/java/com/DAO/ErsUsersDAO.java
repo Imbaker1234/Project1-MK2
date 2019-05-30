@@ -16,7 +16,7 @@ import com.util.ConnectionFactory;
 
 public class ErsUsersDAO {
 
-	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
+	//private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
 
