@@ -6,8 +6,6 @@ public class RequestViewHelper {
     
     public static String process (HttpServletRequest request) {
 
-        //String pathExtension = getPathExtension(request.getRequestURI());
-
         switch(request.getRequestURI()) {
 
         case "/IBJK-Project-One/login.view":
@@ -29,28 +27,4 @@ public class RequestViewHelper {
             return "/index.html";
         }
     }
-
-    /** This method breaks down the URI so that it only retrieves the
-     * relevant part at the end. After the project localhost and project
-     * designation which are left out. So
-     *
-     * http://localhost:8080/IBJK_Project_One_war_exploded/login/request/blahblah
-     *
-     * becomes
-     *
-     * /login/request/blahblah
-     *
-     * @param requestURI
-     * @return
-     */
-/*
-    public static String getPathExtension(String requestURI) {
-        String[] pathArr = requestURI.split("/");
-        StringBuffer sb = new StringBuffer();
-        for (int i = 1; i < pathArr.length; i++) {
-            sb.append("/" + pathArr[i]);
-        }
-        return sb.toString();
-    }
-*/
 }

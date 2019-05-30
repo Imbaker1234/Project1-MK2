@@ -19,6 +19,7 @@ public class ErsUsersDAO {
 	//private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
+		//System.out.println("in getUserByCredentials");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -38,6 +39,7 @@ public class ErsUsersDAO {
 	}
 
 	public ErsUsers getByUsername(String username) {
+		//System.out.println("in getByUsername");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -57,11 +59,12 @@ public class ErsUsersDAO {
 
 	
 	public boolean addUser(ErsUsers user) {
+		//System.out.println("in addUser");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
-
+			
 			connect.setAutoCommit(false);
-
+			
 			String sql = "{call new_user(?,?,?,?,?)}";
 			CallableStatement stmt = connect.prepareCall(sql);
 			stmt.setString(1, user.getErsUsername());
@@ -81,6 +84,8 @@ public class ErsUsersDAO {
 	}
 	
 	private List<ErsUsers> mapResultSet(ResultSet rs) throws SQLException {
+		//System.out.println("in mapResultSet");
+		
 		if (rs != null) {
 			List<ErsUsers> users = new ArrayList<>();
 			while (rs.next()) {

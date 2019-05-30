@@ -1,3 +1,4 @@
+DROP SEQUENCE users_seq;
 DROP TABLE ers_reimbursement;
 DROP TABLE ers_users;
 DROP TABLE ers_reimbursement_status;
@@ -86,3 +87,22 @@ INSERT INTO ers_reimbursement_status VALUES (1, 'Pending');
 INSERT INTO ers_reimbursement_status VALUES (2, 'Approved');
 INSERT INTO ers_reimbursement_status VALUES (3, 'Denied');
 SELECT * FROM ers_reimbursement_status;
+
+CREATE SEQUENCE users_seq;
+INSERT INTO ers_users VALUES (1, 'Kerr007', 'benis69', 'Justin', 'Kerr', 'justin-kerr89@hotmail.com', 2);
+SELECT * FROM ers_users;
+
+CREATE OR REPLACE PROCEDURE new_user
+(
+username VARCHAR2,
+password VARCHAR2,
+firstname VARCHAR2,
+lastname VARCHAR2,
+email VARCHAR2
+)
+IS
+BEGIN
+    INSERT INTO ers_users (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
+    VALUES (users_seq.nextval, username, password, firstname, lastname, email, 1);
+    COMMIT;
+END;

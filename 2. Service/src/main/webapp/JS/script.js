@@ -8,16 +8,12 @@ registerbutton.addEventListener("click", register);
 
 //Functionalities
 
-window.onload = function() {
-	loadLogin();
-}
-
 function loadLogin() {
-	 console.log('in loadLogin()');
+	 //console.log("in loadLogin()");
 	
 	 let xhr = new XMLHttpRequest();
 	
-	 xhr.open('GET', 'login.view', true);
+	 xhr.open("GET", "login.view", true);
 	 xhr.send();
 	
 	 xhr.onreadystatechange = function() {
@@ -29,6 +25,8 @@ function loadLogin() {
 }
 
 function login() {
+	//console.log("in login()");
+	
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
@@ -38,7 +36,7 @@ function login() {
 
 	let xhr = new XMLHttpRequest();
 
-	xhr.open("POST", "login", true);
+	xhr.open("POST", "account", true);
 	xhr.send(credentialsJSON);
 
 	xhr.onreadystatechange = function() {
@@ -48,7 +46,7 @@ function login() {
 			if (user) {
 				console.log(user);
 				alert("Login successful!");
-				document.getElementById("wholepage").innerHTML = xhr.responseText;
+				loadLogin();
 				window.localStorage.setItem("user", xhr.responseText);
 
 			} else {
@@ -60,6 +58,7 @@ function login() {
 }
 
 function register() {
+	console.log("in register()");
 
 	let username = document.getElementById("registerusername").value;
 	let password = document.getElementById("registerpassword").value;
@@ -67,7 +66,7 @@ function register() {
 	let lastname = document.getElementById("registerlast").value;
 	let email = document.getElementById("registeremail").value;
 
-	if (verifyUsername(username) == false|| verifyPassword(password) == false || verifyName(firstname, lastname) == false
+	if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
 			|| verifyEmail(email) == false) return;
 
 	let credentials = [ username, password, firstname, lastname, email ];
@@ -75,7 +74,7 @@ function register() {
 
 	let xhr = new XMLHttpRequest();
 
-	xhr.open("POST", "register", true);
+	xhr.open("POST", "account", true);
 	xhr.send(credentialsJSON);
 
 	xhr.onreadystatechange = function() {
@@ -83,7 +82,7 @@ function register() {
 			let user = JSON.parse(xhr.responseText);
 			if (user) {
 				alert("Account registration successful!");
-				document.getElementById("wholepage").innerHTML = xhr.responseText;
+				loadLogin();
 				window.localStorage.setItem("user", xhr.responseText);
 			} else {
 				alert("That username/email already exists!");
@@ -97,7 +96,7 @@ function register() {
 function verifyUsername(username) {
 
 	if (username == "" || username.includes(" ") || username.length < 3
-			|| username.length > 12) {
+			|| username.length > 24) {
 		document.getElementById("loginusername").value = "";
 		document.getElementById("registerusername").value = "";
 		alert("Invalid username syntax.");
@@ -109,7 +108,7 @@ function verifyUsername(username) {
 function verifyPassword(password) {
 
 	if (password == "" || password.includes(" ") || password.length < 3
-			|| password.length > 12) {
+			|| password.length > 24) {
 		document.getElementById("loginpassword").value = "";
 		document.getElementById("registerpassword").value = "";
 		alert("Invalid password syntax.");
@@ -120,10 +119,20 @@ function verifyPassword(password) {
 
 function verifyName(firstname, lastname) {
 	if (firstname.length < 3 || lastname.length < 3) {
+		
 		document.getElementById("registerfirst").value = "";
 		document.getElementById("registerlast").value = "";
 		alert("Name cannot be less than 3 characters.");
 		return false;
+		
+	} 
+	if (firstname.includes(" ") || lastname.includes(" ")) {
+		
+		document.getElementById("registerfirst").value = "";
+		document.getElementById("registerlast").value = "";
+		alert("Name cannot contain spaces.");
+		return false;
+		
 	}
 	return true;
 }
@@ -139,7 +148,7 @@ function verifyEmail(email) {
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 		return true;
 	}
-	document.getElementById("loginemail").value = "";
+	document.getElementById("registeremail").value = "";
 	alert("Invalid email syntax.");
 	return false;
 }

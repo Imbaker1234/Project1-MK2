@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsUsersService;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/account")
+public class AccountServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	//private static Logger log = LogManager.getLogger(LoginServlet.class);
@@ -35,8 +35,8 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		//System.out.println("in /account Servlet doPost");
 
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
@@ -46,11 +46,13 @@ public class LoginServlet extends HttpServlet {
 		String[] userinput = nodeToArray(rootNode);
 		
 		if (userinput.length == 2) {
+			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
 			String userJSON = mapper.writeValueAsString(user);
 			writer.write(userJSON);
 			
 		} else if (userinput.length == 5) {
+			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
 			String userJSON = mapper.writeValueAsString(user);
 			writer.write(userJSON);
