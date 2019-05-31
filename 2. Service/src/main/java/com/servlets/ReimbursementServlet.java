@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.POJO.ErsReimbursement;
 import com.POJO.ErsUsers;
+import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -40,21 +41,16 @@ public class ReimbursementServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
 		
-		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
-		String[] userinput = nodeToArray(rootNode);
+		String userinput = mapper.readValue(request.getReader(), String.class);
 		
+		switch (userinput) {
 		
-	}
-	
-	public String[] nodeToArray(ArrayNode rootNode) {
-
-		String[] array = new String[rootNode.size()];
-
-		for (int i = 0; i < rootNode.size(); i++) {
-			array[i] = rootNode.get(i).asText();
-
+		case "viewPastTickets":
+			Principal principal = (Principal) request.getAttribute("principal");
+			reimbService.viewPastTickets(principal);
+			
 		}
-		return array;
+		
 	}
 } 
 	

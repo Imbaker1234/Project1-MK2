@@ -8,18 +8,19 @@ import org.apache.logging.log4j.Logger;
 import com.DAO.ErsReimbursementDAO;
 import com.POJO.ErsReimbursement;
 import com.POJO.ErsUsers;
+import com.POJO.Principal;
 
 public class ErsReimbursementService {
 	
 	private static Logger log = LogManager.getLogger(ErsReimbursementService.class);
 	private ErsReimbursementDAO rdao = new ErsReimbursementDAO();
 	
-	public ArrayList<ErsReimbursement> viewPastTickets(ErsUsers user) {
+	public ArrayList<ErsReimbursement> viewPastTickets(Principal user) {
 		log.info("in reimb service viewPastTickets method");
 		
 		ArrayList<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
 		if (pasttickets.size() == 0) {
-			System.out.println("No past tickets");
+			log.info("No past tickets");
 			return null;
 			
 		}

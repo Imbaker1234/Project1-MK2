@@ -23,10 +23,6 @@ function loadLogin() {
 			 document.getElementById('page').innerHTML = xhr.responseText;
 		 }
 	 }
-	 
-	 function loadHome() {
-		 let isAuth = isAuthenticated();
-	 }
 }
 
 function loadDashboard() {
@@ -42,30 +38,34 @@ function loadDashboard() {
 			 document.getElementById('page').innerHTML = xhr.responseText;
 		 }
 	 }
-	 
-	 function loadHome() {
-		 let isAuth = isAuthenticated();
+}
+
+function loadPastTickets(pastTickets) {
+	 console.log("in loadPastTickets()");
+		
+	 let xhr = new XMLHttpRequest();
+	
+	 xhr.open("GET", "pasttickets.view", true);
+	 xhr.send();
+	
+	 xhr.onreadystatechange = function() {
+		 if(xhr.readyState == 4 && xhr.status == 200) {
+			 document.getElementById('page').innerHTML = xhr.responseText;
+		 }
 	 }
 }
 
-//function loadPastTickets(pastTickets) {
-//	 console.log("loadPastTickets() called");
-//		
-//	 let xhr = new XMLHttpRequest();
-//	
-//	 xhr.open("GET", "dashboard.view", true);
-//	 xhr.send();
-//	
-//	 xhr.onreadystatechange = function() {
-//		 if(xhr.readyState == 4 && xhr.status == 200) {
-//			 document.getElementById('page').innerHTML = xhr.responseText;
-//		 }
-//	 }
-//	 
-//	 function loadHome() {
-//		 let isAuth = isAuthenticated();
-//	 }
-//}
+function ajaxLoadView(httpMethod, endPoint, targetDiv) {
+    let xhr = new XMLHttpRequest();
+    xhr.open(httpMethod, endpoint, true); 
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById(targetDiv).innerHTML = xhr.responseText;
+        }
+    }
+}
 
 function login() {
 	//console.log("in login()");
@@ -141,7 +141,7 @@ function register() {
 }
 
 function viewPastTickets() {
-	console.log("viewPastTickets")
+	console.log("in viewPastTickets");
 
 	let content = [ viewPastTickets ];
 	let contentJSON = JSON.stringify(content);
@@ -157,7 +157,7 @@ function viewPastTickets() {
 
 			if (pastTickets) {
 				console.log(pastTickets);
-				//loadPastTickets();
+				loadPastTickets();
 			} else {
 				alert("Login failed!");
 

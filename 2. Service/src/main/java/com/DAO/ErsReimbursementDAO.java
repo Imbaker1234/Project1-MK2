@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.POJO.ErsReimbursement;
 import com.POJO.ErsUsers;
+import com.POJO.Principal;
 import com.util.ConnectionFactory;
 
 public class ErsReimbursementDAO {
@@ -32,9 +33,9 @@ public class ErsReimbursementDAO {
 		return reimbursementlist;
 	}
 
-	public ArrayList<ErsReimbursement> retrieveAllReimbsByAuthor(ErsUsers user) {
+	public ArrayList<ErsReimbursement> retrieveAllReimbsByAuthor(Principal user) {
 		log.info("in reimb DAO retrieveAllReimbsByAuthor method");
-		String ersUsersId = user.getErsUsersId();
+		String ersUsersId = user.getId();
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {

@@ -11,12 +11,13 @@ public class RequestViewHelper {
       
         
         case "/IBJK-Project-One/login.view":
-            System.out.println("login.view called");
             return "partials/login.html";
 
         case "/IBJK-Project-One/dashboard.view":
-            //System.out.println("home.view called");
             return "partials/dashboard.html";
+            
+        case "/IBJK-Project-One/pasttickets.view":
+            return "partials/pasttickets.html";
 
         default:
             return "/index.html";
