@@ -32,7 +32,7 @@ public class ErsUsersDAO {
 			return mapResultSet(rs).get(0);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 
 		return null;
@@ -51,7 +51,7 @@ public class ErsUsersDAO {
 			return mapResultSet(rs).get(0);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 
 		return null;
@@ -78,7 +78,7 @@ public class ErsUsersDAO {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 		return false;
 	}

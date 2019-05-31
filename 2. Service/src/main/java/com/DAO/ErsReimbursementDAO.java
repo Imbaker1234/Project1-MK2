@@ -27,7 +27,7 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 		return reimbursementlist;
 	}
@@ -47,7 +47,7 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 		return null;
 	}
@@ -115,7 +115,7 @@ public class ErsReimbursementDAO {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 		return false;
 	}
@@ -137,7 +137,7 @@ public class ErsReimbursementDAO {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warn(e.getMessage());
 		}
 		return false;
 	}

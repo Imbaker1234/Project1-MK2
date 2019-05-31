@@ -29,8 +29,55 @@ public class ReimbursementServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		doPost(request, response);
+		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		log.info("Reimb doPost() called.");
+		
+		PrintWriter writer = response.getWriter();
+		ObjectMapper mapper = new ObjectMapper();
+		response.setContentType("application/json");
+		
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] userinput = nodeToArray(rootNode);
+		
+		
+	}
+	
+	public String[] nodeToArray(ArrayNode rootNode) {
 
+		String[] array = new String[rootNode.size()];
+
+		for (int i = 0; i < rootNode.size(); i++) {
+			array[i] = rootNode.get(i).asText();
+
+		}
+		return array;
+	}
+} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		log.info("request recieved by ReimbursementServlet");
@@ -61,3 +108,4 @@ public class ReimbursementServlet extends HttpServlet {
 		return array;
 	}
 }
+*/

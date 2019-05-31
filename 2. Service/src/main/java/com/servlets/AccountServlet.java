@@ -13,9 +13,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.POJO.ErsUsers;
+import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsUsersService;
+import com.util.JwtConfig;
+import com.util.JwtGenerator;
 
 @WebServlet("/account")
 public class AccountServlet extends HttpServlet {
@@ -43,14 +46,20 @@ public class AccountServlet extends HttpServlet {
 		if (userinput.length == 2) {
 			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
-			String userJSON = mapper.writeValueAsString(user);
-			writer.write(userJSON);
+			Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(), user.getUserRoleName(user.getUserRoleId()));
+			writer.write(mapper.writeValueAsString(principal));
+			
+			String token = JwtGenerator.createJwt(user);
+			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 			
 		} else if (userinput.length == 5) {
 			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
-			String userJSON = mapper.writeValueAsString(user);
-			writer.write(userJSON);
+			Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(), user.getUserRoleName(user.getUserRoleId()));
+			writer.write(mapper.writeValueAsString(principal));
+			
+			String token = JwtGenerator.createJwt(user);
+			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
 		} 
 	}
@@ -65,20 +74,4 @@ public class AccountServlet extends HttpServlet {
 		}
 		return array;
 	}
-	
-	/*
-
-(if you want to return a Principal)
-1. create principal class model
-2. Create new Principal in Authentication Servlet. 
-    3. write.write(mapper.writeValueAsString(principal);
-        
-        String token = JwtGenerator.createJwt(authUser);
-
-//    Add the token to the response within an Authorization header if storing the token in
-//    localStorage on the client-side (vulnerable to XSS)
-
-        response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
-	 */
-
 }

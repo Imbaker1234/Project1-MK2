@@ -8,6 +8,8 @@ registerbutton.addEventListener("click", register);
 
 //Functionalities
 
+//Load Views
+
 function loadLogin() {
 	 //console.log("in loadLogin()");
 	
@@ -21,7 +23,49 @@ function loadLogin() {
 			 document.getElementById('page').innerHTML = xhr.responseText;
 		 }
 	 }
+	 
+	 function loadHome() {
+		 let isAuth = isAuthenticated();
+	 }
 }
+
+function loadDashboard() {
+	 console.log("in loadDashboard()");
+	
+	 let xhr = new XMLHttpRequest();
+	
+	 xhr.open("GET", "dashboard.view", true);
+	 xhr.send();
+	
+	 xhr.onreadystatechange = function() {
+		 if(xhr.readyState == 4 && xhr.status == 200) {
+			 document.getElementById('page').innerHTML = xhr.responseText;
+		 }
+	 }
+	 
+	 function loadHome() {
+		 let isAuth = isAuthenticated();
+	 }
+}
+
+//function loadPastTickets(pastTickets) {
+//	 console.log("loadPastTickets() called");
+//		
+//	 let xhr = new XMLHttpRequest();
+//	
+//	 xhr.open("GET", "dashboard.view", true);
+//	 xhr.send();
+//	
+//	 xhr.onreadystatechange = function() {
+//		 if(xhr.readyState == 4 && xhr.status == 200) {
+//			 document.getElementById('page').innerHTML = xhr.responseText;
+//		 }
+//	 }
+//	 
+//	 function loadHome() {
+//		 let isAuth = isAuthenticated();
+//	 }
+//}
 
 function login() {
 	//console.log("in login()");
@@ -45,7 +89,7 @@ function login() {
 			if (user) {
 				console.log(user);
 				alert("Login successful!");
-				loadLogin();
+				loadDashboard();
 				window.localStorage.setItem("user", xhr.responseText);
 
 			} else {
@@ -54,6 +98,12 @@ function login() {
 			}
 		}
 	}
+}
+
+function logout() {
+	console.log('in logout()');
+	localStorage.removeItem("jwt");
+	LoadLogin();
 }
 
 function register() {
@@ -81,7 +131,7 @@ function register() {
 			let user = JSON.parse(xhr.responseText);
 			if (user) {
 				alert("Account registration successful!");
-				loadLogin();
+				loadDashboard();
 				window.localStorage.setItem("user", xhr.responseText);
 			} else {
 				alert("That username/email already exists!");
@@ -90,9 +140,33 @@ function register() {
 	}
 }
 
-function logout() {
-	localStorage.removeItem("jwt");
+function viewPastTickets() {
+	console.log("viewPastTickets")
+
+	let content = [ viewPastTickets ];
+	let contentJSON = JSON.stringify(content);
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "dashboard", true);
+	xhr.send(contentJSON);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let pastTickets = JSON.parse(xhr.responseText);
+
+			if (pastTickets) {
+				console.log(pastTickets);
+				//loadPastTickets();
+			} else {
+				alert("Login failed!");
+
+			}
+		}
+	}
 }
+
+
 
 //Support functions for verifying credentials
 
