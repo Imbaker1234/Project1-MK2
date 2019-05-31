@@ -100,3 +100,6 @@ target/
 
 # attach_pid files
 .attach_pid*
+
+# Intellij files
+.idea

@@ -1,2 +1,51 @@
-<h1>I CAN HAZ CHEEZBORGER</h1>
-<h3>From /webapp/partials/</h3>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="CSS/home.css">
+    <script
+            src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+<!-- REMOVE THE ADDITIONAL HTML ON INTEGRATION TO PROJECT -->
+<div id="container" class="container dashboard-container">
+    <div class="row">
+        <div class="col-md-6 dashboard-form-1">
+            <h3>Welcome </h3>
+
+            <div class="form-group">
+                <input id="reimb_amount" type="number" class="form-control"
+                       placeholder="Amount" value=""/>
+            </div>
+            <div class="form-group">
+                <textarea name="" id="reimb_desc" cols="30" rows="10"></textarea>
+            </div>
+            <div id="dashboardupload">
+                <div class="form-group">
+                    <input type="file" name="uploadedimage" id="imageuploadinput" onchange="handleFiles(this.files)">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input id="dashboardsubmitbutton" type="submit" class="btnSubmit"
+                       value="Submit"/>
+            </div>
+
+
+        </div>
+
+        <h3>Tickets</h3>
+    </div>
+</div>
+<!-- Remove the additional html on addition to project-->
+</body>
+</html>
