@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.POJO.ErsReimbursement;
-import com.POJO.ErsUsers;
 import com.POJO.Principal;
 import com.util.ConnectionFactory;
 
@@ -15,6 +14,7 @@ public class ErsReimbursementDAO {
 	
 	private static Logger log = LogManager.getLogger(ErsReimbursementDAO.class);
 
+	
 	public ArrayList<ErsReimbursement> retrieveAllReimbs() {
 		log.info("in reimb DAO retrieveAllReimbs method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
@@ -121,7 +121,7 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	public boolean updateReimbursementStatus(ErsUsers user, ErsReimbursement reimb) {
+	public boolean updateReimbursementStatus(Principal user, ErsReimbursement reimb) {
 		log.info("in reimb DAO updateReimbursementStatus method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -130,7 +130,7 @@ public class ErsReimbursementDAO {
 			String sql = "UPDATE ers_reimbursement SET reimb_status_id = ?, reimb_resolver = ? WHERE reimb_id = ?";
 			PreparedStatement stmt = connect.prepareStatement(sql);
 			stmt.setString(1, reimb.getReimbStatusId());
-			stmt.setString(2, user.getErsUsersId());
+			stmt.setString(2, user.getId());
 			stmt.setString(3, reimb.getReimbId());
 
 			stmt.executeUpdate();
