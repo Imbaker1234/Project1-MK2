@@ -5,23 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestViewHelper {
     
     public static String process (HttpServletRequest request) {
+    	System.out.println("in RequestViewHelper process method");
 
         switch(request.getRequestURI()) {
 
         case "/IBJK-Project-One/login.view":
-            System.out.println("=====REQUEST VIEW HELPER=====");
             System.out.println("login.view called");
-            return "partials/login.html";
+            return "/index.html";
 
         case "/IBJK-Project-One/register.view":
-            System.out.println("=====REQUEST VIEW HELPER=====");
-            System.out.println("register.view called");
-            return "partials/register.html";
+            //System.out.println("register.view called");
+            return "/index.html";
 
-        case "/IBJK-Project-One/home.view":
-            System.out.println("=====REQUEST VIEW HELPER=====");
-            System.out.println("home.view called");
-            return "partials/home.html";
+        case "/IBJK-Project-One/dashboard.view":
+            //System.out.println("home.view called");
+            return "/index.html";
 
         default:
             return "/index.html";

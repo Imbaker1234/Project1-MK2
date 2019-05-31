@@ -15,7 +15,7 @@ public class ErsReimbursementDAO {
 	private static Logger log = LogManager.getLogger(ErsReimbursementDAO.class);
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbs() {
-
+		log.info("in reimb DAO retrieveAllReimbs method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
@@ -33,7 +33,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbsByAuthor(ErsUsers user) {
-
+		System.out.println("in reimb DAO retrieveAllReimbsByAuthor method");
 		String ersUsersId = user.getErsUsersId();
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbId) {
-
+		System.out.println("in reimb DAO retrieveAllReimbsByStatus method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
@@ -70,9 +70,29 @@ public class ErsReimbursementDAO {
 		}
 		return null;
 	}
+	
+	public ArrayList<ErsReimbursement> dashboardDisplayPendingReimbs(String userId, String reimbStatusId) {
+		System.out.println("in reimb DAO dashboardDisplayPendingReimbs method");
+		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
+
+		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ? AND reimb_author = ?";
+			PreparedStatement stmt = connect.prepareStatement(sql);
+			stmt.setString(1, reimbStatusId);
+			stmt.setString(2, userId);
+			ResultSet rs = stmt.executeQuery();
+
+			return mapResultSet(reimbursementlist, rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();;
+		}
+		return null;
+	}
 
 	public boolean addReimbursement(ErsReimbursement reimb) {
-
+		System.out.println("in reimb DAO addReimbursement method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
@@ -100,8 +120,8 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	public boolean updateReimbursementStatus(ErsReimbursement reimb, ErsUsers user) {
-
+	public boolean updateReimbursementStatus(ErsUsers user, ErsReimbursement reimb) {
+		System.out.println("in reimb DAO updateReimbursementStatus method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
@@ -122,8 +142,8 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs)
-			throws SQLException {
+	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs) throws SQLException {
+		System.out.println("in reimb DAO mapResultSet");
 		if (rs != null) {
 
 			while (rs.next()) {

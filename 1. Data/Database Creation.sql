@@ -75,22 +75,17 @@ CREATE TABLE ers_reimbursement (
 
 INSERT INTO ers_user_roles VALUES (1, 'employee');
 INSERT INTO ers_user_roles VALUES (2, 'admin');
-SELECT * FROM ers_user_roles;
 
 INSERT INTO ers_reimbursement_type VALUES (1, 'Lodging');
 INSERT INTO ers_reimbursement_type VALUES (2, 'Travel');
 INSERT INTO ers_reimbursement_type VALUES (3, 'Food');
 INSERT INTO ers_reimbursement_type VALUES (4, 'Other');
-SELECT * FROM ers_reimbursement_type;
 
 INSERT INTO ers_reimbursement_status VALUES (1, 'Pending');
 INSERT INTO ers_reimbursement_status VALUES (2, 'Approved');
 INSERT INTO ers_reimbursement_status VALUES (3, 'Denied');
-SELECT * FROM ers_reimbursement_status;
 
 CREATE SEQUENCE users_seq;
-INSERT INTO ers_users VALUES (1, 'Kerr007', 'benis69', 'Justin', 'Kerr', 'justin-kerr89@hotmail.com', 2);
-SELECT * FROM ers_users;
 
 CREATE OR REPLACE PROCEDURE new_user
 (
@@ -106,3 +101,6 @@ BEGIN
     VALUES (users_seq.nextval, username, password, firstname, lastname, email, 1);
     COMMIT;
 END;
+
+INSERT INTO ers_users VALUES (1, 'Kerr007', 'benis69', 'Justin', 'Kerr', 'justin-kerr89@hotmail.com', 2);
+SELECT * FROM ers_users;

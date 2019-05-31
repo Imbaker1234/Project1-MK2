@@ -18,8 +18,7 @@ function loadLogin() {
 	
 	 xhr.onreadystatechange = function() {
 		 if(xhr.readyState == 4 && xhr.status == 200) {
-			 document.getElementById('wholepage').innerHTML = xhr.responseText;
-			 loadLoginInfo();
+			 document.getElementById('page').innerHTML = xhr.responseText;
 		 }
 	 }
 }
@@ -91,7 +90,11 @@ function register() {
 	}
 }
 
-//Support methods for verifying credentials
+function logout() {
+	localStorage.removeItem("jwt");
+}
+
+//Support functions for verifying credentials
 
 function verifyUsername(username) {
 

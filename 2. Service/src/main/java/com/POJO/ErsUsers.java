@@ -91,6 +91,21 @@ public class ErsUsers {
 	public void setUserRoleId(String userRoleId) {
 		this.userRoleId = userRoleId;
 	}
+	
+	public String getUserRoleName(String userRoleId) {
+		String rolename = "";
+		switch (userRoleId) {
+		case "1":
+			rolename = ""; break;
+		case "2":
+			rolename = ""; break;
+		case "3":
+			rolename = ""; break;
+		case "4":
+			rolename = ""; break;
+		}
+		return rolename;
+	}
 
 	@Override
 	public String toString() {

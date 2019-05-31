@@ -16,6 +16,7 @@ public class FrontControllerServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		System.out.println("in FrontControllerServlet doGet");
 		
 		String returnHTML = RequestViewHelper.process(request);
 		request.getRequestDispatcher(returnHTML).forward(request, response);
