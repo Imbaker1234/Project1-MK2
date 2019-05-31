@@ -53,15 +53,15 @@ public class ErsReimbursementDAO {
 		return null;
 	}
 
-	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbId) {
+	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbStatusId) {
 		log.info("in reimb DAO retrieveAllReimbsByStatus method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ?";
 			PreparedStatement stmt = connect.prepareStatement(sql);
-			stmt.setString(1, reimbId);
+			stmt.setString(1, reimbStatusId);
 			ResultSet rs = stmt.executeQuery();
 
 			return mapResultSet(reimbursementlist, rs);
