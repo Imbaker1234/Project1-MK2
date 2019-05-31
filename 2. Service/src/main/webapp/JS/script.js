@@ -11,93 +11,91 @@ registerbutton.addEventListener("click", register);
 //Load Views
 
 function loadLogin() {
-	 //console.log("in loadLogin()");
-	
-	 let xhr = new XMLHttpRequest();
-	
-	 xhr.open("GET", "login.view", true);
-	 xhr.send();
-	
-	 xhr.onreadystatechange = function() {
-		 if(xhr.readyState == 4 && xhr.status == 200) {
-			 document.getElementById('page').innerHTML = xhr.responseText;
-		 }
-	 }
+	 // //console.log("in loadLogin()");
+	 //
+	 // let xhr = new XMLHttpRequest();
+	 //
+	 // xhr.open("GET", "login.view", true);
+	 // xhr.send();
+	 //
+	 // xhr.onreadystatechange = function() {
+		//  if(xhr.readyState == 4 && xhr.status == 200) {
+		// 	 document.getElementById('page').innerHTML = xhr.responseText;
+		//  }
+	 // }
+
+	ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
-	 console.log("in loadDashboard()");
-	
-	 let xhr = new XMLHttpRequest();
-	
-	 xhr.open("GET", "dashboard.view", true);
-	 xhr.send();
-	
-	 xhr.onreadystatechange = function() {
-		 if(xhr.readyState == 4 && xhr.status == 200) {
-			 document.getElementById('page').innerHTML = xhr.responseText;
-		 }
-	 }
+	 // console.log("in loadDashboard()");
+	 //
+	 // let xhr = new XMLHttpRequest();
+	 //
+	 // xhr.open("GET", "dashboard.view", true);
+	 // xhr.send();
+	 //
+	 // xhr.onreadystatechange = function() {
+		//  if(xhr.readyState == 4 && xhr.status == 200) {
+		// 	 document.getElementById('page').innerHTML = xhr.responseText;
+		//  }
+	 // }
+
+	ajaxLoadDiv(dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
-	 console.log("in loadPastTickets()");
-		
-	 let xhr = new XMLHttpRequest();
-	
-	 xhr.open("GET", "pasttickets.view", true);
-	 xhr.send();
-	
-	 xhr.onreadystatechange = function() {
-		 if(xhr.readyState == 4 && xhr.status == 200) {
-			 document.getElementById('page').innerHTML = xhr.responseText;
-		 }
-	 }
+// 	 console.log("in loadPastTickets()");
+//
+// 	 let xhr = new XMLHttpRequest();
+//
+// 	 xhr.open("GET", "pasttickets.view", true);
+// 	 xhr.send();
+//
+// 	 xhr.onreadystatechange = function() {
+// 		 if(xhr.readyState == 4 && xhr.status == 200) {
+// 			 document.getElementById('page').innerHTML = xhr.responseText;
+// 		 }
+// 	 }
+
+
+	 ajaxLoadDiv("pasttickets.view", "page");
+	//this later to some sort of sub div on the dashboard.
 }
 
-function ajaxLoadView(httpMethod, endPoint, targetDiv) {
-    let xhr = new XMLHttpRequest();
-    xhr.open(httpMethod, endpoint, true); 
-    xhr.send();
-
-    xhr.onreadystatechange = function() {
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById(targetDiv).innerHTML = xhr.responseText;
-        }
-    }
-}
 
 function login() {
 	//console.log("in login()");
-	
+
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
-	let credentialsJSON = JSON.stringify(credentials);
-
-	let xhr = new XMLHttpRequest();
-
-	xhr.open("POST", "account", true);
-	xhr.send(credentialsJSON);
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			let user = JSON.parse(xhr.responseText);
-
-			if (user) {
-				console.log(user);
-				alert("Login successful!");
-				loadDashboard();
-				window.localStorage.setItem("user", xhr.responseText);
-
-			} else {
-				alert("Login failed!");
-
-			}
-		}
-	}
+	// let credentialsJSON = JSON.stringify(credentials);
+	//
+	// let xhr = new XMLHttpRequest();
+	//
+	// xhr.open("POST", "account", true);
+	// xhr.send(credentialsJSON);
+	//
+	// xhr.onreadystatechange = function() {
+	// 	if (xhr.readyState == 4 && xhr.status == 200) {
+	// 		let user = JSON.parse(xhr.responseText);
+	//
+	// 		if (user) {
+	// 			console.log(user);
+	// 			alert("Login successful!");
+	// 			loadDashboard();
+	// 			window.localStorage.setItem("user", xhr.responseText);
+	//
+	// 		} else {
+	// 			alert("Login failed!");
+	//
+	// 		}
+	// 	}
+	// }
+	ajaxCall("POST", credentials, "principal");
 }
 
 function logout() {
@@ -119,25 +117,64 @@ function register() {
 			|| verifyEmail(email) == false) return;
 
 	let credentials = [ username, password, firstname, lastname, email ];
-	let credentialsJSON = JSON.stringify(credentials);
+	// let credentialsJSON = JSON.stringify(credentials);
+	//
+	// let xhr = new XMLHttpRequest();
+	//
+	// xhr.open("POST", "account", true);
+	// xhr.send(credentialsJSON);
+	//
+	// xhr.onreadystatechange = function() {
+	// 	if (xhr.readyState == 4 && xhr.status == 200) {
+	// 		let user = JSON.parse(xhr.responseText);
+	// 		if (user) {
+	// 			alert("Account registration successful!");
+	// 			loadDashboard();
+	// 			window.localStorage.setItem("user", xhr.responseText);
+	// 		} else {
+	// 			alert("That username/email already exists!");
+	// 		}
+	// 	}
+	// }
+	ajaxCall("POST", credentials, "principal");
+}
+
+function ajaxCall(method, incoming, store) {
+	let outgoing = JSON.stringify(incoming);
 
 	let xhr = new XMLHttpRequest();
 
 	xhr.open("POST", "account", true);
-	xhr.send(credentialsJSON);
+	xhr.send(outgoing);
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			let user = JSON.parse(xhr.responseText);
-			if (user) {
-				alert("Account registration successful!");
-				loadDashboard();
-				window.localStorage.setItem("user", xhr.responseText);
+			let result = JSON.parse(xhr.responseText);
+			if (result) {
+				console.log("Results retrieved from AJAX call");
+				console.log(xhr.responseText);
+				if (store) {
+				window.localStorage.setItem(store, xhr.responseText);
+				}
+			}
 			} else {
-				alert("That username/email already exists!");
+				alert("Send/Receive error");
 			}
 		}
+		return xhr.responseText;
 	}
+
+
+function ajaxLoadDiv(endPoint, targetDiv) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", endpoint, true);
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById(targetDiv).innerHTML = xhr.responseText;
+        }
+    }
 }
 
 function viewPastTickets() {
@@ -145,25 +182,27 @@ function viewPastTickets() {
 
 	let content = [ viewPastTickets ];
 	let contentJSON = JSON.stringify(content);
+	//
+	// let xhr = new XMLHttpRequest();
+	//
+	// xhr.open("POST", "dashboard", true);
+	// xhr.send(contentJSON);
+	//
+	// xhr.onreadystatechange = function() {
+	// 	if (xhr.readyState == 4 && xhr.status == 200) {
+	// 		let pastTickets = JSON.parse(xhr.responseText);
+	//
+	// 		if (pastTickets) {
+	// 			console.log(pastTickets);
+	// 			loadPastTickets();
+	// 		} else {
+	// 			alert("Login failed!");
+	//
+	// 		}
+	// 	}
+	// }
 
-	let xhr = new XMLHttpRequest();
-
-	xhr.open("POST", "dashboard", true);
-	xhr.send(contentJSON);
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			let pastTickets = JSON.parse(xhr.responseText);
-
-			if (pastTickets) {
-				console.log(pastTickets);
-				loadPastTickets();
-			} else {
-				alert("Login failed!");
-
-			}
-		}
-	}
+	loadPastTickets(ajaxCall(content));
 }
 
 
