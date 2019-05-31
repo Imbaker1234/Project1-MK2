@@ -41,7 +41,7 @@ public class TokenAuthenticationFilter extends HttpFilter {
 
 		try {
 
-			Claims claims = Jwts.parser().setSigningKey(JwtConfig.SIGNING_KEY).parseClaimsJwt(token).getBody();
+			Claims claims = Jwts.parser().setSigningKey(JwtConfig.SIGNING_KEY).parseClaimsJws(token).getBody();
 
 			Principal principal = new Principal();
 			principal.setId(claims.getId());
