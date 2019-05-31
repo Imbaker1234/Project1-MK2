@@ -33,7 +33,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbsByAuthor(ErsUsers user) {
-		System.out.println("in reimb DAO retrieveAllReimbsByAuthor method");
+		log.info("in reimb DAO retrieveAllReimbsByAuthor method");
 		String ersUsersId = user.getErsUsersId();
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(String reimbId) {
-		System.out.println("in reimb DAO retrieveAllReimbsByStatus method");
+		log.info("in reimb DAO retrieveAllReimbsByStatus method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
@@ -72,7 +72,7 @@ public class ErsReimbursementDAO {
 	}
 	
 	public ArrayList<ErsReimbursement> dashboardDisplayPendingReimbs(String userId, String reimbStatusId) {
-		System.out.println("in reimb DAO dashboardDisplayPendingReimbs method");
+		log.info("in reimb DAO dashboardDisplayPendingReimbs method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
@@ -92,7 +92,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public boolean addReimbursement(ErsReimbursement reimb) {
-		System.out.println("in reimb DAO addReimbursement method");
+		log.info("in reimb DAO addReimbursement method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
@@ -121,7 +121,7 @@ public class ErsReimbursementDAO {
 	}
 
 	public boolean updateReimbursementStatus(ErsUsers user, ErsReimbursement reimb) {
-		System.out.println("in reimb DAO updateReimbursementStatus method");
+		log.info("in reimb DAO updateReimbursementStatus method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
@@ -143,7 +143,7 @@ public class ErsReimbursementDAO {
 	}
 
 	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs) throws SQLException {
-		System.out.println("in reimb DAO mapResultSet");
+		log.info("in reimb DAO mapResultSet");
 		if (rs != null) {
 
 			while (rs.next()) {

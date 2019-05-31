@@ -2,16 +2,20 @@ package com.service;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.DAO.ErsReimbursementDAO;
 import com.POJO.ErsReimbursement;
 import com.POJO.ErsUsers;
 
 public class ErsReimbursementService {
 	
+	private static Logger log = LogManager.getLogger(ErsReimbursementService.class);
 	private ErsReimbursementDAO rdao = new ErsReimbursementDAO();
 	
 	public ArrayList<ErsReimbursement> viewPastTickets(ErsUsers user) {
-		System.out.println("in reimb service viewPastTickets method");
+		log.info("in reimb service viewPastTickets method");
 		
 		ArrayList<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
 		if (pasttickets.size() == 0) {
@@ -23,7 +27,7 @@ public class ErsReimbursementService {
 	}
 	
 	public ArrayList<ErsReimbursement> addReimbRequest(ErsUsers user, ErsReimbursement reimb) {
-		System.out.println("in reimb service addReimbRequest method");
+		log.info("in reimb service addReimbRequest method");
 		
 		Boolean addedReimb = rdao.addReimbursement(reimb);
 		if (addedReimb == true) {
@@ -33,14 +37,14 @@ public class ErsReimbursementService {
 	}
 	
 	public boolean approveDenyReimb(ErsUsers user, ErsReimbursement reimb) {
-		System.out.println("in reimb service approveDenyReimb method");
+		log.info("in reimb service approveDenyReimb method");
 		
 		return rdao.updateReimbursementStatus(user, reimb);
 		
 	}
 	
 	public ArrayList<ErsReimbursement> filterReimbs(String reimbId) {
-		System.out.println("in reimb service approveDenyReimb method");
+		log.info("in reimb service approveDenyReimb method");
 		
 		return rdao.retrieveAllReimbsByStatus(reimbId);
 		

@@ -19,7 +19,7 @@ public class ErsUsersDAO {
 	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
-		//System.out.println("in getUserByCredentials");
+		log.info("in ErsUsersDAO getUserByCredentials method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -39,7 +39,7 @@ public class ErsUsersDAO {
 	}
 
 	public ErsUsers getByUsername(String username) {
-		//System.out.println("in getByUsername");
+		log.info("in ErsUsersDAO getByUsername method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -59,7 +59,7 @@ public class ErsUsersDAO {
 
 	
 	public boolean addUser(ErsUsers user) {
-		//System.out.println("in addUser");
+		log.info("in ErsUsersDAO addUser method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 			
@@ -84,7 +84,7 @@ public class ErsUsersDAO {
 	}
 	
 	private List<ErsUsers> mapResultSet(ResultSet rs) throws SQLException {
-		//System.out.println("in mapResultSet");
+		log.info("in ErsUsersDAO mapResultSet");
 		
 		if (rs != null) {
 			List<ErsUsers> users = new ArrayList<>();

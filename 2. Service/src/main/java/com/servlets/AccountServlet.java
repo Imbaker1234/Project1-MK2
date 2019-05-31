@@ -67,54 +67,6 @@ public class AccountServlet extends HttpServlet {
 	}
 	
 	/*
-	 * HOW TO CREATE JWT
-
-2. Create new JwtConfig class in .util package
-
-public static final String URI = "/**";
-public static final String HEADER = "Authorization";
-public static final String PREFIX = "Bearer ";
-public static int EXPIRATION = 24 * 60 * 60; // token lasts one day long
-public static final String SECRET = "JwtSecretKey";  //only put this here for educational purposes (otherwise put in a seperate forlder for security reasons)
-
-static {
-    // Create a signing key using the JWT secret key
-    SignatureAlgorithm signatureAlg = SignatureAlgorithm.HS256
-    byte[] secretBytes = DatatypeConverter.parseBase64Binary(SECRET);
-    SIGNING_KEY = new SecretKeySpec(secretBytes, signatureAlg.getJcaName());
-}
-
-private JwtConfig() {
-    super();
-    }
-
-
-3. Create new JwtGenerator class in .util package
-
-private static Logger log = LogManager.getLogger(JwtGenerator.class);
-
-public static String createJwt(User subject){
-    log.info("Creating new JWT for: " + subject.getUsername());
-
-    // The JWT Signature Algorithm used to sign the token
-    SignatureAlgorithm sigAlg = SignatureAlgorithm.HS256;
-
-    long nowMillis = System.currentTimeMillis();
-
-    // Configure the JWT and set its claims
-    JwtBuilder builder = Jwts.builder()
-        .setId(Integer.toString(subject.getId());
-        .setSubject(subject.getUsername());
-        .setIssuer("revature");
-        .claim("role", subject.getRole().getRoleName()
-        .setExpiration(new Date(nowMillis + JwtConfig.EXPIRATION))
-        .signWith(sigAlg, JwtConfig.SIGNING_KEY)
-
-    log.info("JWT successfully created");
-
-    // Build the JWT and serialize it into a compact, URL-safe string
-    return builder.compact();
-
 
 (if you want to return a Principal)
 1. create principal class model
