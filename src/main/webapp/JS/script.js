@@ -37,6 +37,46 @@ function loadDashboard() {
 			document.getElementById('wholepage').innerHTML = xhr.responseText;
 			loadLoginInfo();
 		}
+		document.getElementById("dashboardsubmitbutton").addEventListener("click", )
+	}
+}
+
+function submitReimb() {
+	let amount = document.getElementById("reimb_amount").value;
+	let desc = document.getElementById("reimb_description").value;
+	let img = document.getElementById("dashboardupload").value;
+
+	if (verifyUsername(username) == false || verifyPassword(password) == false || verifyCurrency(amount)  == false) return;
+
+	let fr = window.FileReader();
+	fr.onloadend = function (e) {
+		showUploadedItem(e.target.result);
+	};
+
+
+	let sendContent = [ amount, desc, img ];
+	let credentialsJSON = JSON.stringify(send);
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "account", true);
+	xhr.send(credentialsJSON);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let user = JSON.parse(xhr.responseText);
+
+			if (user) {
+				console.log(user);
+				alert("Login successful!");
+				loadLogin();
+				window.localStorage.setItem("user", xhr.responseText);
+
+			} else {
+				alert("Login failed!");
+
+			}
+		}
 	}
 }
 
@@ -130,6 +170,12 @@ function verifyPassword(password) {
 		alert("Invalid password syntax.");
 		return false;
 	}
+	return true;
+}
+
+function verifyCurrency(currency) {
+
+	if (currency == "" || currency.split(".").length > 1 || currency.split(".")[1].length > 1) return false;
 	return true;
 }
 
