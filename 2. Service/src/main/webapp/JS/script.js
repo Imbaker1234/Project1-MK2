@@ -41,7 +41,7 @@ function loadDashboard() {
 		//  }
 	 // }
 
-	ajaxLoadDiv(dashboard.view", "page");
+	ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
