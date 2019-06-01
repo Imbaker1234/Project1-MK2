@@ -1,5 +1,4 @@
-console.log("LOADING JAVASCRIPT");
-//Button action listeners
+//Button action listeners =========================================
 
 let loginbutton = document.getElementById("loginsubmitbutton");
 loginbutton.addEventListener("click", login);
@@ -7,100 +6,75 @@ loginbutton.addEventListener("click", login);
 let registerbutton = document.getElementById("registersubmitbutton");
 registerbutton.addEventListener("click", register);
 
-//Functionalities
+//Functionalities =================================================
 
-//Load Views
+function ajaxCall(method, incoming, store) {
+	let outgoing = JSON.stringify(incoming);
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "account", true);
+	xhr.send(outgoing);
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let result = JSON.parse(xhr.responseText);
+			if (result) {
+				console.log("Results retrieved from AJAX call");
+				console.log(xhr.responseText);
+				if (store) {
+					window.localStorage.setItem(store, xhr.responseText);
+				}
+			}
+		}
+	};
+	if (xhr.responseText) {
+		console.log(xhr.responseText);
+		return xhr.responseText;
+	} else {
+		alert("Send/Receive Error");
+	}
+}
+
+function ajaxLoadDiv(endPoint, targetDiv) {
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", endpoint, true);
+	xhr.send();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			document.getElementById(targetDiv).innerHTML = xhr.responseText;
+		}
+	}
+}
+
+//Load Views ======================================================
 
 function loadLogin() {
-	// //console.log("in loadLogin()");
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("GET", "login.view", true);
-	// xhr.send();
-	//
-	// xhr.onreadystatechange = function() {
-	//  if(xhr.readyState == 4 && xhr.status == 200) {
-	// 	 document.getElementById('page').innerHTML = xhr.responseText;
-	//  }
-	// }
-
 	ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
-	// console.log("in loadDashboard()");
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("GET", "dashboard.view", true);
-	// xhr.send();
-	//
-	// xhr.onreadystatechange = function() {
-	//  if(xhr.readyState == 4 && xhr.status == 200) {
-	// 	 document.getElementById('page').innerHTML = xhr.responseText;
-	//  }
-	// }
-
 	ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
-// 	 console.log("in loadPastTickets()");
-//
-// 	 let xhr = new XMLHttpRequest();
-//
-// 	 xhr.open("GET", "pasttickets.view", true);
-// 	 xhr.send();
-//
-// 	 xhr.onreadystatechange = function() {
-// 		 if(xhr.readyState == 4 && xhr.status == 200) {
-// 			 document.getElementById('page').innerHTML = xhr.responseText;
-// 		 }
-// 	 }
-
-
 	ajaxLoadDiv("pasttickets.view", "page");
 	//this later to some sort of sub div on the dashboard.
 }
 
+//Functions By Page ===============================================
 
+//===== Login =====================================================
 function login() {
-	//console.log("in login()");
 
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
-	// let credentialsJSON = JSON.stringify(credentials);
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("POST", "account", true);
-	// xhr.send(credentialsJSON);
-	//
-	// xhr.onreadystatechange = function() {
-	// 	if (xhr.readyState == 4 && xhr.status == 200) {
-	// 		let user = JSON.parse(xhr.responseText);
-	//
-	// 		if (user) {
-	// 			console.log(user);
-	// 			alert("Login successful!");
-	// 			loadDashboard();
-	// 			window.localStorage.setItem("user", xhr.responseText);
-	//
-	// 		} else {
-	// 			alert("Login failed!");
-	//
-	// 		}
-	// 	}
-	// }
 	ajaxCall("POST", credentials, "principal");
 }
-
-console.log("Made it to Line 100");
-
 
 function logout() {
 	console.log('in logout()');
@@ -121,99 +95,11 @@ function register() {
 		|| verifyEmail(email) == false) return;
 
 	let credentials = [ username, password, firstname, lastname, email ];
-	// let credentialsJSON = JSON.stringify(credentials);
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("POST", "account", true);
-	// xhr.send(credentialsJSON);
-	//
-	// xhr.onreadystatechange = function() {
-	// 	if (xhr.readyState == 4 && xhr.status == 200) {
-	// 		let user = JSON.parse(xhr.responseText);
-	// 		if (user) {
-	// 			alert("Account registration successful!");
-	// 			loadDashboard();
-	// 			window.localStorage.setItem("user", xhr.responseText);
-	// 		} else {
-	// 			alert("That username/email already exists!");
-	// 		}
-	// 	}
-	// }
+
 	ajaxCall("POST", credentials, "principal");
 }
 
-function ajaxCall(method, incoming, store) {
-	let outgoing = JSON.stringify(incoming);
-
-	let xhr = new XMLHttpRequest();
-
-	xhr.open("POST", "account", true);
-	xhr.send(outgoing);
-
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			let result = JSON.parse(xhr.responseText);
-			if (result) {
-				console.log("Results retrieved from AJAX call");
-				console.log(xhr.responseText);
-				if (store) {
-					window.localStorage.setItem(store, xhr.responseText);
-				}
-			}
-		}
-	};
-	if (xhr.responseText) {
-		console.log(xhr.responseText);
-		return xhr.responseText;
-	} else {
-		alert("Send/Receive Error");
-	}
-}
-
-console.log("Made it to Line 169");
-function ajaxLoadDiv(endPoint, targetDiv) {
-	let xhr = new XMLHttpRequest();
-	xhr.open("GET", endpoint, true);
-	xhr.send();
-
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && xhr.status == 200) {
-			document.getElementById(targetDiv).innerHTML = xhr.responseText;
-		}
-	}
-}
-
-function viewPastTickets() {
-	console.log("in viewPastTickets");
-
-	let content = [ viewPastTickets ];
-	let contentJSON = JSON.stringify(content);
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("POST", "dashboard", true);
-	// xhr.send(contentJSON);
-	//
-	// xhr.onreadystatechange = function() {
-	// 	if (xhr.readyState == 4 && xhr.status == 200) {
-	// 		let pastTickets = JSON.parse(xhr.responseText);
-	//
-	// 		if (pastTickets) {
-	// 			console.log(pastTickets);
-	// 			loadPastTickets();
-	// 		} else {
-	// 			alert("Login failed!");
-	//
-	// 		}
-	// 	}
-	// }
-
-	loadPastTickets(ajaxCall(content));
-}
-
-
-//Support functions for verifying credentials
+//=============== Credential Verification =========================
 
 function verifyUsername(username) {
 
@@ -227,7 +113,6 @@ function verifyUsername(username) {
 	return true;
 }
 
-console.log("Made it to Line 226");
 function verifyPassword(password) {
 
 	if (password == "" || password.includes(" ") || password.length < 3
@@ -276,7 +161,23 @@ function verifyEmail(email) {
 	return false;
 }
 
-console.log("Made it to END OF FILE");
+//===== Dashboard =================================================
+
+function viewPastTickets() {
+	console.log("in viewPastTickets");
+
+	let content = [ viewPastTickets ];
+	let contentJSON = JSON.stringify(content);
+
+	loadPastTickets(ajaxCall(content));
+}
+
+console.log("JS Loaded");
+
+//==================REFERENCE SCRIPT===============================
+//==================REFERENCE SCRIPT===============================
+
+
 /*
  window.onload = function() {
  loadLogin();
