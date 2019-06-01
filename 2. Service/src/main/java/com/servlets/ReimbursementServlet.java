@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsReimbursementService;
 
 @WebServlet("/dashboard")
@@ -43,52 +42,52 @@ public class ReimbursementServlet extends HttpServlet {
 		response.setContentType("application/json");
 
 		ErsReimbursement userinput = mapper.readValue(request.getReader(), ErsReimbursement.class);
+		String input2 = userinput.getReimbId();
+		String input3 = userinput.getReimbStatusId();
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getId();
 
 		switch (role) {
 
 		case "1":
-			if (userinput.getReimbId().equals("pasttickets")) {
+			if (input2.equals("pasttickets")) {
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				reimbService.addReimbRequest(principal, userinput);
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput);
+				writer.write(mapper.writeValueAsString(pendingReimbs));
+				
 			}
 			break;
 
 		case "2":
-			if (userinput.getReimbId().equals("pasttickets")) {
+			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
+				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
+				writer.write(mapper.writeValueAsString(pasttickets));
 
-			} else if (userinput.getReimbId().equals("pending") || userinput.getReimbId().equals("approved")
-					|| userinput.getReimbId().equals("denied")) {
-				reimbService.filterReimbs(userinput);
+			} else if (input2.equals("viewallreimbs")) {
+				ArrayList<ErsReimbursement> allReimbs =  reimbService.viewAllReimbs();
+				writer.write(mapper.writeValueAsString(allReimbs));
 
-			} else if (Integer.valueOf(userinput.getReimbId()) instanceof Integer) {
-				reimbService.approveDenyReimb(principal, userinput);
+			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
+				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
+				writer.write(mapper.writeValueAsString(filteredReimbs));
 
-			} else if (userinput.getReimbId().equals("viewallreimbs")) {
-				reimbService.viewAllReimbs();
+			} else if (input3.equals("1") == false) {
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput);
+				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			} else {
 				reimbService.addReimbRequest(principal, userinput);
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput);
+				writer.write(mapper.writeValueAsString(pendingReimbs));
+				
 			}
 			break;
 		}
 		
-	}
-
-	public String[] nodeToArray(ArrayNode rootNode) {
-
-		String[] array = new String[rootNode.size()];
-
-		for (int i = 0; i < rootNode.size(); i++) {
-			array[i] = rootNode.get(i).asText();
-
-		}
-		return array;
 	}
 }
 

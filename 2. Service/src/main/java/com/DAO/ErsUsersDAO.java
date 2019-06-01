@@ -16,6 +16,12 @@ import com.util.ConnectionFactory;
 
 public class ErsUsersDAO {
 
+	public static void main(String[] args) {
+		ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
+		System.out.println(ersUsersDAO.getUserByCredentials("Imbaker1234", "deLUX"));
+	}
+
 	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
 	public ErsUsers getUserByCredentials(String username, String password) {
