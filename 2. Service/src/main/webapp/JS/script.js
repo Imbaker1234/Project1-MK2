@@ -9,6 +9,7 @@ registerbutton.addEventListener("click", register);
 //Functionalities =================================================
 
 function ajaxCall(method, incoming, store) {
+    console.log("ajaxCall(" + method + ", " + incoming + ", " + store + ") called");
 	let outgoing = JSON.stringify(incoming);
 
 	let xhr = new XMLHttpRequest();
@@ -37,8 +38,9 @@ function ajaxCall(method, incoming, store) {
 }
 
 function ajaxLoadDiv(endPoint, targetDiv) {
+    console.log("ajaxLoadDiv(" + endPoint + ", " + targetDiv + ") called");
 	let xhr = new XMLHttpRequest();
-	xhr.open("GET", endpoint, true);
+    xhr.open("GET", endPoint, true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
@@ -51,14 +53,17 @@ function ajaxLoadDiv(endPoint, targetDiv) {
 //Load Views ======================================================
 
 function loadLogin() {
+    console.log("loadLogin() called"); //DEBUG
 	ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
+    console.log("loadDashboard() called"); //DEBUG
 	ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
+    console.log("loadPastTickets(" + pastTickets + ") called"); //DEBUG
 	ajaxLoadDiv("pasttickets.view", "page");
 	//this later to some sort of sub div on the dashboard.
 }
@@ -70,6 +75,10 @@ function login() {
 
 	let username = document.getElementById("loginusername").value;
 	let password = document.getElementById("loginpassword").value;
+
+    console.log("login() called"); //DEBUG
+    console.log("username = " + username); //DEBUG
+    console.log("password = " + password); //DEBUG
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
@@ -77,19 +86,24 @@ function login() {
 }
 
 function logout() {
-	console.log('in logout()');
+    console.log("logout() called"); //DEBUG
 	localStorage.removeItem("jwt");
 	LoadLogin();
 }
 
 function register() {
-	console.log("in register()");
 
 	let username = document.getElementById("registerusername").value;
 	let password = document.getElementById("registerpassword").value;
 	let firstname = document.getElementById("registerfirst").value;
 	let lastname = document.getElementById("registerlast").value;
 	let email = document.getElementById("registeremail").value;
+    console.log("verifyUsername() called"); //DEBUG
+    console.log("username =" + username); //DEBUG
+    console.log("password =" + password); //DEBUG
+    console.log("firstname =" + firstname); //DEBUG
+    console.log("lastname =" + lastname); //DEBUG
+    console.log("email =" + email); //DEBUG
 
 	if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
 		|| verifyEmail(email) == false) return;
@@ -102,7 +116,7 @@ function register() {
 //=============== Credential Verification =========================
 
 function verifyUsername(username) {
-
+    console.log("verifyUsername(" + username + ") called"); //DEBUG
 	if (username == "" || username.includes(" ") || username.length < 3
 		|| username.length > 24) {
 		document.getElementById("loginusername").value = "";
@@ -114,7 +128,7 @@ function verifyUsername(username) {
 }
 
 function verifyPassword(password) {
-
+    console.log("verifyPassword(" + password + ") called"); //DEBUG
 	if (password == "" || password.includes(" ") || password.length < 3
 		|| password.length > 24) {
 		document.getElementById("loginpassword").value = "";
@@ -126,6 +140,7 @@ function verifyPassword(password) {
 }
 
 function verifyName(firstname, lastname) {
+    console.log("verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
 	if (firstname.length < 3 || lastname.length < 3) {
 
 		document.getElementById("registerfirst").value = "";
@@ -146,6 +161,7 @@ function verifyName(firstname, lastname) {
 }
 
 function verifyPhone(phone) {
+    console.log("verifyPhone(" + phone + ") called"); //DEBUG
 	if ((/^\d{10}$/.test(phone))) {
 		return true;
 	}
@@ -153,6 +169,7 @@ function verifyPhone(phone) {
 }
 
 function verifyEmail(email) {
+    console.log("verifyEmail(" + email + ") called"); //DEBUG
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 		return true;
 	}
@@ -164,17 +181,16 @@ function verifyEmail(email) {
 //===== Dashboard =================================================
 
 function viewPastTickets() {
-	console.log("in viewPastTickets");
 
 	let content = [ viewPastTickets ];
 	let contentJSON = JSON.stringify(content);
-
+    console.log("viewPastTickets() called"); //DEBUG
+    console.log(content); //DEBUG
 	loadPastTickets(ajaxCall(content));
 }
 
 console.log("JS Loaded");
 
-//==================REFERENCE SCRIPT===============================
 //==================REFERENCE SCRIPT===============================
 
 
