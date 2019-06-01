@@ -6,15 +6,19 @@ loginbutton.addEventListener("click", login);
 let registerbutton = document.getElementById("registersubmitbutton");
 registerbutton.addEventListener("click", register);
 
+window.onload = function () {
+    if (document.getElementById("page").value == null) ;
+    ajaxLoadDiv("login")
+};
 //Functionalities =================================================
 
-function ajaxCall(method, incoming, store) {
-    console.log("ajaxCall(" + method + ", " + incoming + ", " + store + ") called");
+function ajaxCall(method, endPoint, incoming, store) {
+    console.log("ajaxCall(" + method + ", " + "endPoint = " + endPoint + ", " + incoming + ", " + store + ") called");
 	let outgoing = JSON.stringify(incoming);
 
 	let xhr = new XMLHttpRequest();
 
-	xhr.open("POST", "account", true);
+    xhr.open("POST", endPoint, true);
 	xhr.send(outgoing);
 
 	xhr.onreadystatechange = function () {
@@ -30,7 +34,7 @@ function ajaxCall(method, incoming, store) {
 		}
 	};
 	if (xhr.responseText) {
-		console.log(xhr.responseText);
+        console.log(xhr.responseText); //DEBUG
 		return xhr.responseText;
 	} else {
 		alert("Send/Receive Error");
@@ -82,7 +86,7 @@ function login() {
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
-	ajaxCall("POST", credentials, "principal");
+    ajaxCall("POST", "account", credentials, "principal");
 }
 
 function logout() {
@@ -110,7 +114,7 @@ function register() {
 
 	let credentials = [ username, password, firstname, lastname, email ];
 
-	ajaxCall("POST", credentials, "principal");
+    ajaxCall("POST", "account", credentials, "principal");
 }
 
 //=============== Credential Verification =========================
