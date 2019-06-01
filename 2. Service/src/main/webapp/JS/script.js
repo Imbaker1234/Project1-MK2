@@ -1,3 +1,4 @@
+console.log("LOADING JAVASCRIPT");
 //Button action listeners
 
 let loginbutton = document.getElementById("loginsubmitbutton");
@@ -11,37 +12,37 @@ registerbutton.addEventListener("click", register);
 //Load Views
 
 function loadLogin() {
-	 // //console.log("in loadLogin()");
-	 //
-	 // let xhr = new XMLHttpRequest();
-	 //
-	 // xhr.open("GET", "login.view", true);
-	 // xhr.send();
-	 //
-	 // xhr.onreadystatechange = function() {
-		//  if(xhr.readyState == 4 && xhr.status == 200) {
-		// 	 document.getElementById('page').innerHTML = xhr.responseText;
-		//  }
-	 // }
+	// //console.log("in loadLogin()");
+	//
+	// let xhr = new XMLHttpRequest();
+	//
+	// xhr.open("GET", "login.view", true);
+	// xhr.send();
+	//
+	// xhr.onreadystatechange = function() {
+	//  if(xhr.readyState == 4 && xhr.status == 200) {
+	// 	 document.getElementById('page').innerHTML = xhr.responseText;
+	//  }
+	// }
 
 	ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
-	 // console.log("in loadDashboard()");
-	 //
-	 // let xhr = new XMLHttpRequest();
-	 //
-	 // xhr.open("GET", "dashboard.view", true);
-	 // xhr.send();
-	 //
-	 // xhr.onreadystatechange = function() {
-		//  if(xhr.readyState == 4 && xhr.status == 200) {
-		// 	 document.getElementById('page').innerHTML = xhr.responseText;
-		//  }
-	 // }
+	// console.log("in loadDashboard()");
+	//
+	// let xhr = new XMLHttpRequest();
+	//
+	// xhr.open("GET", "dashboard.view", true);
+	// xhr.send();
+	//
+	// xhr.onreadystatechange = function() {
+	//  if(xhr.readyState == 4 && xhr.status == 200) {
+	// 	 document.getElementById('page').innerHTML = xhr.responseText;
+	//  }
+	// }
 
-	ajaxLoadDiv(dashboard.view", "page");
+	ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
@@ -59,7 +60,7 @@ function loadPastTickets(pastTickets) {
 // 	 }
 
 
-	 ajaxLoadDiv("pasttickets.view", "page");
+	ajaxLoadDiv("pasttickets.view", "page");
 	//this later to some sort of sub div on the dashboard.
 }
 
@@ -98,6 +99,9 @@ function login() {
 	ajaxCall("POST", credentials, "principal");
 }
 
+console.log("Made it to Line 100");
+
+
 function logout() {
 	console.log('in logout()');
 	localStorage.removeItem("jwt");
@@ -114,7 +118,7 @@ function register() {
 	let email = document.getElementById("registeremail").value;
 
 	if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
-			|| verifyEmail(email) == false) return;
+		|| verifyEmail(email) == false) return;
 
 	let credentials = [ username, password, firstname, lastname, email ];
 	// let credentialsJSON = JSON.stringify(credentials);
@@ -154,27 +158,30 @@ function ajaxCall(method, incoming, store) {
 				console.log("Results retrieved from AJAX call");
 				console.log(xhr.responseText);
 				if (store) {
-				window.localStorage.setItem(store, xhr.responseText);
+					window.localStorage.setItem(store, xhr.responseText);
 				}
 			}
-			} else {
-				alert("Send/Receive error");
-			}
 		}
+	};
+	if (xhr.responseText) {
+		console.log(xhr.responseText);
 		return xhr.responseText;
+	} else {
+		alert("Send/Receive Error");
 	}
+}
 
-
+console.log("Made it to Line 169");
 function ajaxLoadDiv(endPoint, targetDiv) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", endpoint, true);
-    xhr.send();
+	let xhr = new XMLHttpRequest();
+	xhr.open("GET", endpoint, true);
+	xhr.send();
 
-    xhr.onreadystatechange = function() {
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById(targetDiv).innerHTML = xhr.responseText;
-        }
-    }
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			document.getElementById(targetDiv).innerHTML = xhr.responseText;
+		}
+	}
 }
 
 function viewPastTickets() {
@@ -206,13 +213,12 @@ function viewPastTickets() {
 }
 
 
-
 //Support functions for verifying credentials
 
 function verifyUsername(username) {
 
 	if (username == "" || username.includes(" ") || username.length < 3
-			|| username.length > 24) {
+		|| username.length > 24) {
 		document.getElementById("loginusername").value = "";
 		document.getElementById("registerusername").value = "";
 		alert("Invalid username syntax.");
@@ -221,10 +227,11 @@ function verifyUsername(username) {
 	return true;
 }
 
+console.log("Made it to Line 226");
 function verifyPassword(password) {
 
 	if (password == "" || password.includes(" ") || password.length < 3
-			|| password.length > 24) {
+		|| password.length > 24) {
 		document.getElementById("loginpassword").value = "";
 		document.getElementById("registerpassword").value = "";
 		alert("Invalid password syntax.");
@@ -235,20 +242,20 @@ function verifyPassword(password) {
 
 function verifyName(firstname, lastname) {
 	if (firstname.length < 3 || lastname.length < 3) {
-		
+
 		document.getElementById("registerfirst").value = "";
 		document.getElementById("registerlast").value = "";
 		alert("Name cannot be less than 3 characters.");
 		return false;
-		
-	} 
+
+	}
 	if (firstname.includes(" ") || lastname.includes(" ")) {
-		
+
 		document.getElementById("registerfirst").value = "";
 		document.getElementById("registerlast").value = "";
 		alert("Name cannot contain spaces.");
 		return false;
-		
+
 	}
 	return true;
 }
@@ -269,6 +276,7 @@ function verifyEmail(email) {
 	return false;
 }
 
+console.log("Made it to END OF FILE");
 /*
  window.onload = function() {
  loadLogin();
