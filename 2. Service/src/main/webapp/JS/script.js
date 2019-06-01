@@ -72,30 +72,31 @@ function login() {
 	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
-	// let credentialsJSON = JSON.stringify(credentials);
-	//
-	// let xhr = new XMLHttpRequest();
-	//
-	// xhr.open("POST", "account", true);
-	// xhr.send(credentialsJSON);
-	//
-	// xhr.onreadystatechange = function() {
-	// 	if (xhr.readyState == 4 && xhr.status == 200) {
-	// 		let user = JSON.parse(xhr.responseText);
-	//
-	// 		if (user) {
-	// 			console.log(user);
-	// 			alert("Login successful!");
-	// 			loadDashboard();
-	// 			window.localStorage.setItem("user", xhr.responseText);
-	//
-	// 		} else {
-	// 			alert("Login failed!");
-	//
-	// 		}
-	// 	}
-	// }
-	ajaxCall("POST", credentials, "principal");
+	let credentialsJSON = JSON.stringify(credentials);
+
+	let xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "account", true);
+	xhr.send(credentialsJSON);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let user = JSON.parse(xhr.responseText);
+
+			if (user) {
+				console.log(user);
+				alert("Login successful!");
+				loadDashboard();
+				window.localStorage.setItem("user", xhr.responseText);
+
+			} else {
+				alert("Login failed!");
+
+			}
+		}
+	}
+	// ajaxCall(credentials, "principal");
+	// loadDashboard();
 }
 
 function logout() {
@@ -139,12 +140,12 @@ function register() {
 	ajaxCall("POST", credentials, "principal");
 }
 
-function ajaxCall(method, incoming, store) {
+function ajaxCall(method, endpoint, incoming, store) {
 	let outgoing = JSON.stringify(incoming);
 
 	let xhr = new XMLHttpRequest();
 
-	xhr.open("POST", "account", true);
+	xhr.open(method, endpoint, true);
 	xhr.send(outgoing);
 
 	xhr.onreadystatechange = function() {
@@ -173,7 +174,9 @@ function ajaxLoadDiv(endPoint, targetDiv) {
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
-        }
+        } else {
+        	console.log("DIV Load Error");
+		}
     }
 }
 

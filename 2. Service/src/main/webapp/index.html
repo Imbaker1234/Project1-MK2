@@ -16,7 +16,6 @@
 <body>
 
 	<!--BEGIN NAVBAR--------------------------------------------------------------------------------------->
-	<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">ExExpense</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +47,7 @@
         </ul>
     </div>
 </nav>
--->
+
 	<!--END NAVBAR--------------------------------------------------------------------------------------->
 <div id="page">
 <div id="container" class="container login-container">
@@ -57,12 +56,14 @@
 				<h3>Login</h3>
 
 				<div class="form-group">
+
 					<input id="loginusername" type="text" class="form-control"
 						placeholder="Your Username *" value="" />
 				</div>
 				<div class="form-group">
-					<input id="loginpassword" type="password" class="form-control"
-						placeholder="Your Password *" value="" />
+					<form action="">
+					<input type="password" class="form-control" id="loginpassword" placeholder="Password">
+					</form>
 				</div>
 				<div class="form-group">
 					<input id="loginsubmitbutton" type="submit" class="btnSubmit"
