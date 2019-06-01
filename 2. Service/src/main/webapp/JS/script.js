@@ -1,14 +1,6 @@
-//Button action listeners =========================================
-
-let loginbutton = document.getElementById("loginsubmitbutton");
-loginbutton.addEventListener("click", login);
-
-let registerbutton = document.getElementById("registersubmitbutton");
-registerbutton.addEventListener("click", register);
-
 window.onload = function () {
-    if (document.getElementById("page").value == null) ;
-    ajaxLoadDiv("login")
+	if (document.getElementById("page").value == "") ;
+	loadLogin();
 };
 //Functionalities =================================================
 
@@ -18,7 +10,7 @@ function ajaxCall(method, endPoint, incoming, store) {
 
 	let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", endPoint, true);
+	xhr.open(method, endPoint, true);
 	xhr.send(outgoing);
 
 	xhr.onreadystatechange = function () {
@@ -41,10 +33,10 @@ function ajaxCall(method, endPoint, incoming, store) {
 	}
 }
 
-function ajaxLoadDiv(endPoint, targetDiv) {
-    console.log("ajaxLoadDiv(" + endPoint + ", " + targetDiv + ") called");
+function ajaxLoadDiv(view, targetDiv) {
+	console.log("ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
 	let xhr = new XMLHttpRequest();
-    xhr.open("GET", endPoint, true);
+	xhr.open("GET", view, true);
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
@@ -59,6 +51,10 @@ function ajaxLoadDiv(endPoint, targetDiv) {
 function loadLogin() {
     console.log("loadLogin() called"); //DEBUG
 	ajaxLoadDiv("login.view", "page");
+	let loginbutton = document.getElementById("loginsubmitbutton");
+	loginbutton.addEventListener("click", login);
+	let registerbutton = document.getElementById("registersubmitbutton");
+	registerbutton.addEventListener("click", register);
 }
 
 function loadDashboard() {
