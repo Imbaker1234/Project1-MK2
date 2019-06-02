@@ -38,6 +38,7 @@ function ajaxLoadDiv(view, targetDiv) {
 	xhr.send();
 
 	xhr.onreadystatechange = function () {
+		console.log("Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			document.getElementById(targetDiv).innerHTML = xhr.responseText;
 		}
@@ -77,7 +78,7 @@ function login() {
 
 	let credentials = [ username, password ];
     ajaxCall("POST", "account", credentials, "principal");
-	if (window.localStorage.getItem("jwt")) { //If they have a JWT at this point load the dashboard.
+	if (window.localStorage.getItem("principal") != "") { //If they have a JWT at this point load the dashboard.
 		loadDashboard();
 	}
 }

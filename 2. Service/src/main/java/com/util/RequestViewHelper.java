@@ -10,20 +10,19 @@ public class RequestViewHelper {
 
     public static String process(HttpServletRequest request) {
 
-
+        log.info("RequestViewHelper: Process() called\n" + request.getRequestURI() + " was the URI provided.\n"); //DEBUG
         switch (request.getRequestURI()) {
 
 
             case "/IBJK-Project-One/login.view":
-                log.info("RequestViewHelper called login.view");
+            case "/IBJK_Project_One/login.view":
                 return "partials/login.html";
-
+            case "/IBJK_Project_One_/dashboard.view":
             case "/IBJK-Project-One/dashboard.view":
-                log.info("RequestViewHelper called dashboard.view");
                 return "partials/dashboard.html";
 
             case "/IBJK-Project-One/pasttickets.view":
-                log.info("RequestViewHelper called pasttickets.view");
+            case "/IBJK_Project_One/pasttickets.view":
                 return "partials/pasttickets.html";
 
             default:
