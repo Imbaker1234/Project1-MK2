@@ -146,3 +146,16 @@
 // 		}
 // 	}
 // }
+//============================================================
+
+// function verifyPassword(password) {
+//     console.log("verifyPassword(" + password + ") called"); //DEBUG
+//     if (password == "" || password.includes(" ") || password.length < 3
+//         || password.length > 24) {
+//         document.getElementById("loginpassword").value = "";
+//         document.getElementById("registerpassword").value = "";
+//         alert("Invalid password syntax.");
+//         return false;
+//     }
+//     return true;
+// }

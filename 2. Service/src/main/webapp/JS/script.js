@@ -1,66 +1,66 @@
 window.onload = function () {
-	loadLogin();
+    loadLogin();
 };
 
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
     console.log("ajaxCall(" + method + ", " + "endPoint = " + endPoint + ", " + incoming + ", " + store + ") called");
-	let outgoing = JSON.stringify(incoming);
+    let outgoing = JSON.stringify(incoming);
 
-	let xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
 
-	xhr.open(method, endPoint, true);
-	xhr.send(outgoing);
+    xhr.open(method, endPoint, true);
+    xhr.send(outgoing);
 
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			let result = JSON.parse(xhr.responseText);
-			if (result) {
-				console.log("Results retrieved from AJAX call");
-				console.log(xhr.responseText);
-				if (store) {
-					window.localStorage.setItem(store, xhr.responseText);
-				}
-			}
-		}
-	};
-	if (xhr.responseText) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let result = JSON.parse(xhr.responseText);
+            if (result) {
+                console.log("Results retrieved from AJAX call");
+                console.log(xhr.responseText);
+                if (store) {
+                    window.localStorage.setItem(store, xhr.responseText);
+                }
+            }
+        }
+    };
+    if (xhr.responseText) {
         console.log(xhr.responseText); //DEBUG
-		return xhr.responseText;
-	}
+        return xhr.responseText;
+    }
 }
 
 function ajaxLoadDiv(view, targetDiv) {
-	console.log("ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
-	let xhr = new XMLHttpRequest();
-	xhr.open("GET", view, true);
-	xhr.send();
+    console.log("ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", view, true);
+    xhr.send();
 
-	xhr.onreadystatechange = function () {
-		console.log("Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			document.getElementById(targetDiv).innerHTML = xhr.responseText;
-		}
-	}
+    xhr.onreadystatechange = function () {
+        console.log("Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById(targetDiv).innerHTML = xhr.responseText;
+        }
+    }
 }
 
 //Load Views ======================================================
 
 function loadLogin() {
     console.log("loadLogin() called"); //DEBUG
-	ajaxLoadDiv("login.view", "page");
+    ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
     console.log("loadDashboard() called"); //DEBUG
-	ajaxLoadDiv("dashboard.view", "page");
+    ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadPastTickets(pastTickets) {
     console.log("loadPastTickets(" + pastTickets + ") called"); //DEBUG
-	ajaxLoadDiv("pasttickets.view", "page");
-	//this later to some sort of sub div on the dashboard.
+    ajaxLoadDiv("pasttickets.view", "page");
+    //this later to some sort of sub div on the dashboard.
 }
 
 //Functions By Page ===============================================
@@ -68,33 +68,33 @@ function loadPastTickets(pastTickets) {
 //===== Login =====================================================
 function login() {
 
-	let username = document.getElementById("loginusername").value;
-	let password = document.getElementById("loginpassword").value;
+    let username = document.getElementById("loginusername").value;
+    let password = document.getElementById("loginpassword").value;
 
     console.log("login() called"); //DEBUG
     console.log("username = " + username); //DEBUG
     console.log("password = " + password); //DEBUG
 
-	let credentials = [ username, password ];
+    let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
-	if (window.localStorage.getItem("principal") != "") { //If they have a JWT at this point load the dashboard.
-		loadDashboard();
-	}
+    if (window.localStorage.getItem("principal") != "") { //If they have a JWT at this point load the dashboard.
+        loadDashboard();
+    }
 }
 
 function logout() {
     console.log("logout() called"); //DEBUG
-	localStorage.removeItem("jwt");
-	LoadLogin();
+    localStorage.removeItem("jwt");
+    LoadLogin();
 }
 
 function register() {
 
-	let username = document.getElementById("registerusername").value;
-	let password = document.getElementById("registerpassword").value;
-	let firstname = document.getElementById("registerfirst").value;
-	let lastname = document.getElementById("registerlast").value;
-	let email = document.getElementById("registeremail").value;
+    let username = document.getElementById("registerusername").value;
+    let password = document.getElementById("registerpassword").value;
+    let firstname = document.getElementById("registerfirst").value;
+    let lastname = document.getElementById("registerlast").value;
+    let email = document.getElementById("registeremail").value;
     console.log("verifyUsername() called"); //DEBUG
     console.log("username =" + username); //DEBUG
     console.log("password =" + password); //DEBUG
@@ -102,91 +102,93 @@ function register() {
     console.log("lastname =" + lastname); //DEBUG
     console.log("email =" + email); //DEBUG
 
-	if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
-		|| verifyEmail(email) == false) return;
+    if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
+        || verifyEmail(email) == false) return;
 
-	let credentials = [ username, password, firstname, lastname, email ];
+    let credentials = [username, password, firstname, lastname, email];
 
     ajaxCall("POST", "account", credentials, "principal");
 }
 
 //=============== Credential Verification =========================
 
-function verifyUsername() {
-    console.log("verifyUsername(" + username + ") called"); //DEBUG
+function verifyLoginFields() {
+    console.log("verifyLoginFields() called");
     let username = document.getElementById("loginusername").value;
-	if (username == "" || username.includes(" ") || username.length < 3
-		|| username.length > 24) {
-		document.getElementById("loginusername").value = "";
-		document.getElementById("registerusername").value = "";
-		alert("Invalid username syntax.");
-        return;
-        document.getElementById("loginsubmitbutton").disabled = false;
+    let password = document.getElementById("loginpassword").value;
+    console.log("Username: " + username + ", Length " + username.length + ", " + verifyField(username));
+    console.log("Password: " + password + ", Length " + password.length + ", " + verifyField(password));
+    if (verifyField(username) && verifyField(password)) {
+        console.log("Credentials valid. toggling button");
+        toggleButton("loginsubmitbutton", true);
+    } else {
+        toggleButton("loginsubmitbutton", false);
     }
-    document.getElementById("loginsubmitbutton").classList.add("animated flip fast");
-    document.getElementById("loginsubmitbutton").disabled = true;
 }
 
-function verifyPassword(password) {
-    console.log("verifyPassword(" + password + ") called"); //DEBUG
-	if (password == "" || password.includes(" ") || password.length < 3
-		|| password.length > 24) {
-		document.getElementById("loginpassword").value = "";
-		document.getElementById("registerpassword").value = "";
-		alert("Invalid password syntax.");
-		return false;
-	}
-	return true;
+function verifyField(field) {
+    console.log("verifyField(" + field + ") called"); //DEBUG
+    return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24);
+}
+
+function toggleButton(buttonId, status) {
+    if (status) {
+        document.getElementById(buttonId).classList.add('animated', 'pulse', 'slow', 'infinite');
+        document.getElementById(buttonId).disabled = false;
+    } else {
+        document.getElementById(buttonId).classList.remove('animated', 'pulse', 'slow', 'infinite');
+        document.getElementById(buttonId).disabled = true;
+    }
 }
 
 function verifyName(firstname, lastname) {
     console.log("verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
-	if (firstname.length < 3 || lastname.length < 3) {
+    if (firstname.length < 3 || lastname.length < 3) {
 
-		document.getElementById("registerfirst").value = "";
-		document.getElementById("registerlast").value = "";
-		alert("Name cannot be less than 3 characters.");
-		return false;
+        document.getElementById("registerfirst").value = "";
+        document.getElementById("registerlast").value = "";
+        alert("Name cannot be less than 3 characters.");
+        return false;
 
-	}
-	if (firstname.includes(" ") || lastname.includes(" ")) {
+    }
+    if (firstname.includes(" ") || lastname.includes(" ")) {
 
-		document.getElementById("registerfirst").value = "";
-		document.getElementById("registerlast").value = "";
-		alert("Name cannot contain spaces.");
-		return false;
+        document.getElementById("registerfirst").value = "";
+        document.getElementById("registerlast").value = "";
+        alert("Name cannot contain spaces.");
+        return false;
 
-	}
-	return true;
+    }
+    return true;
 }
 
 function verifyPhone(phone) {
     console.log("verifyPhone(" + phone + ") called"); //DEBUG
-	if ((/^\d{10}$/.test(phone))) {
-		return true;
-	}
-	return false;
+    if ((/^\d{10}$/.test(phone))) {
+        return true;
+    }
+    return false;
 }
 
 function verifyEmail(email) {
     console.log("verifyEmail(" + email + ") called"); //DEBUG
-	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-		return true;
-	}
-	document.getElementById("registeremail").value = "";
-	alert("Invalid email syntax.");
-	return false;
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        return true;
+    }
+    document.getElementById("registeremail").value = "";
+    alert("Invalid email syntax.");
+    return false;
 }
 
 //===== Dashboard =================================================
 
 function viewPastTickets() {
 
-	let content = [ viewPastTickets ];
-	let contentJSON = JSON.stringify(content);
+    let content = [viewPastTickets];
+    let contentJSON = JSON.stringify(content);
     console.log("viewPastTickets() called"); //DEBUG
     console.log(content); //DEBUG
-	loadPastTickets(ajaxCall(content));
+    loadPastTickets(ajaxCall(content));
 }
 
 console.log("JS Loaded");
