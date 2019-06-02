@@ -28,7 +28,8 @@ public class TokenAuthenticationFilter extends HttpFilter {
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		log.info("Request intercepted by TokenAuthenticationFilter.doFilter()");
 		String header = request.getHeader(JwtConfig.HEADER);
-
+		
+		log.info(header);
 		if (header == null || !header.startsWith(JwtConfig.PREFIX)) {
 			log.warn("Request originates from an unauthenticated origin.");
 			request.setAttribute("isAuthenticated", false);

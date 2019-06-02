@@ -34,8 +34,7 @@ public class ReimbursementServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		log.info("Reimb doPost() called.");
 
 		PrintWriter writer = response.getWriter();
@@ -44,25 +43,34 @@ public class ReimbursementServlet extends HttpServlet {
 		
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = nodeToArray(rootNode);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
-		String role = principal.getId();
-
+		String role = principal.getRole();
+		
 		switch (role) {
-
-		case "1":
+//TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
+		case "employee":
+			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1");
 			if (input2.equals("pasttickets")) {
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
+<<<<<<< HEAD
 				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3], userinput[0], userinput[1], userinput[0], userinput[1], userinput[0], userinput[1]);
+=======
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
 			break;
 
-		case "2":
+		case "admin":
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
@@ -76,13 +84,17 @@ public class ReimbursementServlet extends HttpServlet {
 				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 
+<<<<<<< HEAD
 			} else if (userinput[8].equals("1") == false) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput);
+=======
+			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			} else {
-				reimbService.addReimbRequest(principal, userinput);
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput);
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
 				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}

@@ -9,7 +9,11 @@ html, body {
     background: #00147e;
 }
 
+<<<<<<< HEAD
 #inactive {
+=======
+.inactive {
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
     color: hsla(30, 2%, 22%, 0.5);
     opacity: .7;
 }

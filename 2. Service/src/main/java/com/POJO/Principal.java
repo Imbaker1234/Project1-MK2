@@ -13,6 +13,7 @@ class Principal {
 	private String id;
 	private String username;
 	private String role;
+<<<<<<< HEAD
 
 	@Override
 	public int hashCode() {
@@ -52,5 +53,7 @@ class Principal {
 	public String toString() {
 		return "Principal [id=" + id + ", username=" + username + ", role=" + role + "]";
 	}
+=======
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 
 }

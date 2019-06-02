@@ -21,5 +21,9 @@ class ErsReimbursement {
 	private String reimbResolver;
 	private String reimbStatusId;
 	private String reimbTypeId;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 }
