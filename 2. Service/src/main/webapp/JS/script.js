@@ -74,7 +74,6 @@ function login() {
     console.log("login() called"); //DEBUG
     console.log("username = " + username); //DEBUG
     console.log("password = " + password); //DEBUG
-	if (verifyUsername(username) == false || verifyPassword(password) == false) return;
 
 	let credentials = [ username, password ];
     ajaxCall("POST", "account", credentials, "principal");
@@ -113,16 +112,19 @@ function register() {
 
 //=============== Credential Verification =========================
 
-function verifyUsername(username) {
+function verifyUsername() {
     console.log("verifyUsername(" + username + ") called"); //DEBUG
+    let username = document.getElementById("loginusername").value;
 	if (username == "" || username.includes(" ") || username.length < 3
 		|| username.length > 24) {
 		document.getElementById("loginusername").value = "";
 		document.getElementById("registerusername").value = "";
 		alert("Invalid username syntax.");
-		return false;
-	}
-	return true;
+        return;
+        document.getElementById("loginsubmitbutton").disabled = false;
+    }
+    document.getElementById("loginsubmitbutton").classList.add("animated flip fast");
+    document.getElementById("loginsubmitbutton").disabled = true;
 }
 
 function verifyPassword(password) {

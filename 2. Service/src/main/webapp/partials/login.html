@@ -4,10 +4,13 @@
             <h3>Login</h3>
 
             <div class="form-group">
-                <input class="form-control" id="loginusername" placeholder="Your Email *" type="text" value=""/>
+                <input class="form-control" id="loginusername" onchange="verifyUsername()" placeholder="Your Email *"
+                       type="text" value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="loginpassword" placeholder="Your Password *" type="password" value=""/>
+                <input class="form-control" id="loginpassword" onchange="verifyPassword()" placeholder="Your Password *"
+                       type="password"
+                       value=""/>
             </div>
             <div class="form-group">
                 <input button class="btnSubmit" id="loginsubmitbutton" onclick="login()" type="submit"

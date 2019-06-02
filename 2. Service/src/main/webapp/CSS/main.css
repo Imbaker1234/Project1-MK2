@@ -1,3 +1,10 @@
 .nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light {
     background: #092F56;
 }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #00147e;
+}
