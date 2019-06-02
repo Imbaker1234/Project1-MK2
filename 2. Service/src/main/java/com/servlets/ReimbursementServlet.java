@@ -34,8 +34,7 @@ public class ReimbursementServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		log.info("Reimb doPost() called.");
 
 		PrintWriter writer = response.getWriter();
@@ -56,12 +55,12 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0]..input2.);
-				writer.write(mapper.writeValueAsString(pendingReimbs));
+				//ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0]..input2.);
+				//writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
 			break;
-
+/*
 		case "2":
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
@@ -86,7 +85,7 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
-			break;
+			break;*/
 		}
 		
 	}
