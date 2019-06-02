@@ -4,13 +4,14 @@
 }
 .login-logo{
     position: relative;
-    margin-left: -52.5%;
+    margin-left: -22%;
+    box-shadow: 10px 10px 5px grey;
 }
 .login-logo img{
     position: absolute;
     width: 32%;
-    margin-top: 10%;
-    border-radius: 4rem;
+    margin-top: -15%;
+    border-radius: 4.5rem;
     padding: 5%;
 }
 .login-form-1{
@@ -41,17 +42,4 @@
     border: none;
     border-radius: 1.5rem;
     padding:2%;
-}
-.btnForgetPwd{
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-}
-.btnForgetPwd:hover{
-    text-decoration:none;
-    color:#fff;
-}
-
-.nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light {
-    background: #092F56;
 }
