@@ -9,7 +9,7 @@ html, body {
     background: #00147e;
 }
 
-#inactive {
+.inactive {
     color: hsla(30, 2%, 22%, 0.5);
     opacity: .7;
 }

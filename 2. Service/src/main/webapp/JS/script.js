@@ -2,6 +2,10 @@ window.onload = function () {
     loadLogin();
 };
 
+document.getElementById("dashboard-container").onload = function () {
+    document.getElementById("dashboardwelcomeuser").innerText = "Welcome Lumpy Space Princess";
+};
+
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
@@ -154,7 +158,7 @@ function verifyRegisterFields() {
 function viewPastTickets() {
 	
     console.log("viewPastTickets() called"); //DEBUG
-    let content = ["dashboard", "pasttickets"]
+    let content = ["dashboard", "pasttickets"];
     
     ajaxCall("POST", "dashboard", "pasttickets", "tickets");
     console.log(window.localStorage.tickets);

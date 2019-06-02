@@ -2,7 +2,8 @@
     margin-top: 5%;
     margin-bottom: 15%;
 }
-.login-logo{
+
+.login-logo {
     position: relative;
     margin-left: -22%;
     box-shadow: 10px 10px 5px grey;
@@ -11,7 +12,7 @@
     position: absolute;
     width: 32%;
     margin-top: -15%;
-    border-radius: 4.5rem;
+    border-radius: 4rem;
     padding: 5%;
 }
 .login-form-1{
