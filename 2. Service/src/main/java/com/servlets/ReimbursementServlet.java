@@ -40,33 +40,29 @@ public class ReimbursementServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
-		log.info("ReimbursementServlet.doPost() : Line 43 : Content Type Set");
+		
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = nodeToArray(rootNode);
-		log.info("ReimbursementServlet.doPost() : Line 46 : ArrayNode parsed into String Array");
+		
 		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
-			log.info("ReimbursementServlet.doPost() : Line 49 : Principal set");
 		String role = principal.getRole();
-		log.info("ReimbursementServlet.doPost() : Line 49 : Principal role = " + role);
+		
 		switch (role) {
 //TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
 		case "employee":
 			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1");
 			if (input2.equals("pasttickets")) {
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
-				for (int i=0;i<pasttickets.size(); i++) {
-				log.info(pasttickets.get(i));
-				}
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				//ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0]..input2.);
-				//writer.write(mapper.writeValueAsString(pendingReimbs));
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
 			break;
-/*
+
 		case "admin":
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
@@ -81,17 +77,16 @@ public class ReimbursementServlet extends HttpServlet {
 				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 
-			} else if (userinput[8].equals("1") == false) {
-				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput);
+			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			} else {
-				reimbService.addReimbRequest(principal, userinput);
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput);
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
 				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
-			break;*/
+			break;
 		}
 		
 	}

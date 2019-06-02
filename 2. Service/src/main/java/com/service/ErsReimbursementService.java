@@ -26,20 +26,20 @@ public class ErsReimbursementService {
 		return pasttickets;
 	}
 
-	public ArrayList<ErsReimbursement> addReimbRequest(Principal user, ErsReimbursement reimb) {
+	public ArrayList<ErsReimbursement> addReimbRequest(Principal user, String input1, String input2, String input3, String input4) {
 		log.info("in reimb service addReimbRequest method");
-
-		Boolean addedReimb = rdao.addReimbursement(reimb);
+		
+		Boolean addedReimb = rdao.addReimbursement(input1, input2, input3, input4);
 		if (addedReimb == true) {
-			return rdao.dashboardDisplayPendingReimbs(user.getId(), reimb.getReimbStatusId());
+			return rdao.dashboardDisplayPendingReimbs(user.getId());
 		}
 		return null;
 	}
 
-	public boolean approveDenyReimb(Principal user, ErsReimbursement reimb) {
+	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
 		log.info("in reimb service approveDenyReimb method");
 
-		return rdao.updateReimbursementStatus(user, reimb);
+		return rdao.updateReimbursementStatus(user, statusupdate, reimbId);
 
 	}
 
