@@ -13,7 +13,9 @@ function ajaxCall(method, endPoint, incoming, store) {
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
-
+    if (localStorage.getItem("principal")) {
+        xhr.setRequestHeader("Authorization", localStorage.getItem("principal"));
+    }
     xhr.open(method, endPoint, true);
     xhr.send(outgoing);
 
@@ -95,10 +97,10 @@ function verifyLoginFields() {
     document.getElementById("registerfirst").value = '';
     document.getElementById("registerlast").value = '';
     document.getElementById("registeremail").value = '';
-    
+
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
-    
+
     if (verifyField(username) && verifyField(password)) {
         console.log("Credentials valid. toggling button");
         toggleButton("loginsubmitbutton", true);
@@ -156,13 +158,13 @@ function verifyRegisterFields() {
 //===== Dashboard =================================================
 
 function viewPastTickets() {
-	
+
     console.log("viewPastTickets() called"); //DEBUG
     let content = ["pasttickets"];
-    
+
     ajaxCall("POST", "dashboard", content, "tickets");
     console.log(window.localStorage.tickets);
-    
+
     if (window.localStorage.getItem("principal") != "") { //If they have a JWT, load the page
         loadPastTickets();
     }
