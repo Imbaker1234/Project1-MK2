@@ -13,7 +13,6 @@ import com.util.ConnectionFactory;
 public class ErsReimbursementDAO {
 	
 	private static Logger log = LogManager.getLogger(ErsReimbursementDAO.class);
-
 	
 	public ArrayList<ErsReimbursement> retrieveAllReimbs() {
 		log.info("in reimb DAO retrieveAllReimbs method");
