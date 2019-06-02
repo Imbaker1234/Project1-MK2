@@ -158,9 +158,9 @@ function verifyRegisterFields() {
 function viewPastTickets() {
 	
     console.log("viewPastTickets() called"); //DEBUG
-    let content = ["dashboard", "pasttickets"];
+    let content = ["pasttickets"];
     
-    ajaxCall("POST", "dashboard", "pasttickets", "tickets");
+    ajaxCall("POST", "dashboard", content, "tickets");
     console.log(window.localStorage.tickets);
     
     if (window.localStorage.getItem("principal") != "") { //If they have a JWT, load the page
