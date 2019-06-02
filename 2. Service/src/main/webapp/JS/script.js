@@ -82,9 +82,21 @@ function login() {
     }
 }
 
+function verifyLoginFields() {
+    console.log("verifyLoginFields() called");
+    let username = document.getElementById("loginusername").value;
+    let password = document.getElementById("loginpassword").value;
+    if (verifyField(username) && verifyField(password)) {
+        console.log("Credentials valid. toggling button");
+        toggleButton("loginsubmitbutton", true);
+    } else {
+        toggleButton("loginsubmitbutton", false);
+    }
+}
+
 function logout() {
     console.log("logout() called"); //DEBUG
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("principle");
     LoadLogin();
 }
 
@@ -110,21 +122,23 @@ function register() {
     ajaxCall("POST", "account", credentials, "principal");
 }
 
-//=============== Credential Verification =========================
-
-function verifyLoginFields() {
-    console.log("verifyLoginFields() called");
-    let username = document.getElementById("loginusername").value;
-    let password = document.getElementById("loginpassword").value;
-    console.log("Username: " + username + ", Length " + username.length + ", " + verifyField(username));
-    console.log("Password: " + password + ", Length " + password.length + ", " + verifyField(password));
-    if (verifyField(username) && verifyField(password)) {
+function verifyRegisterFields() {
+    console.log("verifyRegisterFields() called");
+    let username = document.getElementById("registerusername").value;
+    let password = document.getElementById("registerpassword").value;
+    let first = document.getElementById("registerfirst").value;
+    let last = document.getElementById("registerlast").value;
+    let email = document.getElementById("registeremail").value;
+    if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
         console.log("Credentials valid. toggling button");
-        toggleButton("loginsubmitbutton", true);
+        toggleButton("registersubmitbutton", true);
     } else {
-        toggleButton("loginsubmitbutton", false);
+        toggleButton("registersubmitbutton", false);
     }
 }
+
+//=============== Credential Verification =========================
+
 
 function verifyField(field) {
     console.log("verifyField(" + field + ") called"); //DEBUG
