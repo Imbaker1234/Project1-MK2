@@ -5,7 +5,7 @@ window.onload = function () {
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
-    console.log("ajaxCall(" + method + ", " + "endPoint = " + endPoint + ", " + incoming + ", " + store + ") called");
+    console.log("ajaxCall(method = " + method + ","  + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
@@ -17,10 +17,11 @@ function ajaxCall(method, endPoint, incoming, store) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let result = JSON.parse(xhr.responseText);
             if (result) {
-                console.log("Results retrieved from AJAX call");
-                console.log(xhr.responseText);
+                console.log("Results retrieved from AJAX call"); //DEBUG
+                console.log(xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
+                    alert("Results valid from AJAX call");
                 }
             }
         }
@@ -57,9 +58,9 @@ function loadDashboard() {
     ajaxLoadDiv("dashboard.view", "page");
 }
 
-function loadPastTickets(pastTickets) {
-    console.log("loadPastTickets(" + pastTickets + ") called"); //DEBUG
-    ajaxLoadDiv("pasttickets.view", "page");
+function loadPastTickets() {
+    console.log("loadPastTickets() called"); //DEBUG
+    ajaxLoadDiv("pasttickets.view", "ticketview");
     //this later to some sort of sub div on the dashboard.
 }
 
@@ -83,15 +84,17 @@ function login() {
 }
 
 function verifyLoginFields() {
-    console.log("verifyLoginFields() called");
+    console.log("verifyLoginFields() called"); //DEBUG
     document.getElementById("registerdiv").classList.add("inactive");
     document.getElementById("registerusername").value = '';
     document.getElementById("registerpassword").value = '';
     document.getElementById("registerfirst").value = '';
     document.getElementById("registerlast").value = '';
     document.getElementById("registeremail").value = '';
+    
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
+    
     if (verifyField(username) && verifyField(password)) {
         console.log("Credentials valid. toggling button");
         toggleButton("loginsubmitbutton", true);
@@ -143,6 +146,21 @@ function verifyRegisterFields() {
         toggleButton("registersubmitbutton", true);
     } else {
         toggleButton("registersubmitbutton", false);
+    }
+}
+
+//===== Dashboard =================================================
+
+function viewPastTickets() {
+	
+    console.log("viewPastTickets() called"); //DEBUG
+    let content = ["dashboard", "pasttickets"]
+    
+    ajaxCall("POST", "dashboard", "pasttickets", "tickets");
+    console.log(window.localStorage.tickets);
+    
+    if (window.localStorage.getItem("principal") != "") { //If they have a JWT, load the page
+        loadPastTickets();
     }
 }
 
@@ -203,18 +221,9 @@ function verifyEmail(email) {
     return false;
 }
 
-//===== Dashboard =================================================
-
-function viewPastTickets() {
-
-    let content = [viewPastTickets];
-    let contentJSON = JSON.stringify(content);
-    console.log("viewPastTickets() called"); //DEBUG
-    console.log(content); //DEBUG
-    loadPastTickets(ajaxCall(content));
-}
 
 console.log("JS Loaded");
+
 
 //==================REFERENCE SCRIPT===============================
 

@@ -17,6 +17,7 @@ public class RequestViewHelper {
             case "/IBJK-Project-One/login.view":
             case "/IBJK_Project_One/login.view":
                 return "partials/login.html";
+                
             case "/IBJK_Project_One_/dashboard.view":
             case "/IBJK-Project-One/dashboard.view":
                 return "partials/dashboard.html";
