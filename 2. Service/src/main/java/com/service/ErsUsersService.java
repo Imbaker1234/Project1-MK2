@@ -17,16 +17,17 @@ public class ErsUsersService {
     //Create a login() and register method().
     public ErsUsers validateCredentials(String... incoming) {
         log.info("in ERSUsersService validateCredentials method");
-
+//
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
                 + "A-Z]{2,7}$";
+        log.info("Line 23");
         Pattern pattern = Pattern.compile(emailRegex);
-
-        for (String s : incoming) {
-            if (s.equals("") || s.contains(" ") || s.length() > 24 || s.length() < 2)
-                return null;
-
-        }
+//        log.info("Line 25");
+//        for (String s : incoming) {
+//            if (s.equals("") || s.contains(" ") || s.length() < 150) return null;
+//            }
+//            log.info("Line 31");
+//            log.info("Made it to the if/else statement");
         //The login field provides 2 values and therefore if you are calling this method with 2
         //values then you are calling to log in.
         if (incoming.length == 2) {
@@ -45,6 +46,7 @@ public class ErsUsersService {
             String incFirst = incoming[2];
             String incLast = incoming[3];
             String incEmail = incoming[4];
+            log.info("Successfully populated incoming fields from JSON");
             ErsUsers user = new ErsUsers(incUsername, incPassword, incFirst, incLast, incEmail);
             Boolean insert = udao.addUser(user);
             return insert == true ? user : null;
@@ -52,5 +54,4 @@ public class ErsUsersService {
         }
         return null;
     }
-
 }

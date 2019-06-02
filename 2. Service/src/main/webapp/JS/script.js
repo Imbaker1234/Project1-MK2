@@ -1,5 +1,4 @@
 window.onload = function () {
-	// if (document.getElementById("page").value == "") ;
 	loadLogin();
 };
 
@@ -29,8 +28,6 @@ function ajaxCall(method, endPoint, incoming, store) {
 	if (xhr.responseText) {
         console.log(xhr.responseText); //DEBUG
 		return xhr.responseText;
-	} else {
-		alert("Send/Receive Error");
 	}
 }
 
@@ -80,6 +77,9 @@ function login() {
 
 	let credentials = [ username, password ];
     ajaxCall("POST", "account", credentials, "principal");
+	if (window.localStorage.getItem("jwt")) { //If they have a JWT at this point load the dashboard.
+		loadDashboard();
+	}
 }
 
 function logout() {
