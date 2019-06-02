@@ -9,13 +9,13 @@ document.getElementById("dashboard-container").onload = function () {
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
-    console.log("ajaxCall(method = " + method + ","  + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
+    console.log("ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
     xhr.open(method, endPoint, true);
-    if (localStorage.getItem("principal")) {
-        xhr.setRequestHeader("Authorization", localStorage.getItem("principal"));
+    if (localStorage.getItem("jwt")) { //If the user has a jwt in localstorage then attach it as the authorization.
+        xhr.setRequestHeader("Authorization", localStorage.getItem("jwt"));
     }
     xhr.send(outgoing);
 
@@ -27,15 +27,20 @@ function ajaxCall(method, endPoint, incoming, store) {
                 console.log(xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
-                    alert("Results valid from AJAX call");
+                    console.log("Line 33");
+                    if (xhr.responseText) {
+                        // console.log("=======Begin Response=======");
+                        // console.log(xhr.responseText); //DEBUG
+                        // console.log("=======Begin Header=======");
+                        // console.log(xhr.getAllResponseHeaders());
+                        if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
+                        if (localStorage.getItem("jwt")) console.log("JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
+                        return xhr.responseText;
+                    }
                 }
             }
         }
     };
-    if (xhr.responseText) {
-        console.log(xhr.responseText); //DEBUG
-        return xhr.responseText;
-    }
 }
 
 function ajaxLoadDiv(view, targetDiv) {
