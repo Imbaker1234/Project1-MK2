@@ -13,10 +13,10 @@ function ajaxCall(method, endPoint, incoming, store) {
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
+    xhr.open(method, endPoint, true);
     if (localStorage.getItem("principal")) {
         xhr.setRequestHeader("Authorization", localStorage.getItem("principal"));
     }
-    xhr.open(method, endPoint, true);
     xhr.send(outgoing);
 
     xhr.onreadystatechange = function () {
