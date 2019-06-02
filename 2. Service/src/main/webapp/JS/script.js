@@ -1,7 +1,8 @@
 window.onload = function () {
-	if (document.getElementById("page").value == "") ;
+	// if (document.getElementById("page").value == "") ;
 	loadLogin();
 };
+
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
@@ -51,10 +52,6 @@ function ajaxLoadDiv(view, targetDiv) {
 function loadLogin() {
     console.log("loadLogin() called"); //DEBUG
 	ajaxLoadDiv("login.view", "page");
-	let loginbutton = document.getElementById("loginsubmitbutton");
-	loginbutton.addEventListener("click", login);
-	let registerbutton = document.getElementById("registersubmitbutton");
-	registerbutton.addEventListener("click", register);
 }
 
 function loadDashboard() {

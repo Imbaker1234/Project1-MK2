@@ -95,6 +95,11 @@
 //  if(xhr.readyState == 4 && xhr.status == 200) {
 // 	 document.getElementById('page').innerHTML = xhr.responseText;
 //  }
+
+// let loginbutton = document.getElementById("loginsubmitbutton");
+// loginbutton.addEventListener("click", login);
+// let registerbutton = document.getElementById("registersubmitbutton");
+// registerbutton.addEventListener("click", register);
 // }
 
 //============================================================

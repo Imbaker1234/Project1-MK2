@@ -1,17 +1,5 @@
 package com.servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.POJO.ErsUsers;
 import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +7,16 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsUsersService;
 import com.util.JwtConfig;
 import com.util.JwtGenerator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/account")
 public class AccountServlet extends HttpServlet {
@@ -46,7 +44,8 @@ public class AccountServlet extends HttpServlet {
 		if (userinput.length == 2) {
 			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
-			Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(), user.getUserRoleName(user.getUserRoleId()));
+            Principal principal = new Principal(user.getErsUsersId() + "", user.getErsUsername(),
+                    user.getUserRoleName(user.getUserRoleId()));
 			writer.write(mapper.writeValueAsString(principal));
 			
 			String token = JwtGenerator.createJwt(user);
@@ -55,7 +54,8 @@ public class AccountServlet extends HttpServlet {
 		} else if (userinput.length == 5) {
 			
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
-			Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(), user.getUserRoleName(user.getUserRoleId()));
+            Principal principal = new Principal(user.getErsUsersId() + "", user.getErsUsername(),
+                    user.getUserRoleName(user.getUserRoleId()));
 			writer.write(mapper.writeValueAsString(principal));
 			
 			String token = JwtGenerator.createJwt(user);

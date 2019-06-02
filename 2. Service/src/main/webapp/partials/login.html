@@ -1,49 +1,46 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form-1">
             <h3>Login</h3>
 
             <div class="form-group">
-                <input class="form-control" placeholder="Your Email *" type="text" value=""/>
+                <input class="form-control" id="loginusername" placeholder="Your Email *" type="text" value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" placeholder="Your Password *" type="password" value=""/>
+                <input class="form-control" id="loginpassword" placeholder="Your Password *" type="password" value=""/>
             </div>
             <div class="form-group">
-                <input class="btnSubmit" type="loginsubmitbutton" value="Login"/>
+                <input button class="btnSubmit" id="loginsubmitbutton" onclick="login()" type="submit"
+                       value="Login"/>
             </div>
         </div>
         <div class="col-md-6 login-form-2">
             <div class="login-logo">
                 <img alt="" src="https://i.ibb.co/HHTrbyJ/XXPENSE.png"/>
             </div>
-            <h3>Login Form 2</h3>
+            <h3>Register</h3>
             <div class="form-group">
-                <input class="form-control" id="registerusername" placeholder="Your Email *" type="text" value=""/>
+                <input class="form-control" id="registerusername" placeholder="User Name *" type="text" value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="registerpassword" placeholder="Your Password *" type="password"
+                <input class="form-control" id="registerpassword" placeholder="Password *" type="password"
                        value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="registerfirst" placeholder="Your Password *" type="text"
+                <input class="form-control" id="registerfirst" placeholder="First Name" type="text"
                        value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="registerlast" placeholder="Your Password *" type="text"
+                <input class="form-control" id="registerlast" placeholder="Last Name" type="text"
                        value=""/>
             </div>
             <div class="form-group">
-                <input class="form-control" id="registeremail" placeholder="Your Password *" type="password"
+                <input class="form-control" id="registeremail" placeholder="Email" type="email"
                        value=""/>
             </div>
             <div class="form-group">
-                <input class="btnSubmit" id="registersubmitbutton" type="submit" value="Login"/>
+                <input button class="btnSubmit" id="registersubmitbutton" onclick="register()" type="submit"
+                       value="Login"/>
             </div>
             </form>
         </div>
