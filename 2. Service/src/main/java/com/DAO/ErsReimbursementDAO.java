@@ -72,7 +72,7 @@ public class ErsReimbursementDAO {
 		return null;
 	}
 	
-	public ArrayList<ErsReimbursement> dashboardDisplayPendingReimbs(String userId, String reimbStatusId) {
+	public ArrayList<ErsReimbursement> dashboardDisplayPendingReimbs(String userId) {
 		log.info("in reimb DAO dashboardDisplayPendingReimbs method");
 		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class ErsReimbursementDAO {
 
 			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ? AND reimb_author = ?";
 			PreparedStatement stmt = connect.prepareStatement(sql);
-			stmt.setString(1, reimbStatusId);
+			stmt.setString(1, "1");
 			stmt.setString(2, userId);
 			ResultSet rs = stmt.executeQuery();
 
@@ -92,24 +92,18 @@ public class ErsReimbursementDAO {
 		return null;
 	}
 
-	public boolean addReimbursement(ErsReimbursement reimb) {
+	public boolean addReimbursement(String input1, String input2, String input3, String input4) {
 		log.info("in reimb DAO addReimbursement method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
 
-			String sql = "INSERT INTO ers_reimbursement VALUES (?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement stmt = connect.prepareStatement(sql);
-			stmt.setString(1, reimb.getReimbId());
-			stmt.setString(2, reimb.getReimbAmount());
-			stmt.setTimestamp(3, reimb.getReimbSubmitted());
-			stmt.setTimestamp(4, reimb.getReimbResolved());
-			stmt.setString(5, reimb.getReimbDescription());
-			stmt.setBlob(6, reimb.getReimbReceipt());
-			stmt.setString(7, reimb.getReimbAuthor());
-			stmt.setString(8, reimb.getReimbResolver());
-			stmt.setString(9, reimb.getReimbStatusId());
-			stmt.setString(10, reimb.getReimbTypeId());
+			String sql = "{call new_reimb(?,?,?,?)}";
+			CallableStatement stmt = connect.prepareCall(sql);
+			stmt.setString(1, input1);
+			stmt.setDouble(2, Double.parseDouble(input2));
+			stmt.setString(3, input3);
+			stmt.setInt(4, Integer.parseInt(input4));
 
 			stmt.executeUpdate();
 			connect.commit();
@@ -121,7 +115,7 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	public boolean updateReimbursementStatus(Principal user, ErsReimbursement reimb) {
+	public boolean updateReimbursementStatus(Principal user, String statusupdate, String reimbId) {
 		log.info("in reimb DAO updateReimbursementStatus method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -129,9 +123,9 @@ public class ErsReimbursementDAO {
 
 			String sql = "UPDATE ers_reimbursement SET reimb_status_id = ?, reimb_resolver = ? WHERE reimb_id = ?";
 			PreparedStatement stmt = connect.prepareStatement(sql);
-			stmt.setString(1, reimb.getReimbStatusId());
+			stmt.setString(1, statusupdate);
 			stmt.setString(2, user.getId());
-			stmt.setString(3, reimb.getReimbId());
+			stmt.setString(3, reimbId);
 
 			stmt.executeUpdate();
 			connect.commit();
