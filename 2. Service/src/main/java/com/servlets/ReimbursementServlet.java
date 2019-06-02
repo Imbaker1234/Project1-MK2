@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsReimbursementService;
 
 @WebServlet("/dashboard")
@@ -40,10 +41,10 @@ public class ReimbursementServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
-
-		ErsReimbursement userinput = mapper.readValue(request.getReader(), ErsReimbursement.class);
-		String input2 = userinput.getReimbId();
-		String input3 = userinput.getReimbStatusId();
+		
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] userinput = nodeToArray(rootNode);
+		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getId();
 
@@ -55,7 +56,7 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput);
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3], userinput[0], userinput[1], userinput[0], userinput[1], userinput[0], userinput[1]);
 				writer.write(mapper.writeValueAsString(pendingReimbs));
 				
 			}
@@ -75,7 +76,7 @@ public class ReimbursementServlet extends HttpServlet {
 				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 
-			} else if (input3.equals("1") == false) {
+			} else if (userinput[8].equals("1") == false) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput);
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
@@ -88,6 +89,17 @@ public class ReimbursementServlet extends HttpServlet {
 			break;
 		}
 		
+	}
+	
+	public String[] nodeToArray(ArrayNode rootNode) {
+
+		String[] array = new String[rootNode.size()];
+
+		for (int i = 0; i < rootNode.size(); i++) {
+			array[i] = rootNode.get(i).asText();
+
+		}
+		return array;
 	}
 }
 
