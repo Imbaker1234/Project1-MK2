@@ -1,0 +1,15 @@
+#reimb_desc {
+    resize: none;
+}
+
+.dashboard-form-1 {
+    padding: 9%;
+    background: #0e2a63;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dashboard-form-2 {
+    padding: 9%;
+    background: #072550;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}

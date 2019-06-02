@@ -1,51 +1,60 @@
-<div id="container" class="container login-container">
-		<div class="row">
-			<div class="col-md-6 login-form-1">
-				<h3>Login</h3>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1" id="logindiv">
+            <h3>Login</h3>
 
-				<div class="form-group">
-					<input id="loginusername" type="text" class="form-control"
-						placeholder="Your Username *" value="" />
-				</div>
-				<div class="form-group">
-					<input id="loginpassword" type="password" class="form-control"
-						placeholder="Your Password *" value="" />
-				</div>
-				<div class="form-group">
-					<input id="loginsubmitbutton" type="submit" class="btnSubmit"
-						value="Login" />
-				</div>
-
-			</div>
-			<div class="col-md-6 login-form-2">
-				<div class="login-logo">
-					<img src="https://i.ibb.co/HHTrbyJ/XXPENSE.png" alt="" />
-				</div>
-				<h3>New User</h3>
-				<div class="form-group">
-					<input id="registerusername" type="text" class="form-control"
-						placeholder="Your New Username" value="" />
-				</div>
-				<div class="form-group">
-					<input id="registerpassword" type="password" class="form-control"
-						placeholder="Your New Password" value="" />
-				</div>
-				<div class="form-group">
-					<input id="registerfirst" type="text" class="form-control"
-						placeholder="First Name" value="" />
-				</div>
-				<div class="form-group">
-					<input id="registerlast" type="text" class="form-control"
-						placeholder="Last Name" value="" />
-				</div>
-				<div class="form-group">
-					<input id="registeremail" type="text" class="form-control"
-						placeholder="Your Email" value="" />
-				</div>
-				<div class="form-group">
-					<input id="registersubmitbutton" type="submit" class="btnSubmit" value="Start Getting Paid" />
-				</div>
-				<div class="form-group"></div>
-			</div>
-		</div>
-	</div>
+            <div class="form-group">
+                <input class="form-control" id="loginusername" onchange="verifyLoginFields()" placeholder="Your Email *"
+                       type="text" value=""/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="loginpassword" onchange="verifyLoginFields()"
+                       placeholder="Your Password *"
+                       type="password"
+                       value=""/>
+            </div>
+            <div class="form-group">
+                <input button class="btnSubmit" id="loginsubmitbutton" onclick="login()" type="submit"
+                       disabled value="Login"/>
+            </div>
+        </div>
+        <div class="col-md-6 login-form-2" id="registerdiv">
+            <div class="login-logo">
+                <img alt="" src="Assets/Images/ExExpenseFullLogo.png"/>
+            </div>
+            <div>
+                <h3>Register</h3>
+                <div class="form-group">
+                    <input class="form-control" id="registerusername" onchange="verifyRegisterFields()"
+                           placeholder="User Name *"
+                           type="text" value=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="registerpassword" onchange="verifyRegisterFields()"
+                           placeholder="Password *" type="password"
+                           value=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="registerfirst" onchange="verifyRegisterFields()"
+                           placeholder="First Name" type="text"
+                           value=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="registerlast" onchange="verifyRegisterFields()"
+                           placeholder="Last Name" type="text"
+                           value=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="registeremail" onchange="verifyRegisterFields()"
+                           placeholder="Email" type="email"
+                           value=""/>
+                </div>
+                <div class="form-group">
+                    <input button class="btnSubmit" id="registersubmitbutton" onclick="register()" type="submit"
+                           disabled value="Start Getting Paid"/>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

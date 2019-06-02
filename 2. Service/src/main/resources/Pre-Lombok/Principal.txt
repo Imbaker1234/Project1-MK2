@@ -1,18 +1,45 @@
 package com.POJO;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public class Principal {
 
-
-public @Data
-@NoArgsConstructor
-@AllArgsConstructor
-class Principal {
-	
 	private String id;
 	private String username;
 	private String role;
+
+	public Principal() {
+		super();
+	}
+
+	public Principal(String id, String username, String role) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.role = role;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	@Override
 	public int hashCode() {
@@ -44,9 +71,12 @@ class Principal {
 		} else if (!role.equals(other.role))
 			return false;
 		if (username == null) {
-            return other.username == null;
-        } else return username.equals(other.username);
-    }
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {

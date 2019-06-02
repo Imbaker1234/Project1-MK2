@@ -1,20 +1,21 @@
 package com.DAO;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.POJO.ErsUsers;
+import com.util.ConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.POJO.ErsUsers;
-import com.util.ConnectionFactory;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ErsUsersDAO {
+
+	public static void main(String[] args) {
+		ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
+		System.out.println(ersUsersDAO.getUserByCredentials("Imbaker1234", "deLUX"));
+	}
 
 	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
 
@@ -89,13 +90,13 @@ public class ErsUsersDAO {
 		if (rs != null) {
 			List<ErsUsers> users = new ArrayList<>();
 			while (rs.next()) {
-				String ersUsersId = rs.getString(1);
+                int ersUsersId = rs.getInt(1);
 				String ersUsername = rs.getString(2);
 				String ersPassword = rs.getString(3);
 				String userFirstName = rs.getString(4);
 				String userLastName = rs.getString(5);
 				String userEmail = rs.getString(6);
-				String userRoleId = rs.getString(7);
+                int userRoleId = rs.getInt(7);
 				ErsUsers user = new ErsUsers(ersUsersId, ersUsername, ersPassword, userFirstName, userLastName,
 						userEmail, userRoleId);
 				users.add(user);

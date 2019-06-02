@@ -1,15 +1,13 @@
 package com.util;
 
-import java.util.Date;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.POJO.ErsUsers;
-
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Date;
 
 public class JwtGenerator {
 
@@ -24,7 +22,7 @@ public class JwtGenerator {
 		long nowMillis = System.currentTimeMillis();
 
 		// Configure the JWT and set its claims
-		JwtBuilder builder = Jwts.builder().setId(subject.getErsUsersId()).setSubject(subject.getErsUsername())
+		JwtBuilder builder = Jwts.builder().setId(subject.getErsUsersId() + "").setSubject(subject.getErsUsername())
 				.setIssuer("The IBJKP1 Gods").claim("role", subject.getUserRoleName(subject.getUserRoleId()))
 				.setExpiration(new Date(nowMillis + JwtConfig.EXPIRATION)).signWith(sigAlg, JwtConfig.SIGNING_KEY);
 
