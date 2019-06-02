@@ -84,6 +84,12 @@ function login() {
 
 function verifyLoginFields() {
     console.log("verifyLoginFields() called");
+    document.getElementById("registerdiv").classList.add("inactive");
+    document.getElementById("registerusername").value = '';
+    document.getElementById("registerpassword").value = '';
+    document.getElementById("registerfirst").value = '';
+    document.getElementById("registerlast").value = '';
+    document.getElementById("registeremail").value = '';
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
     if (verifyField(username) && verifyField(password)) {
@@ -124,6 +130,9 @@ function register() {
 
 function verifyRegisterFields() {
     console.log("verifyRegisterFields() called");
+    document.getElementById("logindiv").classList.add("inactive");
+    document.getElementById("loginusername").value = '';
+    document.getElementById("loginpassword").value = '';
     let username = document.getElementById("registerusername").value;
     let password = document.getElementById("registerpassword").value;
     let first = document.getElementById("registerfirst").value;

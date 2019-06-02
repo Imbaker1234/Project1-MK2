@@ -8,3 +8,8 @@ html, body {
     overflow: hidden;
     background: #00147e;
 }
+
+#inactive {
+    color: hsla(30, 2%, 22%, 0.5);
+    opacity: .7;
+}
