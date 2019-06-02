@@ -44,6 +44,10 @@ public class ReimbursementServlet extends HttpServlet {
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = nodeToArray(rootNode);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 =======
 		
 >>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
@@ -61,7 +65,11 @@ public class ReimbursementServlet extends HttpServlet {
 
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3], userinput[0], userinput[1], userinput[0], userinput[1], userinput[0], userinput[1]);
+=======
+				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 =======
 				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
 >>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
@@ -85,8 +93,13 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			} else if (userinput[8].equals("1") == false) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput);
+=======
+			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
+>>>>>>> 3d15da6506159deffc83d216b357add4cd1450ae
 =======
 			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
