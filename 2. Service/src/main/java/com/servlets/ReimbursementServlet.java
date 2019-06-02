@@ -40,18 +40,24 @@ public class ReimbursementServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
-		
+		log.info("ReimbursementServlet.doPost() : Line 43 : Content Type Set");
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = nodeToArray(rootNode);
+		log.info("ReimbursementServlet.doPost() : Line 46 : ArrayNode parsed into String Array");
 		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
-		String role = principal.getId();
-
+			log.info("ReimbursementServlet.doPost() : Line 49 : Principal set");
+		String role = principal.getRole();
+		log.info("ReimbursementServlet.doPost() : Line 49 : Principal role = " + role);
 		switch (role) {
-
-		case "1":
+//TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
+		case "employee":
+			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1");
 			if (input2.equals("pasttickets")) {
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
+				for (int i=0;i<pasttickets.size(); i++) {
+				log.info(pasttickets.get(i));
+				}
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
@@ -61,7 +67,7 @@ public class ReimbursementServlet extends HttpServlet {
 			}
 			break;
 /*
-		case "2":
+		case "admin":
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
