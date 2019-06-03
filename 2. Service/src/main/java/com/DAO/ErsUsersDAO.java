@@ -28,7 +28,7 @@ public class ErsUsersDAO {
 
 			List<ErsUsers> user = mapResultSet(rs);
 			if (PasswordEncryption.verifyPassword(password, user.get(0).getErsPassword(), salt) == true) {
-				return mapResultSet(rs).get(0);
+				return user.get(0);
 			}
 
 		} catch (Exception e) {
@@ -100,7 +100,6 @@ public class ErsUsersDAO {
 				ErsUsers user = new ErsUsers(ersUsersId, ersUsername, ersPassword, userFirstName, userLastName,
 						userEmail, userRoleId);
 				users.add(user);
-
 			}
 			return users;
 		}
