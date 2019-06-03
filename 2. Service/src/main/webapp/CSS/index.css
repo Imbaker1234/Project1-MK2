@@ -5,13 +5,8 @@
 html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     background: #00147e;
-    color: #ffffff;
-}
-
-.text {
-    text-decoration-color: #ffffff;
 }
 
 .center {
