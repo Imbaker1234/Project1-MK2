@@ -25,7 +25,7 @@ public class ErsReimbursementService {
 		return pasttickets;
 	}
 
-	public ArrayList<ErsReimbursement> addReimbRequest(Principal user, String author, String amt, String desc, String type) {
+	public boolean addReimbRequest(Principal user, String author, String amt, String desc, String type) {
 		log.info("in reimb service addReimbRequest method");
 		
 		Double amtReformat;
@@ -36,14 +36,10 @@ public class ErsReimbursementService {
 			
 		} catch (NumberFormatException e) {
 			log.warn("Invalid field input.");
-			return null;
+			return false;
 		}
 		
-		Boolean addedReimb = rdao.addReimbursement(author, amtReformat, desc, typeReformat);
-		if (addedReimb == true) {
-			return rdao.dashboardDisplayPendingReimbs(user.getId());
-		}
-		return null;
+		return rdao.addReimbursement(author, amtReformat, desc, typeReformat);
 	}
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {

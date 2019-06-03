@@ -71,26 +71,6 @@ public class ErsReimbursementDAO {
 		}
 		return null;
 	}
-	
-	public ArrayList<ErsReimbursement> dashboardDisplayPendingReimbs(int userId) {
-		log.info("in reimb DAO dashboardDisplayPendingReimbs method");
-		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
-
-		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
-
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ? AND reimb_author = ?";
-			PreparedStatement stmt = connect.prepareStatement(sql);
-			stmt.setString(1, "1");
-			stmt.setInt(2, userId);
-			ResultSet rs = stmt.executeQuery();
-
-			return mapResultSet(reimbursementlist, rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
-		return null;
-	}
 
 	public boolean addReimbursement(String input1, Double input2, String input3, int input4) {
 		log.info("in reimb DAO addReimbursement method");

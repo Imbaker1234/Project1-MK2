@@ -32,20 +32,21 @@ public class ReimbursementServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		log.info("Reimb doPost() called.");
 
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		response.setContentType("application/json");
-		
+
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = nodeToArray(rootNode);
-		
+
 		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getRole();
-		
+
 		switch (role) {
 //TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
 		case "employee":
@@ -55,9 +56,12 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
-				writer.write(mapper.writeValueAsString(pendingReimbs));
-				
+				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+				if (reimbAdded == true) {
+					writer.write(mapper.writeValueAsString(reimbAdded));
+				} else {
+					writer.write(mapper.writeValueAsString(null));
+				}
 			}
 			break;
 
@@ -68,7 +72,7 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else if (input2.equals("viewallreimbs")) {
-				ArrayList<ErsReimbursement> allReimbs =  reimbService.viewAllReimbs();
+				ArrayList<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
 			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
@@ -80,15 +84,19 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			} else {
-				ArrayList<ErsReimbursement> pendingReimbs = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
-				writer.write(mapper.writeValueAsString(pendingReimbs));
-				
+				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+				if (reimbAdded == true) {
+					writer.write(mapper.writeValueAsString(reimbAdded));
+				} else {
+					writer.write(mapper.writeValueAsString(null));
+				}
+
 			}
 			break;
 		}
-		
+
 	}
-	
+
 	public String[] nodeToArray(ArrayNode rootNode) {
 
 		String[] array = new String[rootNode.size()];
