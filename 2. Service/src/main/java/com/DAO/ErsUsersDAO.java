@@ -57,20 +57,21 @@ public class ErsUsersDAO {
 		return null;
 	}
 
-	public boolean addUser(ErsUsers user) {
+	public boolean addUser(ErsUsers user, String salt) {
 		log.info("in ErsUsersDAO addUser method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
 			connect.setAutoCommit(false);
 
-			String sql = "{call new_user(?,?,?,?,?)}";
+			String sql = "{call new_user(?,?,?,?,?,?)}";
 			CallableStatement stmt = connect.prepareCall(sql);
 			stmt.setString(1, user.getErsUsername());
 			stmt.setString(2, user.getErsPassword());
 			stmt.setString(3, user.getUserFirstName());
 			stmt.setString(4, user.getUserLastName());
 			stmt.setString(5, user.getUserEmail());
+			stmt.setString(6, salt);
 
 			stmt.executeUpdate();
 			connect.commit();

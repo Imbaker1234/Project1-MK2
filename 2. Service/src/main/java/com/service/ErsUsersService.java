@@ -57,7 +57,7 @@ public class ErsUsersService {
 			String incEmail = incoming[4];
 			log.info("Successfully populated incoming fields from JSON");
 			ErsUsers user = new ErsUsers(incUsername, passKey, incFirst, incLast, incEmail);
-			Boolean insert = udao.addUser(user);
+			Boolean insert = udao.addUser(user, salt);
 			return insert == true ? user : null;
 
 		}
