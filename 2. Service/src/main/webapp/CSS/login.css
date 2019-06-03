@@ -36,3 +36,7 @@
     padding:2%;
     alignment: center;
 }
+
+.invisible {
+    opacity: 0;
+}

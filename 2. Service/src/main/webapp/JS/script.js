@@ -218,10 +218,11 @@ function verifyField(field) {
 
 function toggleButton(buttonId, status) {
     if (status) {
-
+        document.getElementById(buttonId).classList.remove("invisible");
+        document.getElementById(buttonId).classList.add("animated", "fadeIn");
+        document.getElementById(buttonId).classList.remove("fadeIn");
         //If the status is true then set the button the pulse endlessly.
-        document.getElementById(buttonId).classList.add('animated', "fadeIn");
-        document.getElementById(buttonId).classList.add('animated', 'pulse', 'infinite');
+        document.getElementById(buttonId).classList.add("pulse", "infinite");
         document.getElementById(buttonId).disabled = false;
     } else {
         //If the status is false

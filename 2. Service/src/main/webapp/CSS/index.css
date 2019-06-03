@@ -14,9 +14,9 @@ html, body {
 }
 
 #page {
-    position: center;
-    height: 80%;
-    width: 75%;
+    margin: auto;
+    height: 250px;
+    width: 1200px;
 }
 
 #nav_logo {
