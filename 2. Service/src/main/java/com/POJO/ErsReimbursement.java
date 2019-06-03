@@ -11,15 +11,15 @@ public @Data
 @AllArgsConstructor
 class ErsReimbursement {
 
-	private String reimbId;
-	private String reimbAmount;
+	private int reimbId;
+	private Double reimbAmount;
 	private java.sql.Timestamp reimbSubmitted;
 	private java.sql.Timestamp reimbResolved;
 	private String reimbDescription;
 	private Blob reimbReceipt;
-	private String reimbAuthor;
-	private String reimbResolver;
-	private String reimbStatusId;
-	private String reimbTypeId;
+	private int reimbAuthor;
+	private int reimbResolver;
+	private int reimbStatusId;
+	private int reimbTypeId;
 	
 }

@@ -10,7 +10,7 @@ public @Data
 @AllArgsConstructor
 class Principal {
 	
-	private String id;
+	private int id;
 	private String username;
 	private String role;
 

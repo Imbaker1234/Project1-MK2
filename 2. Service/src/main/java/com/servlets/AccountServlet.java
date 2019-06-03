@@ -44,7 +44,7 @@ public class AccountServlet extends HttpServlet {
 		if (userinput.length == 2) {
             log.info("AccountServlet.doPost() : Line 45 : Logging in user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
-            Principal principal = new Principal(user.getErsUsersId() + "", user.getErsUsername(),
+            Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
 			writer.write(mapper.writeValueAsString(principal));
 
@@ -54,7 +54,7 @@ public class AccountServlet extends HttpServlet {
         } else if (userinput.length == 5) { // This clause is entered register
             log.info("AccountServlet.doPost() : Line 55 : Registering new user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
-            Principal principal = new Principal(user.getErsUsersId() + "", user.getErsUsername(),
+            Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
 			writer.write(mapper.writeValueAsString(principal));
 			

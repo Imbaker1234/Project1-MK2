@@ -13,9 +13,21 @@ public class ErsUsersService {
 
 	private static Logger log = LogManager.getLogger(ErsUsersService.class);
 	private ErsUsersDAO udao = new ErsUsersDAO();
+	
+	/**
+	 * Checks for valid credentials and procedes to retrieve a user for the login functionality or store and then retrieve that user
+	 * for the register functionality.
+	 * 
+	 * The login field provides 2 values and therefore if you are calling this
+	 * method with 2 values then you are calling to log in
+	 * 
+	 * The register field provides 5 values and therefore if you are calling this
+	 * method with 5 values you are intending to register
+	 * 
+	 * @param incoming
+	 * @return
+	 */
 
-	// TODO Methodize this for readability and comprehension.
-	// Create a login() and register method().
 	public ErsUsers validateCredentials(String... incoming) {
 		log.info("in ERSUsersService validateCredentials method");
 
@@ -28,19 +40,12 @@ public class ErsUsersService {
 				return null;
 		}
 
-		// The login field provides 2 values and therefore if you are calling this
-		// method with 2
-		// values then you are calling to log in.
-
 		if (incoming.length == 2) {
 			log.info("validating credentials for login");
 
 			ErsUsers user = udao.getByCredentials(incoming[0], incoming[1]);
 			return user;
 
-			// The register field provides 5 values and therefore if you are calling this
-			// method with
-			// 5 values you are intending to register.
 		} else if (udao.getByUsername(incoming[0]) == null && pattern.matcher(incoming[4]).matches()) {
 			log.info("validating credentials for registered account");
 

@@ -26,10 +26,21 @@ public class ErsReimbursementService {
 		return pasttickets;
 	}
 
-	public ArrayList<ErsReimbursement> addReimbRequest(Principal user, String input1, String input2, String input3, String input4) {
+	public ArrayList<ErsReimbursement> addReimbRequest(Principal user, String author, String amt, String desc, String type) {
 		log.info("in reimb service addReimbRequest method");
 		
-		Boolean addedReimb = rdao.addReimbursement(input1, input2, input3, input4);
+		Double amtReformat;
+		int typeReformat;
+		try {
+			amtReformat = Double.parseDouble(amt);
+			typeReformat = Integer.parseInt(type);
+			
+		} catch (NumberFormatException e) {
+			log.warn("Invalid field input.");
+			return null;
+		}
+		
+		Boolean addedReimb = rdao.addReimbursement(author, amtReformat, desc, typeReformat);
 		if (addedReimb == true) {
 			return rdao.dashboardDisplayPendingReimbs(user.getId());
 		}
@@ -38,26 +49,35 @@ public class ErsReimbursementService {
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
 		log.info("in reimb service approveDenyReimb method");
+		
+		int reimbidReformat;
+		try {
+			reimbidReformat = Integer.parseInt(reimbId);
+			
+		} catch (NumberFormatException e) {
+			log.warn("Invalid field input.");
+			return false;
+		}
 
-		return rdao.updateReimbursementStatus(user, statusupdate, reimbId);
+		return rdao.updateReimbursementStatus(user, statusupdate, reimbidReformat);
 
 	}
 
 	public ArrayList<ErsReimbursement> filterReimbs(String reimbStatus) {
 		log.info("in reimb service approveDenyReimb method");
 
-		String reimbStatusId = null;
+		int reimbStatusId;
 		switch (reimbStatus) {
 		case "Pending":
-			reimbStatusId = "1";
+			reimbStatusId = 1;
 			break;
 
 		case "Approved":
-			reimbStatusId = "2";
+			reimbStatusId = 2;
 			break;
 
 		case "Denied":
-			reimbStatusId = "3";
+			reimbStatusId = 3;
 			break;
 
 		default:
