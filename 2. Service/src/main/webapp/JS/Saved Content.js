@@ -52,7 +52,7 @@
 //============================================================
 //LoadPastTickets
 
-// 	 console.log("in loadPastTickets()");
+// 	 console.log("in loadTickets()");
 //
 // 	 let xhr = new XMLHttpRequest();
 //
@@ -139,7 +139,7 @@
 //
 // 		if (pastTickets) {
 // 			console.log(pastTickets);
-// 			loadPastTickets();
+// 			loadTickets();
 // 		} else {
 // 			alert("Login failed!");
 //

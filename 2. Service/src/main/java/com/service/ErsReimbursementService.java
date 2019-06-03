@@ -1,13 +1,12 @@
 package com.service;
 
-import java.util.ArrayList;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.DAO.ErsReimbursementDAO;
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class ErsReimbursementService {
 
@@ -15,7 +14,7 @@ public class ErsReimbursementService {
 	private ErsReimbursementDAO rdao = new ErsReimbursementDAO();
 
 	public ArrayList<ErsReimbursement> viewPastTickets(Principal user) {
-		log.info("in reimb service viewPastTickets method");
+        log.info("in reimb service getTickets method");
 
 		ArrayList<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
 		if (pasttickets.size() == 0) {

@@ -73,8 +73,8 @@ function loadDashboard() {
     document.getElementById("dashboardwelcomeuser").innerText = "Hello Benis"
 }
 
-function loadPastTickets() {
-    console.log("loadPastTickets() called"); //DEBUG
+function loadTickets() {
+    console.log("loadTickets() called"); //DEBUG
     ajaxLoadDiv("pasttickets.view", "ticketview");
     //this later to some sort of sub div on the dashboard.
 }
@@ -132,16 +132,16 @@ function register() {
     ajaxCall("POST", "account", credentials, "principal");
 }
 
-function viewPastTickets() {
+function getTickets() {
 
-    console.log("viewPastTickets() called"); //DEBUG
+    console.log("getTickets() called"); //DEBUG
     let content = ["pasttickets"];
 
-    ajaxCall("POST", "dashboard", content, "pasttickets");
-    console.log(window.localStorage.pasttickets);
+    let tickets = ajaxCall("POST", "dashboard", content);
+    console.log(tickets);
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        loadPastTickets();
+        loadTickets();
     }
 }
 
@@ -220,6 +220,7 @@ function toggleButton(buttonId, status) {
     if (status) {
 
         //If the status is true then set the button the pulse endlessly.
+        document.getElementById(buttonId).classList.add('animated', "fadeIn");
         document.getElementById(buttonId).classList.add('animated', 'pulse', 'infinite');
         document.getElementById(buttonId).disabled = false;
     } else {

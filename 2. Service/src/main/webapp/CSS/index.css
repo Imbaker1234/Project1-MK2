@@ -7,10 +7,11 @@ html, body {
     height: 100%;
     overflow: hidden;
     background: #00147e;
+    color: #ffffff;
 }
 
 .text {
-    text-decoration-color: white;
+    text-decoration-color: #ffffff;
 }
 
 .center {
@@ -26,4 +27,18 @@ html, body {
 #nav_logo {
     height: 70px;
     position: center;
+}
+
+#ticketview {
+    height: 70%;
+    width: 95%;
+    overflow-y: scroll;
+    overflow-wrap: normal;
+    overborder: 8px solid #00008b;
+    padding: 2%;
+    color: #ffffff;
+}
+
+h1 h2 h3 h4 h5 h6 {
+    color: #ffffff;
 }

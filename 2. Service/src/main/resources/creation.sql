@@ -45,7 +45,8 @@ create table ERS_USERS
         unique,
     USER_ROLE_ID    NUMBER
         constraint ERS_ROLES_FK
-            references ERS_USER_ROLES
+            references ERS_USER_ROLES,
+    ERS_SALT        VARCHAR2(600)
 )
 /
 
@@ -78,12 +79,13 @@ create PROCEDURE new_user(username VARCHAR2,
                           password VARCHAR2,
                           firstname VARCHAR2,
                           lastname VARCHAR2,
-                          email VARCHAR2)
+                          email VARCHAR2,
+                          salt VARCHAR2)
     IS
 BEGIN
     INSERT INTO ers_users (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email,
-                           user_role_id)
-    VALUES (users_seq.nextval, username, password, firstname, lastname, email, 1);
+                           user_role_id, ers_salt)
+    VALUES (users_seq.nextval, username, password, firstname, lastname, email, 1, salt);
     COMMIT;
 END;
 /
@@ -141,4 +143,3 @@ BEGIN
     COMMIT;
 END;
 /
-
