@@ -1,17 +1,18 @@
 <div class="container dashboard-container animated fadeIn slow" id="container">
     <div class="row">
         <div class="col-md-6 dashboard-form-1">
-            <h3 id="dashboardwelcomeuser"></h3>
+            <h3 class="text" id="dashboardwelcomeuser">${Benis}</h3> <!--TODO Figure out Template literals to auto
+            update -->
             <br>
-            <h4 class="center">New Ticket</h4>
+            <h4 class="center text">New Ticket</h4>
             <div class="form-group">
-                <input id="reimb_amount" type="number" class="form-control"
+                <input class="form-control text" id="reimb_amount" type="number"
                        placeholder="Amount" value=""/>
             </div>
             <div class="form-group">
                 <textarea cols="30" id="reimb_desc" maxlength="200" name=""
                           placeholder="Enter a brief description (0/200)"
-                          rows="10"></textarea>
+                          class="text" rows="10"></textarea>
             </div>
             <div class="form-group">
                 <select id="expense_type" name="expense_type">
@@ -23,7 +24,8 @@
             </div>
             <div id="dashboardupload">
                 <div class="form-group">
-                    <input type="file" name="uploadedimage" id="imageuploadinput" onchange="handleFiles(this.files)">
+                    <input class="text" id="imageuploadinput" name="uploadedimage" onchange="handleFiles(this.files)"
+                           type="file">
 
                 </div>
             </div>
@@ -36,6 +38,22 @@
 
         </div>
         <div class="col-md-6 dashboard-form-2">
-            <div id="ticketview"></div>
+            <h3>Reimbursement Requests</h3>
+            <select onchange="getTickets()">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="denied">Denied</option>
+            </select>
+            <br>
+            <div style="height:100px;width:140px;overflow:auto;
+            overflow-wrap: normal; overborder:8px solid darkblue;padding:2%">
+                <div id="ticketview">
+
+                </div>
+            </div>
+
+
         </div>
     </div>
+</div>
+</div>

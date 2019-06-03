@@ -9,10 +9,21 @@ html, body {
     background: #00147e;
 }
 
-.inactive {
-
+.text {
+    text-decoration-color: white;
 }
 
 .center {
     align-items: center;
+}
+
+#page {
+    position: center;
+    height: 80%;
+    width: 75%;
+}
+
+#nav_logo {
+    height: 70px;
+    position: center;
 }

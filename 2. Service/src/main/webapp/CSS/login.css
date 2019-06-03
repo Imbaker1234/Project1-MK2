@@ -3,11 +3,6 @@
     margin-bottom: 15%;
 }
 
-.login-logo {
-    position: relative;
-    margin-left: -25%;
-    box-shadow: 10px 10px 5px grey;
-}
 .login-logo img{
     position: absolute;
     width: 32%;

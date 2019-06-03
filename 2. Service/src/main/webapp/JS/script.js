@@ -1,9 +1,11 @@
 window.onload = function () {
-    loadLogin();
-};
-
-document.getElementById("dashboard-container").onload = function () {
-    document.getElementById("dashboardwelcomeuser").innerText = "Welcome Lumpy Space Princess";
+    if (localStorage.jwt) {
+        console.log("window.onload() called : JWT Found: Loading Dashboard");
+        loadDashboard();
+    } else {
+        console.log("window.onload() called : JWT Not Found: Loading Login");
+        loadLogin();
+    }
 };
 
 //Functionalities =================================================
@@ -67,6 +69,8 @@ function loadLogin() {
 function loadDashboard() {
     console.log("loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
+    // let userToWelcome = localStorage.principal
+    document.getElementById("dashboardwelcomeuser").innerText = "Hello Benis"
 }
 
 function loadPastTickets() {
@@ -105,7 +109,7 @@ function login() {
 
 function logout() {
     console.log("logout() called"); //DEBUG
-    localStorage.removeItem("principle");
+    localStorage.removeItem("jwt");
     LoadLogin();
 }
 
@@ -142,8 +146,8 @@ function viewPastTickets() {
 }
 
 function addReimbursement() {
-	
-	console.log("addReimbursement() called") //DEBUG
+
+    console.log("addReimbursement() called"); //DEBUG
 	
 	let amt = document.getElementById("reimb_amount").value;
 	let desc = document.getElementById("reimb_desc").value;
@@ -159,8 +163,8 @@ function addReimbursement() {
 }
 
 function viewAllReimbursements() {
-	
-	console.log("viewAllReimbursements() called") //DEBUG
+
+    console.log("viewAllReimbursements() called"); //DEBUG
 	
 	let content = [viewallreimbs];
 	
@@ -173,8 +177,8 @@ function viewAllReimbursements() {
 }
 
 function updateReimbursementStatus() {
-	
-	console.log("updateReimbursementStatus() called") //DEBUG
+
+    console.log("updateReimbursementStatus() called"); //DEBUG
 	
 	let newstatus = document.getElementById("reimb_amount").value;
 	let id = document.getElementById("reimb_id").value;
@@ -189,8 +193,8 @@ function updateReimbursementStatus() {
 }
 
 function filterAllReimbs() {
-	
-	console.log("filterAllReimbs() called") //DEBUG
+
+    console.log("filterAllReimbs() called"); //DEBUG
 	
 	let filteredstatus = document.getElementById("filtered_status").value;
 	let content = [filtered_status];
@@ -214,10 +218,13 @@ function verifyField(field) {
 
 function toggleButton(buttonId, status) {
     if (status) {
-        document.getElementById(buttonId).classList.add('animated', 'pulse', 'slow', 'infinite');
+
+        //If the status is true then set the button the pulse endlessly.
+        document.getElementById(buttonId).classList.add('animated', 'pulse', 'infinite');
         document.getElementById(buttonId).disabled = false;
     } else {
-        document.getElementById(buttonId).classList.remove('animated', 'pulse', 'slow', 'infinite');
+        //If the status is false
+        document.getElementById(buttonId).classList.remove('animated', 'pulse', 'infinite');
         document.getElementById(buttonId).disabled = true;
     }
 }
@@ -269,6 +276,7 @@ function verifyLoginFields() {
     document.getElementById("registerfirst").value = '';
     document.getElementById("registerlast").value = '';
     document.getElementById("registeremail").value = '';
+    toggleButton("registersubmitbutton", false);
 
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
@@ -283,17 +291,30 @@ function verifyLoginFields() {
 
 function verifyRegisterFields() {
     console.log("verifyRegisterFields() called");
+
+    //Set the login div to inactive.
     document.getElementById("logindiv").classList.add("inactive");
+
+    //Clear any forms in the login div since we can't log in and register at the same time
     document.getElementById("loginusername").value = '';
     document.getElementById("loginpassword").value = '';
+
+    //Turn off the login button if it happens to be active.
+    toggleButton("loginsubmitbutton", false);
+
+    //Fetch the necessary values from the 5 register forms.
     let username = document.getElementById("registerusername").value;
     let password = document.getElementById("registerpassword").value;
     let first = document.getElementById("registerfirst").value;
     let last = document.getElementById("registerlast").value;
     let email = document.getElementById("registeremail").value;
+
+    //If all the forms are verified then active the "Start Getting Paid" button.
     if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
         console.log("Credentials valid. toggling button");
         toggleButton("registersubmitbutton", true);
+
+        //If they are not valid then disable the register button.
     } else {
         toggleButton("registersubmitbutton", false);
     }
