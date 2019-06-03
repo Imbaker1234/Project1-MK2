@@ -104,3 +104,5 @@ END;
 
 INSERT INTO ers_users VALUES (1, 'Kerr007', 'benis69', 'Justin', 'Kerr', 'justin-kerr89@hotmail.com', 2);
 SELECT * FROM ers_users;
+SELECT * FROM ers_user_roles;
+SELECT * FROM ers_reimbursement_status;

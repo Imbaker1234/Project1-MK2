@@ -143,3 +143,17 @@ BEGIN
     COMMIT;
 END;
 /
+
+INSERT INTO ers_user_roles VALUES (1, 'employee');
+INSERT INTO ers_user_roles VALUES (2, 'admin');
+
+INSERT INTO ers_reimbursement_type VALUES (1, 'Lodging');
+INSERT INTO ers_reimbursement_type VALUES (2, 'Travel');
+INSERT INTO ers_reimbursement_type VALUES (3, 'Food');
+INSERT INTO ers_reimbursement_type VALUES (4, 'Other');
+
+INSERT INTO ers_reimbursement_status VALUES (1, 'Pending');
+INSERT INTO ers_reimbursement_status VALUES (2, 'Approved');
+INSERT INTO ers_reimbursement_status VALUES (3, 'Denied');
+
+commit;
