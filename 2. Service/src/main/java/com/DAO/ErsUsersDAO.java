@@ -2,6 +2,8 @@ package com.DAO;
 
 import com.POJO.ErsUsers;
 import com.util.ConnectionFactory;
+import com.util.PasswordEncryption;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,27 +13,24 @@ import java.util.List;
 
 public class ErsUsersDAO {
 
-	public static void main(String[] args) {
-		ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
-
-		System.out.println(ersUsersDAO.getUserByCredentials("Imbaker1234", "deLUX"));
-	}
-
 	private static Logger log = LogManager.getLogger(ErsUsersDAO.class);
+	static String salt;
 
-	public ErsUsers getUserByCredentials(String username, String password) {
+	public ErsUsers getByCredentials(String username, String password) {
 		log.info("in ErsUsersDAO getUserByCredentials method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?";
+			String sql = "SELECT * FROM ers_users WHERE ers_username = ?";
 			PreparedStatement stmt = connect.prepareStatement(sql);
 			stmt.setString(1, username);
-			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 
-			return mapResultSet(rs).get(0);
-			
+			List<ErsUsers> user = mapResultSet(rs);
+			if (PasswordEncryption.verifyPassword(password, user.get(0).getErsPassword(), salt) == true) {
+				return mapResultSet(rs).get(0);
+			}
+
 		} catch (Exception e) {
 			log.warn(e.getMessage());
 		}
@@ -50,7 +49,7 @@ public class ErsUsersDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			return mapResultSet(rs).get(0);
-			
+
 		} catch (Exception e) {
 			log.warn(e.getMessage());
 		}
@@ -58,14 +57,13 @@ public class ErsUsersDAO {
 		return null;
 	}
 
-	
 	public boolean addUser(ErsUsers user) {
 		log.info("in ErsUsersDAO addUser method");
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
-			
+
 			connect.setAutoCommit(false);
-			
+
 			String sql = "{call new_user(?,?,?,?,?)}";
 			CallableStatement stmt = connect.prepareCall(sql);
 			stmt.setString(1, user.getErsUsername());
@@ -83,24 +81,25 @@ public class ErsUsersDAO {
 		}
 		return false;
 	}
-	
+
 	private List<ErsUsers> mapResultSet(ResultSet rs) throws SQLException {
 		log.info("in ErsUsersDAO mapResultSet");
-		
+
 		if (rs != null) {
 			List<ErsUsers> users = new ArrayList<>();
 			while (rs.next()) {
-                int ersUsersId = rs.getInt(1);
+				int ersUsersId = rs.getInt(1);
 				String ersUsername = rs.getString(2);
 				String ersPassword = rs.getString(3);
 				String userFirstName = rs.getString(4);
 				String userLastName = rs.getString(5);
 				String userEmail = rs.getString(6);
-                int userRoleId = rs.getInt(7);
+				int userRoleId = rs.getInt(7);
+				salt = rs.getString(8);
 				ErsUsers user = new ErsUsers(ersUsersId, ersUsername, ersPassword, userFirstName, userLastName,
 						userEmail, userRoleId);
 				users.add(user);
-				
+
 			}
 			return users;
 		}
