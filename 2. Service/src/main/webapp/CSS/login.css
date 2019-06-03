@@ -12,6 +12,7 @@
 }
 .login-form-1{
     padding: 9%;
+    background: #0e2a63;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-1 h3{
@@ -20,6 +21,7 @@
 }
 .login-form-2{
     padding: 9%;
+    background: #072550;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-2 h3{
@@ -39,4 +41,8 @@
 
 .invisible {
     opacity: 0;
+}
+
+h1 h2 h3 h4 h5 h6 {
+    color: #ffffff !important;
 }

@@ -30,6 +30,16 @@
     margin-bottom: 12%;
 }
 
+#ticketview {
+    height: 70%;
+    width: 95%;
+    overflow-y: scroll;
+    overflow-wrap: normal;
+    overborder: 8px solid #00008b;
+    padding: 2%;
+    color: #ffffff;
+}
+
 .btnSubmit {
     font-weight: 600;
     width: 50%;
@@ -41,4 +51,7 @@
     alignment: center;
 }
 
+h1 h2 h3 h4 h5 h6 {
+    color: #ffffff !important;
+}
 
