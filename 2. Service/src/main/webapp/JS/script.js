@@ -75,9 +75,18 @@ function loadPastTickets() {
     //this later to some sort of sub div on the dashboard.
 }
 
-//Functions By Page ===============================================
+function loadCurrentTickets() {
+	console.log("loadCurrentTickets() called"); //DEBUG
+	ajaxLoadDiv("dashboard.view", "page");
+}
 
-//===== Login =====================================================
+function loadAllReimbs() {
+	console.log("loadAllReimbs() called"); //DEBUG
+	ajaxLoadDiv("admindashboard.view", "page");
+}
+
+//Functions ===============================================
+
 function login() {
 
     let username = document.getElementById("loginusername").value;
@@ -91,26 +100,6 @@ function login() {
     ajaxCall("POST", "account", credentials, "principal");
     if (window.localStorage.getItem("principal") != "") { //If they have a JWT at this point load the dashboard.
         loadDashboard();
-    }
-}
-
-function verifyLoginFields() {
-    console.log("verifyLoginFields() called"); //DEBUG
-    document.getElementById("registerdiv").classList.add("inactive");
-    document.getElementById("registerusername").value = '';
-    document.getElementById("registerpassword").value = '';
-    document.getElementById("registerfirst").value = '';
-    document.getElementById("registerlast").value = '';
-    document.getElementById("registeremail").value = '';
-
-    let username = document.getElementById("loginusername").value;
-    let password = document.getElementById("loginpassword").value;
-
-    if (verifyField(username) && verifyField(password)) {
-        console.log("Credentials valid. toggling button");
-        toggleButton("loginsubmitbutton", true);
-    } else {
-        toggleButton("loginsubmitbutton", false);
     }
 }
 
@@ -134,46 +123,86 @@ function register() {
     console.log("lastname =" + lastname); //DEBUG
     console.log("email =" + email); //DEBUG
 
-    if (verifyUsername(username) == false || verifyPassword(password) == false || verifyName(firstname, lastname) == false
-        || verifyEmail(email) == false) return;
-
     let credentials = [username, password, firstname, lastname, email];
 
     ajaxCall("POST", "account", credentials, "principal");
 }
-
-function verifyRegisterFields() {
-    console.log("verifyRegisterFields() called");
-    document.getElementById("logindiv").classList.add("inactive");
-    document.getElementById("loginusername").value = '';
-    document.getElementById("loginpassword").value = '';
-    let username = document.getElementById("registerusername").value;
-    let password = document.getElementById("registerpassword").value;
-    let first = document.getElementById("registerfirst").value;
-    let last = document.getElementById("registerlast").value;
-    let email = document.getElementById("registeremail").value;
-    if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
-        console.log("Credentials valid. toggling button");
-        toggleButton("registersubmitbutton", true);
-    } else {
-        toggleButton("registersubmitbutton", false);
-    }
-}
-
-//===== Dashboard =================================================
 
 function viewPastTickets() {
 
     console.log("viewPastTickets() called"); //DEBUG
     let content = ["pasttickets"];
 
-    ajaxCall("POST", "dashboard", content, "tickets");
-    console.log(window.localStorage.tickets);
+    ajaxCall("POST", "dashboard", content, "pasttickets");
+    console.log(window.localStorage.pasttickets);
 
-    if (window.localStorage.getItem("principal") != "") { //If they have a JWT, load the page
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadPastTickets();
     }
 }
+
+function addReimbursement() {
+	
+	console.log("addReimbursement() called") //DEBUG
+	
+	let amt = document.getElementById("reimb_amount").value;
+	let desc = document.getElementById("reimb_desc").value;
+	let type = document.getElementById("id_expense_type").value;
+	let content = [amt, desc, type];
+	
+	ajaxCall("POST", "dashboard", content, "currenttickets");
+	console.log(window.localStorage.currenttickets);
+	
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
+        loadCurrentTickets();
+    }
+}
+
+function viewAllReimbursements() {
+	
+	console.log("viewAllReimbursements() called") //DEBUG
+	
+	let content = [viewallreimbs];
+	
+	ajaxCall("POST", "dashboard", content, "allreimbs");
+	console.log(window.localStorage.allreimbs);
+	
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
+        loadAllReimbs();
+    }
+}
+
+function updateReimbursementStatus() {
+	
+	console.log("updateReimbursementStatus() called") //DEBUG
+	
+	let newstatus = document.getElementById("reimb_amount").value;
+	let id = document.getElementById("reimb_id").value;
+	let content = [reimb_id, newstatus];
+	
+	ajaxCall("POST", "dashboard", content, "updatecheck");
+	console.log(window.localStorage.updatecheck);
+	
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
+    	loadAllReimbs();
+    }
+}
+
+function filterAllReimbs() {
+	
+	console.log("filterAllReimbs() called") //DEBUG
+	
+	let filteredstatus = document.getElementById("filtered_status").value;
+	let content = [filtered_status];
+	
+	ajaxCall("POST", "dashboard", content, "filteredlist");
+	console.log(window.localStorage.filteredlist);
+	
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
+    	loadAllReimbs();
+    }
+}
+
 
 //=============== Credential Verification =========================
 
@@ -230,6 +259,44 @@ function verifyEmail(email) {
     document.getElementById("registeremail").value = "";
     alert("Invalid email syntax.");
     return false;
+}
+
+function verifyLoginFields() {
+    console.log("verifyLoginFields() called"); //DEBUG
+    document.getElementById("registerdiv").classList.add("inactive");
+    document.getElementById("registerusername").value = '';
+    document.getElementById("registerpassword").value = '';
+    document.getElementById("registerfirst").value = '';
+    document.getElementById("registerlast").value = '';
+    document.getElementById("registeremail").value = '';
+
+    let username = document.getElementById("loginusername").value;
+    let password = document.getElementById("loginpassword").value;
+
+    if (verifyField(username) && verifyField(password)) {
+        console.log("Credentials valid. toggling button");
+        toggleButton("loginsubmitbutton", true);
+    } else {
+        toggleButton("loginsubmitbutton", false);
+    }
+}
+
+function verifyRegisterFields() {
+    console.log("verifyRegisterFields() called");
+    document.getElementById("logindiv").classList.add("inactive");
+    document.getElementById("loginusername").value = '';
+    document.getElementById("loginpassword").value = '';
+    let username = document.getElementById("registerusername").value;
+    let password = document.getElementById("registerpassword").value;
+    let first = document.getElementById("registerfirst").value;
+    let last = document.getElementById("registerlast").value;
+    let email = document.getElementById("registeremail").value;
+    if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
+        console.log("Credentials valid. toggling button");
+        toggleButton("registersubmitbutton", true);
+    } else {
+        toggleButton("registersubmitbutton", false);
+    }
 }
 
 
