@@ -1,3 +1,5 @@
+//TODO Check for 403 errors when you pass in a bad JWT. Redirect users who get this response to login.
+
 window.onload = function () {
     if (localStorage.jwt) {
         console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
@@ -68,6 +70,10 @@ function timeStamp() {
     return (d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 }
 
+function timeOutCalled() {
+    console.log("Timeout Called")
+}
+
 //Load Views ======================================================
 
 function loadLogin() {
@@ -75,6 +81,7 @@ function loadLogin() {
     ajaxLoadDiv("login.view", "page");
 }
 
+//TODO Set admin dropdown above new ticket to appear so that admins can submit tickets for employees.
 function loadDashboard() {
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
@@ -93,18 +100,20 @@ function loadTickets(tickets) {
 
 function loadCurrentTickets() {
     console.log(timeStamp() + " " + "loadCurrentTickets() called"); //DEBUG
-	ajaxLoadDiv("dashboard.view", "page");
+    ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadAllReimbs() {
     console.log(timeStamp() + " " + "loadAllReimbs() called"); //DEBUG
-	ajaxLoadDiv("admindashboard.view", "page");
+    ajaxLoadDiv("admindashboard.view", "page");
 }
 
 //Functions ===============================================
 
-function login() {
+//TODO Use screenshot from discord to determine the resulting error from logging in and fix it.
 
+function login() {
+    window.setTimeout(null, 20000);
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
 
@@ -119,6 +128,7 @@ function login() {
     }
 }
 
+//TODO Set an element for this in the navbar to log out and called loadLogin()
 function logout() {
     console.log(timeStamp() + " " + "logout() called"); //DEBUG
     localStorage.removeItem("jwt");
@@ -144,6 +154,8 @@ function register() {
     ajaxCall("POST", "account", credentials, "principal");
 }
 
+//TODO set the logic so that the admin role naturally just "owns" all tickets.
+//TODO convert incoming ticket information from milliseconds into date-time values.
 function getTickets() {
 
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
@@ -160,62 +172,67 @@ function getTickets() {
 function addReimbursement() {
 
     console.log(timeStamp() + " " + "addReimbursement() called"); //DEBUG
-	
-	let amt = document.getElementById("reimb_amount").value;
-	let desc = document.getElementById("reimb_desc").value;
-	let type = document.getElementById("id_expense_type").value;
-	let content = [amt, desc, type];
+
+    let amt = document.getElementById("reimb_amount").value;
+    let desc = document.getElementById("reimb_desc").value;
+    let type = document.getElementById("id_expense_type").value;
+    let content = [amt, desc, type];
 
     ajaxCall("POST", "dashboard", content);
     console.log(timeStamp() + " " + window.localStorage.currenttickets);
-	
+
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadCurrentTickets();
     }
 }
 
+/*TODO force this function to create nodes using the incoming information from getTickets() and
+inject them into the page view*/
+
 function viewAllReimbursements() {
 
     console.log(timeStamp() + " " + "viewAllReimbursements() called"); //DEBUG
-	
-	let content = [viewallreimbs];
-	
-	ajaxCall("POST", "dashboard", content, "allreimbs");
+
+    let content = [viewallreimbs];
+
+    ajaxCall("POST", "dashboard", content, "allreimbs");
     console.log(timeStamp() + " " + window.localStorage.allreimbs);
-	
+
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadAllReimbs();
     }
 }
 
+//TODO discuss adding approve/deny buttons to the table similar to daniel and tuckers project
 function updateReimbursementStatus() {
 
     console.log(timeStamp() + " " + "updateReimbursementStatus() called"); //DEBUG
-	
-	let newstatus = document.getElementById("reimb_amount").value;
-	let id = document.getElementById("reimb_id").value;
-	let content = [reimb_id, newstatus];
-	
-	ajaxCall("POST", "dashboard", content, "updatecheck");
+
+    let newstatus = document.getElementById("reimb_amount").value;
+    let id = document.getElementById("reimb_id").value;
+    let content = [reimb_id, newstatus];
+
+    ajaxCall("POST", "dashboard", content, "updatecheck");
     console.log(timeStamp() + " " + window.localStorage.updatecheck);
-	
+
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-    	loadAllReimbs();
+        loadAllReimbs();
     }
 }
 
+//TODO Set the dropdown above the ticketview to call this function and filter the reimbursements.
 function filterAllReimbs() {
 
     console.log(timeStamp() + " " + "filterAllReimbs() called"); //DEBUG
-	
-	let filteredstatus = document.getElementById("filtered_status").value;
-	let content = [filtered_status];
-	
-	ajaxCall("POST", "dashboard", content, "filteredlist");
+
+    let filteredstatus = document.getElementById("filtered_status").value;
+    let content = [filtered_status];
+
+    ajaxCall("POST", "dashboard", content, "filteredlist");
     console.log(timeStamp() + " " + window.localStorage.filteredlist);
-	
+
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-    	loadAllReimbs();
+        loadAllReimbs();
     }
 }
 
@@ -333,30 +350,8 @@ function verifyRegisterFields() {
 
 //=======================BLOBHALLA=================================
 
-const url = 'process.php';
-const form = document.querySelector('form');
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const files = document.querySelector('[type=file]').files;
-    const formData = new FormData();
-
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-
-        formData.append('files[]', file)
-    }
-
-    fetch(url, {
-        method: 'POST',
-        body: formData,
-    }).then(response => {
-        console.log(response)
-    })
-});
-
-console.log(timeStamp() + " " + "JS Loaded");
+console.log(timeStamp() + " " + "JS v1.1 Loaded");
 
 
 //==================REFERENCE SCRIPT===============================
