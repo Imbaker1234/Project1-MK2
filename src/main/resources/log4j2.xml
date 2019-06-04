@@ -2,7 +2,7 @@
 <Configuration status="info" strict="true" name="app-logger"
                packages="com.revature">
   <Properties>
-    <Property name="filename">C:\Revature\Project1-MK2\2. Service\src\main\resources\app.log</Property>
+    <Property name="filename">\src\main\resources\app.log</Property>
   </Properties>
   <Filter type="ThresholdFilter" level="trace"/>
  

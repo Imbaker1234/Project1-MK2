@@ -123,7 +123,7 @@ function login() {
 
     let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
-    if (window.localStorage.getItem("principal") != "") { //If they have a JWT at this point load the dashboard.
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT at this point load the dashboard.
         loadDashboard();
     }
 }
