@@ -8,8 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f3d29d9d-b02b-4cc7-a9ae-36d21bd290e3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/login.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -75,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="20">
+              <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -84,19 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
+            <state relative-caret-position="4840">
               <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_USERS">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
-              <filtering>
-                <filter text="" />
-              </filtering>
             </state>
           </provider>
         </entry>
@@ -105,7 +92,7 @@
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
-              <caret line="5" column="4" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -113,10 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_TYPE">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
-              <filtering>
-                <filter text="" />
-              </filtering>
+            <state projectRestartId="91c7385d-4f80-4cd9-9157-ee4ac6c4f30b">
+              <filtering />
             </state>
           </provider>
         </entry>
@@ -124,7 +109,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
+            <state relative-caret-position="720">
               <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
             </state>
           </provider>
@@ -151,8 +136,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="460">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
@@ -162,6 +147,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
               <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -179,7 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loadLo</find>
       <find>dashboard.view</find>
       <find>_</find>
       <find>delay</find>
@@ -209,6 +202,7 @@
       <find>loadTickets()</find>
       <find>getTickets()</find>
       <find>loadTic</find>
+      <find>dark</find>
     </findStrings>
     <replaceStrings>
       <replace>dashboard</replace>
@@ -266,7 +260,6 @@
         <option value="/502a2a10/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/routine/NEW_USER.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/dashboard.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/login.css" />
-        <option value="$PROJECT_DIR$/src/main/webapp/CSS/index.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/Staged-HTML/Staged-Dashboard.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" />
@@ -274,8 +267,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/partials/login.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/JS/script.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/CSS/index.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/partials/login.html" />
       </list>
     </option>
   </component>
@@ -313,10 +307,10 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1930" />
-    <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -324,6 +318,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -402,7 +397,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -615,6 +609,7 @@
       <workItem from="1559573497815" duration="9461000" />
       <workItem from="1559590902319" duration="2378000" />
       <workItem from="1559619029061" duration="9074000" />
+      <workItem from="1559653237228" duration="1104000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed JS Syntax errors that were keeping the page from loading properly. &#10;&#10;Put in console.log messages to show which lines loaded properly in the JS. &#10;&#10;Added a .properties file. &#10;&#10;Adjusted Tomcat folder so that Tomcat will have full control of it. &#10;&#10;Set up OJDBC as a global libary.">
       <created>1559415450757</created>
@@ -791,11 +786,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559628299734</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Morning push for Justin">
+      <created>1559653329717</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1559653329717</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Swapped colors on divs for more accurate looking shadows.">
+      <created>1559654182912</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1559654182912</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115802000" />
+    <option name="totallyTimeSpent" value="116906000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -807,10 +816,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1927" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09932886" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.31073827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -848,7 +857,7 @@
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09932886" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.31073827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -859,7 +868,7 @@
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.509915" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.509915" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -881,7 +890,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.020134227" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.20067114" />
+      <window_info anchor="right" id="Database" order="6" weight="0.20067114" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout-to-restore>
@@ -891,8 +900,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Fixed JS Syntax errors that were keeping the page from loading properly. &#10;&#10;Put in console.log messages to show which lines loaded properly in the JS. &#10;&#10;Added a .properties file. &#10;&#10;Adjusted Tomcat folder so that Tomcat will have full control of it. &#10;&#10;Set up OJDBC as a global libary." />
-    <MESSAGE value="Cleaned up script.js dramatically. Moving old, but working functionality to JS/Saved Content.js&#10;&#10;Added dividing lines. Re-organized JS.&#10;&#10;Updated error checking based on whether xhr response was received rather than the ready state since it changes so many times and causes erroneous false errors to be thrown numerous times during the run." />
     <MESSAGE value="Added debug console messages which include not only what methods are being called but also what variables are being passed into them throughout script.js so that we can better debug and observe the flow. In addition each console.log was tagged with //DEBUG so that finding them would be easier." />
     <MESSAGE value="Broke login page down to hopefully fix the CSS. Deposited updated Login partial HTML content to the actual partials folder and started the beginnings of forcing it to load if the page ever is empty." />
     <MESSAGE value="Fixed CSS&#10;&#10;Got login page to load on demand from the partial instead of baking it in to the index.html&#10;&#10;Deleted newreimb.sql and replaced it with the more comprehensive creation.sql which contains&#10;all database entity creation scripts." />
@@ -916,7 +923,9 @@
     <MESSAGE value="Adjusted height and position on the page DIV. Still haven't figured out what is causing the page div to be white. Dashboard returns as blue. Started using static px height on the page div." />
     <MESSAGE value="Removed bootstrap stylings and implementing raw CSS for more manageability." />
     <MESSAGE value="Revamped login and dashboard pages. Updated javascript. Disabled onload as it wasn't checking accurately for JWTs and was loading the login instead." />
-    <option name="LAST_COMMIT_MESSAGE" value="Revamped login and dashboard pages. Updated javascript. Disabled onload as it wasn't checking accurately for JWTs and was loading the login instead." />
+    <MESSAGE value="Morning push for Justin" />
+    <MESSAGE value="Swapped colors on divs for more accurate looking shadows." />
+    <option name="LAST_COMMIT_MESSAGE" value="Swapped colors on divs for more accurate looking shadows." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1146,13 +1155,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/dashboard.css" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/login.css" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/Staged-HTML/Staged-Dashboard.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_STATUS">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
@@ -1167,35 +1169,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_USERS">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="4" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state projectRestartId="91c7385d-4f80-4cd9-9157-ee4ac6c4f30b">
+          <filtering />
         </state>
       </provider>
     </entry>
     <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_TYPE">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
-          <filtering>
-            <filter text="" />
-          </filtering>
+        <state projectRestartId="91c7385d-4f80-4cd9-9157-ee4ac6c4f30b">
+          <filtering />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1206,10 +1197,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        <state relative-caret-position="220">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
@@ -1220,23 +1218,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        <state relative-caret-position="138">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="20">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
+        <state relative-caret-position="4840">
           <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
         </state>
       </provider>
