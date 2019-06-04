@@ -28,6 +28,7 @@ public class ReimbursementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		doPost(request, response);
+		log.info("ReimbursementServlet.doGet() called");
 
 	}
 
@@ -50,12 +51,15 @@ public class ReimbursementServlet extends HttpServlet {
 		switch (role) {
 //TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
 		case "employee":
-			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1");
+			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1 : \"employee\"");
 			if (input2.equals("pasttickets")) {
+				log.info("Received input == \"pasttickets\": Servlet calling for past tickets belonging to the " +
+						"principal");
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
+				log.info("Recieved input != \"pasttickets\": Servlet calling to add Reimbursement");
 				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
 				if (reimbAdded == true) {
 					writer.write(mapper.writeValueAsString(reimbAdded));
@@ -65,25 +69,32 @@ public class ReimbursementServlet extends HttpServlet {
 			}
 			break;
 
-		case "admin":
+			case "admin": //TODO Discuss removing the pasttickets method from admin as they should be viewing all tickets
+				// at all times.
+				log.info("ReimbursementServlet.doPost() : Line 55 : Case 1 : \"admin\": Servlet calling for tickets" +
+						"belonging to the principal");
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else if (input2.equals("viewallreimbs")) {
+				log.info("Recieved input != \"viewallreimbs\": Servlet calling to add Reimbursement");
 				ArrayList<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
+				//TODO Discuss why this checks against any value instead of each individual value.
 			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
 				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 
+				//TODO Discuss why this runs regardless of true or false.
 			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			} else {
+				log.info("ReimbursementServlet calling for a new Reimbursement.");
 				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
 				if (reimbAdded == true) {
 					writer.write(mapper.writeValueAsString(reimbAdded));

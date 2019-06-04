@@ -32,7 +32,7 @@ public class AccountServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		log.info("request recieved by AccountServlet");
+		log.info("AccountServlet recieved request: " + request.toString());
 
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
@@ -51,6 +51,7 @@ public class AccountServlet extends HttpServlet {
 			String token = JwtGenerator.createJwt(user);
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
+			log.info("Sending out response: " + response.getHeaderNames());
         } else if (userinput.length == 5) { // This clause is entered register
             log.info("AccountServlet.doPost() : Line 55 : Registering new user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);

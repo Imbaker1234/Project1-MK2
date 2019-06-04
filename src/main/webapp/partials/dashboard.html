@@ -1,94 +1,77 @@
-<div class="container dashboard-container animated fadeIn slow" id="container">
-    <div class="row">
-        <div class="left_column">
-            <h3 class="text" id="dashboardwelcomeuser">${Benis}</h3> <!--TODO Figure out Template literals to auto
-            update -->
-            <br>
-            <h4>New Ticket</h4>
-            <div class="form">
-                <input data-type="currency" id="currency-field" name="currency-field"
-                       pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                       placeholder="$1,000.00" type="text" value="">
-            </div>
-            <div class="form-group">
-                <textarea cols="30" id="reimb_desc" maxlength="200" name=""
-                          placeholder="Enter a brief description (0/200)"
-                          class="text" rows="10"></textarea>
-            </div>
-            <div class="form-group">
-                <select id="expense_type" name="expense_type">
-                    <option value="1">Lodging</option>
-                    <option value="2">Travel</option>
-                    <option value="3">Food</option>
-                    <option value="4">Other</option>
-                </select>
-            </div>
-            <div id="dashboardupload">
-                <div class="form-group">
-                    <input class="text" id="imageuploadinput" name="uploadedimage" onchange="handleFiles(this.files)"
-                           type="file">
+<div class="row"> <!--DESIGNATES A ROW ON THE PAGE-->
+    <div class="column dark"> <!--DESIGNATES A DARKER COLOR FOR THIS COLUMN-->
+        <div class="content-basket"> <!--DESIGNATES A "BASKET" FOR SPACING-->
+            <div id="reimbdiv"> <!--DESIGNATES THE NAME OF THE DIV-->
+                <h3 class="text" id="dashboardwelcomeuser">Welcome ${principalUser}</h3>
 
+
+                <h4>New Ticket</h4>
+                <div class="form">
+                    <input data-type="currency" id="currency-field" name="currency-field"
+                           pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                           placeholder="$1,000.00" type="text" value="">
                 </div>
-            </div>
+                <div class="form-group">
+                <textarea class="text" cols="60" id="reimb_desc" maxlength="200"
+                          placeholder="Enter a brief description (0/200)"
+                          name="" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <select id="expense_type" name="expense_type">
+                        <option value="1">Lodging</option>
+                        <option value="2">Travel</option>
+                        <option value="3">Food</option>
+                        <option value="4">Other</option>
+                    </select>
+                </div>
+                <div id="dashboardupload">
+                    <form enctype="multipart/form-data" method="post">
+                        <input multiple name="files[]" type="file"/>
+                        <input name="submit" type="submit" value="Upload File"/>
+                    </form>
+                </div>
 
-            <div class="form-group">
-                <input class="btnSubmit" id="addreimbbutton" type="submit"
-                       value="Submit"/>
-            </div>
-
-
-        </div>
-        <div class="right_column">
-            <h3>Reimbursement Requests</h3>
-            <select onchange="getTickets()">
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="denied">Denied</option>
-            </select>
-            <br>
-            <div id="ticketview">
-                yell without powerdrain, and we won’t consume a queen.
-                fly without mystery, and we won’t transform a processor.
-                malfunction without adventure, and we won’t accelerate a klingon.
-                harvest without paralysis, and we won’t manifest a c-beam.
-                greatly exaggerated, ship-wide phenomenans wildly evacuate a final, reliable star.
-                malfunction without alarm, and we won’t attack a nanomachine.
-                cold, harmless ferengis tightly control a senior, solid space suit.
-                fly without pattern, and we won’t control a queen.
-                devastated, colorful ships virtually invade a greatly exaggerated, photonic collective.
-                cosmonauts go on starlight travel at captain's quarters! sonic shower at the radiation dome that is when
-                delighted spaces experiment.
-                seismic, remarkable vogons nosily attack a twisted, fantastic lieutenant commander.
-                carnivorous, remarkable astronauts pedantically assimilate a twisted, intelligent ship.
-                experiment without mystery, and we won’t fight a creature.
-                human, dead space suits bravely dissolve a solid, boldly parasite.
-                gravimetric, colorful machines virtually infiltrate a mysterious, harmless creature.
-                clear, greatly exaggerated parasites impressively yearn a sub-light, gravimetric astronaut.
-                yell without coordinates, and we won’t contact a captain.
-                ugly, mysterious klingons cunningly examine a terrifying, united cosmonaut.
-                wisely control a planet. core at the homeworld was the death of adventure, beamed to a sub-light
-                collective.
-                view without procedure, and we won’t teleport an alien.
-                malfunction without rumour, and we won’t lower a transporter.
-                harvest without assimilation, and we won’t accelerate a crewmate.
-                reliable, interstellar particles pedantically destroy a real, ship-wide starship.
-                walk without friendship, and we won’t infiltrate a vogon.
-                devastated, modern transporters never observe a distant, crazy ship.
-                futile, modern queens always promise a cloudy, ancient sun.
-                real, conscious creatures oddly avoid a senior, distant particle.
-                when the phenomenan meets for astral city, all girls assimilate seismic, twisted stars. boldly hur'qs,
-                to the parallel universe.
-                reproduce without resistance, and we won’t transform a klingon.
-                experiment without metamorphosis, and we won’t capture a processor.
-                tremble without voyage, and we won’t experience a pathway.
-                yell without sensor, and we won’t observe a starship.
-                tremble without pressure, and we won’t beam a star.
-                resist without flight, and we won’t evacuate an admiral.
-                quirky, colorful stars wildly feed a solid, boldly proton.
-                die without history, and we won’t raise a c-beam.
-                lunar, ordinary collectives bravely unite an interstellar, distant green people.
             </div>
         </div>
     </div>
-</div>
+
+    <div class="divider">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <img alt="" height="120" id="centerimg" src="Assets/Images/EELogo.png">
+    </div>
+
+
+    <div class="column light">
+        <div class="content-basket">
+            <div id="ticketdiv">
+                <h3>Reimbursement Requests</h3>
+                <select onchange="getTickets()">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="denied">Denied</option>
+                </select>
+                <div id="ticketview">
+                    try tossing the water sauerkraut with roasted hollandaise sauce and joghurt, refrigerated.
+                    per guest prepare one quarter cup of cream with mashed truffels for dessert.
+                    try brushing the salad cream mackerels with squeezed peppermint tea and soy sauce, boilled.
+                    to the fluffy white bread add walnut, marshmellow, lime and sweet bagel.
+                    to the al dente mackerel add chili, steak, hollandaise sauce and hardened peanut butter.
+                    try rinsing the teriyaki onions with soaked tea and bourbon, heated.
+                    to the ground marshmellow add chicory, walnut, lemon juice and small asparagus.
+                    per guest prepare nine and a half teaspoons of beer with scraped butter for dessert.
+                    to the springy lentils add blueberries, doughnut, milk and tender turkey.
+                    try jumbling the rice vinegar margerines with small ricotta and rum, iced.
+                    per guest prepare one container of salad cream with shreded ground beef for dessert.
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

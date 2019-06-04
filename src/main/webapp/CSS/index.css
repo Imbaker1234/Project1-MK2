@@ -1,36 +1,86 @@
-.nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light {
-    background: #092F56;
-}
-
-.container {
-    margin: 0 0 0 12.5vw;
-}
 html, body {
-    margin: 0;
-    height: 100%;
     overflow: -moz-hidden-unscrollable;
     background-color: #03002e;
 }
 
-.left_column {
-    background-color: #010048;
+.navbar {
+    background-color: #E7E6DD;
 }
 
-.right_column {
-   background-color: #010057;
+#navlogo {
+    height: 35px;
 }
 
 #page {
-    margin-bottom: 10vh;
-    height: 75vh;
-    width: 75vw;
+    position: fixed;
+    margin: 10vh;
+    height: 70vh !important;
+    width: 90vw;
+    top: 25px;
 }
 
-#nav_logo {
-    height: 70px;
-    position: center;
+.divider {
+    width: 10%;
 }
 
-h1 h2 h3 h4 h5 h6 {
-    color: #ffffff !important;
+.column {
+    float: left;
+    height: 80vh;
+    width: 45%;
+    padding: 5%;
+    box-shadow: 20px 20px 20px 20px black;
+}
+
+.content-basket {
+    width: 95%;
+    alignment: center;
+}
+
+.dark {
+    background-color: #0F2043;
+}
+
+.light {
+    background-color: #162F65;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+    text-align: center;
+}
+
+p {
+    color: white;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+#ticketview {
+    width: 90%;
+    height: 90%;
+    border-color: #E7E6DD;
+}
+
+iframe {
+    width: 90%;
+    height: 90%;
+    border-color: #E7E6DD;
+}
+
+#reimb_desc {
+    resize: none;
+}
+
+.btnSubmit {
+    font-weight: 600;
+    width: 50%;
+    color: #282726;
+    background-color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    alignment: center;
 }
