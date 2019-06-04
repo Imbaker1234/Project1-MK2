@@ -86,6 +86,7 @@ function loadLogin() {
 function loadDashboard() {
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
+    getTickets();
 }
 
 function loadTickets() {
@@ -166,7 +167,7 @@ function login() {
 function logout() {
     console.log(timeStamp() + " " + "logout() called"); //DEBUG
     localStorage.removeItem("jwt");
-    LoadLogin();
+    loadLogin();
 }
 
 function register() {
