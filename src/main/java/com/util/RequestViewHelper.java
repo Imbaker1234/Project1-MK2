@@ -28,7 +28,7 @@ public class RequestViewHelper {
 
             default:
                 log.info("RequestViewHelper called the default in switch case");
-                return "/partials/login.html";
+                return "/partials/index.html";
         }
     }
 }
