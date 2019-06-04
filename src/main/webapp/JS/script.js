@@ -1,9 +1,9 @@
 window.onload = function () {
     if (localStorage.jwt) {
-        console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
+        console.log("window.onload() called : JWT Found: Loading Dashboard");
         loadDashboard();
     } else {
-        console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
+        console.log("window.onload() called : JWT Not Found: Loading Login");
         loadLogin();
     }
 
@@ -15,7 +15,7 @@ window.onload = function () {
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
-    console.log(timeStamp() + " " + "ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
+    console.log("ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
@@ -29,18 +29,18 @@ function ajaxCall(method, endPoint, incoming, store) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let result = JSON.parse(xhr.responseText);
             if (result) {
-                console.log(timeStamp() + " " + "Results retrieved from AJAX call"); //DEBUG
-                console.log(timeStamp() + " " + xhr.responseText); //DEBUG
+                console.log("Results retrieved from AJAX call"); //DEBUG
+                console.log(xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
-                    console.log(timeStamp() + " " + "Line 33");
+                    console.log("Line 33");
                     if (xhr.responseText) {
-                        // console.log(timeStamp() + " " + "=======Begin Response=======");
-                        // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
-                        // console.log(timeStamp() + " " + "=======Begin Header=======");
-                        // console.log(timeStamp() + " " + xhr.getAllResponseHeaders());
+                        // console.log("=======Begin Response=======");
+                        // console.log(xhr.responseText); //DEBUG
+                        // console.log("=======Begin Header=======");
+                        // console.log(xhr.getAllResponseHeaders());
                         if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-                        if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
+                        if (localStorage.getItem("jwt")) console.log("JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
                         return xhr.responseText;
                     }
                 }
@@ -50,33 +50,28 @@ function ajaxCall(method, endPoint, incoming, store) {
 }
 
 function ajaxLoadDiv(view, targetDiv) {
-    console.log(timeStamp() + " " + "ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
+    console.log("ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
     let xhr = new XMLHttpRequest();
     xhr.open("GET", view, true);
     xhr.send();
 
     xhr.onreadystatechange = function () {
-        console.log(timeStamp() + " " + "Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
+        console.log("Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
         }
     }
 }
 
-function timeStamp() {
-    d = new Date();
-    return (d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
-}
-
 //Load Views ======================================================
 
 function loadLogin() {
-    console.log(timeStamp() + " " + "loadLogin() called"); //DEBUG
+    console.log("loadLogin() called"); //DEBUG
     ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
-    console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
+    console.log("loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
     // let userToWelcome = localStorage.principal
     const principals = JSON.parse(localStorage.principal);
@@ -84,7 +79,7 @@ function loadDashboard() {
 }
 
 function loadTickets(tickets) {
-    console.log(timeStamp() + " " + "loadTickets() called"); //DEBUG
+    console.log("loadTickets() called"); //DEBUG
     ajaxLoadDiv("pasttickets.view", "ticketview");
     //this later to some sort of sub div on the dashboard.
     console.log("LOAD TICKETS")
@@ -92,12 +87,12 @@ function loadTickets(tickets) {
 }
 
 function loadCurrentTickets() {
-    console.log(timeStamp() + " " + "loadCurrentTickets() called"); //DEBUG
+    console.log("loadCurrentTickets() called"); //DEBUG
 	ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadAllReimbs() {
-    console.log(timeStamp() + " " + "loadAllReimbs() called"); //DEBUG
+    console.log("loadAllReimbs() called"); //DEBUG
 	ajaxLoadDiv("admindashboard.view", "page");
 }
 
@@ -108,9 +103,9 @@ function login() {
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
 
-    console.log(timeStamp() + " " + "login() called"); //DEBUG
-    console.log(timeStamp() + " " + "username = " + username); //DEBUG
-    console.log(timeStamp() + " " + "password = " + password); //DEBUG
+    console.log("login() called"); //DEBUG
+    console.log("username = " + username); //DEBUG
+    console.log("password = " + password); //DEBUG
 
     let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
@@ -120,7 +115,7 @@ function login() {
 }
 
 function logout() {
-    console.log(timeStamp() + " " + "logout() called"); //DEBUG
+    console.log("logout() called"); //DEBUG
     localStorage.removeItem("jwt");
     LoadLogin();
 }
@@ -132,12 +127,12 @@ function register() {
     let firstname = document.getElementById("registerfirst").value;
     let lastname = document.getElementById("registerlast").value;
     let email = document.getElementById("registeremail").value;
-    console.log(timeStamp() + " " + "verifyUsername() called"); //DEBUG
-    console.log(timeStamp() + " " + "username =" + username); //DEBUG
-    console.log(timeStamp() + " " + "password =" + password); //DEBUG
-    console.log(timeStamp() + " " + "firstname =" + firstname); //DEBUG
-    console.log(timeStamp() + " " + "lastname =" + lastname); //DEBUG
-    console.log(timeStamp() + " " + "email =" + email); //DEBUG
+    console.log("verifyUsername() called"); //DEBUG
+    console.log("username =" + username); //DEBUG
+    console.log("password =" + password); //DEBUG
+    console.log("firstname =" + firstname); //DEBUG
+    console.log("lastname =" + lastname); //DEBUG
+    console.log("email =" + email); //DEBUG
 
     let credentials = [username, password, firstname, lastname, email];
 
@@ -146,11 +141,11 @@ function register() {
 
 function getTickets() {
 
-    console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
+    console.log("getTickets() called"); //DEBUG
     let content = ["pasttickets"];
 
     var tickets = ajaxCall("POST", "dashboard", content);
-    console.log(timeStamp() + " " + tickets);
+    console.log(tickets);
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadTickets(tickets);
@@ -159,7 +154,7 @@ function getTickets() {
 
 function addReimbursement() {
 
-    console.log(timeStamp() + " " + "addReimbursement() called"); //DEBUG
+    console.log("addReimbursement() called"); //DEBUG
 	
 	let amt = document.getElementById("reimb_amount").value;
 	let desc = document.getElementById("reimb_desc").value;
@@ -167,7 +162,7 @@ function addReimbursement() {
 	let content = [amt, desc, type];
 
     ajaxCall("POST", "dashboard", content);
-    console.log(timeStamp() + " " + window.localStorage.currenttickets);
+    console.log(window.localStorage.currenttickets);
 	
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadCurrentTickets();
@@ -176,12 +171,12 @@ function addReimbursement() {
 
 function viewAllReimbursements() {
 
-    console.log(timeStamp() + " " + "viewAllReimbursements() called"); //DEBUG
+    console.log("viewAllReimbursements() called"); //DEBUG
 	
 	let content = [viewallreimbs];
 	
 	ajaxCall("POST", "dashboard", content, "allreimbs");
-    console.log(timeStamp() + " " + window.localStorage.allreimbs);
+    console.log(window.localStorage.allreimbs);
 	
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadAllReimbs();
@@ -190,14 +185,14 @@ function viewAllReimbursements() {
 
 function updateReimbursementStatus() {
 
-    console.log(timeStamp() + " " + "updateReimbursementStatus() called"); //DEBUG
+    console.log("updateReimbursementStatus() called"); //DEBUG
 	
 	let newstatus = document.getElementById("reimb_amount").value;
 	let id = document.getElementById("reimb_id").value;
 	let content = [reimb_id, newstatus];
 	
 	ajaxCall("POST", "dashboard", content, "updatecheck");
-    console.log(timeStamp() + " " + window.localStorage.updatecheck);
+    console.log(window.localStorage.updatecheck);
 	
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
     	loadAllReimbs();
@@ -206,13 +201,13 @@ function updateReimbursementStatus() {
 
 function filterAllReimbs() {
 
-    console.log(timeStamp() + " " + "filterAllReimbs() called"); //DEBUG
+    console.log("filterAllReimbs() called"); //DEBUG
 	
 	let filteredstatus = document.getElementById("filtered_status").value;
 	let content = [filtered_status];
 	
 	ajaxCall("POST", "dashboard", content, "filteredlist");
-    console.log(timeStamp() + " " + window.localStorage.filteredlist);
+    console.log(window.localStorage.filteredlist);
 	
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
     	loadAllReimbs();
@@ -224,7 +219,7 @@ function filterAllReimbs() {
 
 
 function verifyField(field) {
-    console.log(timeStamp() + " " + "verifyField(" + field + ") called"); //DEBUG
+    console.log("verifyField(" + field + ") called"); //DEBUG
     return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24);
 }
 
@@ -245,7 +240,7 @@ function toggleButton(buttonId, status) {
 }
 
 function verifyName(firstname, lastname) {
-    console.log(timeStamp() + " " + "verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
+    console.log("verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
     if (firstname.length < 3 || lastname.length < 3) {
 
         document.getElementById("registerfirst").value = "";
@@ -266,7 +261,7 @@ function verifyName(firstname, lastname) {
 }
 
 function verifyPhone(phone) {
-    console.log(timeStamp() + " " + "verifyPhone(" + phone + ") called"); //DEBUG
+    console.log("verifyPhone(" + phone + ") called"); //DEBUG
     if ((/^\d{10}$/.test(phone))) {
         return true;
     }
@@ -274,7 +269,7 @@ function verifyPhone(phone) {
 }
 
 function verifyEmail(email) {
-    console.log(timeStamp() + " " + "verifyEmail(" + email + ") called"); //DEBUG
+    console.log("verifyEmail(" + email + ") called"); //DEBUG
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         return true;
     }
@@ -284,7 +279,7 @@ function verifyEmail(email) {
 }
 
 function verifyLoginFields() {
-    console.log(timeStamp() + " " + "verifyLoginFields() called"); //DEBUG
+    console.log("verifyLoginFields() called"); //DEBUG
     document.getElementById("registerusername").value = '';
     document.getElementById("registerpassword").value = '';
     document.getElementById("registerfirst").value = '';
@@ -296,7 +291,7 @@ function verifyLoginFields() {
     let password = document.getElementById("loginpassword").value;
 
     if (verifyField(username) && verifyField(password)) {
-        console.log(timeStamp() + " " + "Credentials valid. toggling button");
+        console.log("Credentials valid. toggling button");
         toggleButton("loginsubmitbutton", true);
     } else {
         toggleButton("loginsubmitbutton", false);
@@ -304,7 +299,7 @@ function verifyLoginFields() {
 }
 
 function verifyRegisterFields() {
-    console.log(timeStamp() + " " + "verifyRegisterFields() called");
+    console.log("verifyRegisterFields() called");
 
     //Clear any forms in the login div since we can't log in and register at the same time
     document.getElementById("loginusername").value = '';
@@ -322,7 +317,7 @@ function verifyRegisterFields() {
 
     //If all the forms are verified then active the "Start Getting Paid" button.
     if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
-        console.log(timeStamp() + " " + "Credentials valid. toggling button");
+        console.log("Credentials valid. toggling button");
         toggleButton("registersubmitbutton", true);
 
         //If they are not valid then disable the register button.
@@ -356,7 +351,7 @@ form.addEventListener('submit', e => {
     })
 });
 
-console.log(timeStamp() + " " + "JS Loaded");
+console.log("JS Loaded");
 
 
 //==================REFERENCE SCRIPT===============================
@@ -377,7 +372,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function updateNav(isAuth) {
- console.log(timeStamp() + " " + 'in updateNav()');
+ console.log('in updateNav()');
 
  if(isAuth) {
  $('#toLogin').attr('hidden', true);
@@ -398,14 +393,14 @@ console.log(timeStamp() + " " + "JS Loaded");
 
  function isAuthenticated() {
  let authenticatedUser = window.localStorage.getItem('user');
- console.log(timeStamp() + " " + authenticatedUser);
+ console.log(authenticatedUser);
 
  if(authenticatedUser) return true
  else return false;
  }
 
  function loadLogin() {
-	 console.log(timeStamp() + " " + 'in loadLogin()');
+	 console.log('in loadLogin()');
 	
 	 let isAuth = isAuthenticated();
 	 updateNav(isAuth);
@@ -424,7 +419,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function loadRegister() {
- console.log(timeStamp() + " " + 'in loadRegister()');
+ console.log('in loadRegister()');
 
  let isAuth = isAuthenticated();
  updateNav(isAuth);
@@ -443,7 +438,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function loadHome() {
- console.log(timeStamp() + " " + 'in loadHome()');
+ console.log('in loadHome()');
 
  let isAuth = isAuthenticated();
  updateNav(isAuth);
@@ -462,7 +457,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function loadHomeInfo() {
- console.log(timeStamp() + " " + 'in loadHomeInfo()');
+ console.log('in loadHomeInfo()');
  let userJSON = window.localStorage.getItem('user');
  let user = JSON.parse(userJSON);
  $('#user_id').html(user.id);
@@ -474,7 +469,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function loadProfile() {
- console.log(timeStamp() + " " + 'in loadProfile()');
+ console.log('in loadProfile()');
 
  let isAuth = isAuthenticated();
  updateNav(isAuth);
@@ -485,7 +480,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function loadLoginInfo() {
- console.log(timeStamp() + " " + 'in loadLoginInfo()');
+ console.log('in loadLoginInfo()');
 
  $('#login-message').hide();
  $('#login').on('click', login);
@@ -493,7 +488,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function login() {
- console.log(timeStamp() + " " + 'in login()');
+ console.log('in login()');
 
  let username = $('#login-username').val();
  let password = $('#login-password').val();
@@ -513,7 +508,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  alert('Login successful!');
  window.localStorage.setItem('user', xhr.responseText);
  loadHome();
- console.log(timeStamp() + " " + `User id: ${user.id} login successful`);
+ console.log(`User id: ${user.id} login successful`);
  } else {
  $('#login-message').show();
  $('#login-message').html('Invalid credentials');
@@ -524,7 +519,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function logout() {
- console.log(timeStamp() + " " + 'in logout()');
+ console.log('in logout()');
  window.localStorage.removeItem('user');
 
  let xhr = new XMLHttpRequest();
@@ -533,14 +528,14 @@ console.log(timeStamp() + " " + "JS Loaded");
 
  xhr.onreadystatechange = function() {
  if(xhr.readyState == 4 && xhr.status == 200) {
- console.log(timeStamp() + " " + 'Session has been invalidated!');
+ console.log('Session has been invalidated!');
  loadLogin();
  }
  }
  }
 
  function loadRegisterInfo() {
- console.log(timeStamp() + " " + 'in loadRegisterInfo()');
+ console.log('in loadRegisterInfo()');
 
  $('#reg-message').hide();
 
@@ -572,10 +567,10 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function validateUsername() {
- console.log(timeStamp() + " " + 'in validateUsername()');
+ console.log('in validateUsername()');
 
  let username = $('#reg-username').val();
- console.log(timeStamp() + " " + username);
+ console.log(username);
 
  if(username !== '') {
  let usernameJSON = JSON.stringify(username);
@@ -587,7 +582,7 @@ console.log(timeStamp() + " " + "JS Loaded");
 
  xhr.onreadystatechange = function(){
  if(xhr.readyState == 4 && xhr.status == 200) {
- console.log(timeStamp() + " " + xhr.responseText);
+ console.log(xhr.responseText);
  let username = JSON.parse(xhr.responseText);
  if(!username) {
  $('#reg-message').show();
@@ -603,7 +598,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function validateEmail() {
- console.log(timeStamp() + " " + 'in validateEmail()');
+ console.log('in validateEmail()');
 
  let email = $('#email').val();
 
@@ -617,7 +612,7 @@ console.log(timeStamp() + " " + "JS Loaded");
 
  xhr.onreadystatechange = function(){
  if(xhr.readyState == 4 && xhr.status == 200) {
- console.log(timeStamp() + " " + xhr.responseText);
+ console.log(xhr.responseText);
  let email = JSON.parse(xhr.responseText);
  if(!email) {
  $('#reg-message').show();
@@ -632,7 +627,7 @@ console.log(timeStamp() + " " + "JS Loaded");
  }
 
  function register() {
- console.log(timeStamp() + " " + 'in register()');
+ console.log('in register()');
 
  $('#register').attr('disabled', true);
 
