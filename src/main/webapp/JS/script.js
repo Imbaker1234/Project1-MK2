@@ -1,6 +1,7 @@
 //TODO Check for 403 errors when you pass in a bad JWT. Redirect users who get this response to login.
 
 window.onload = function () {
+	
     if (localStorage.jwt) {
         console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
         loadDashboard();
@@ -18,6 +19,7 @@ window.onload = function () {
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
+	
     console.log(timeStamp() + " " + "ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
@@ -32,18 +34,15 @@ function ajaxCall(method, endPoint, incoming, store) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let result = JSON.parse(xhr.responseText);
             if (result) {
-                console.log(timeStamp() + " " + "Results retrieved from AJAX call"); //DEBUG
-                console.log(timeStamp() + " " + xhr.responseText); //DEBUG
+                //console.log(timeStamp() + " " + "Results retrieved from AJAX call"); //DEBUG
+                //console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
-                    console.log(timeStamp() + " " + "Line 33");
+                    //console.log(timeStamp() + " " + "Line 33"); //DEBUG
                     if (xhr.responseText) {
-                        // console.log(timeStamp() + " " + "=======Begin Response=======");
                         // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
-                        // console.log(timeStamp() + " " + "=======Begin Header=======");
-                        // console.log(timeStamp() + " " + xhr.getAllResponseHeaders());
                         if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-                        if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
+                        //if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
                         return xhr.responseText;
                     }
                 }
@@ -53,13 +52,14 @@ function ajaxCall(method, endPoint, incoming, store) {
 }
 
 function ajaxLoadDiv(view, targetDiv) {
-    console.log(timeStamp() + " " + "ajaxLoadDiv(" + view + ", " + targetDiv + ") called");
+	
+    //console.log(timeStamp() + " " + "ajaxLoadDiv(" + view + ", " + targetDiv + ") called"); //DEBUG
     let xhr = new XMLHttpRequest();
     xhr.open("GET", view, true);
     xhr.send();
 
     xhr.onreadystatechange = function () {
-        console.log(timeStamp() + " " + "Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText);
+        //console.log(timeStamp() + " " + "Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText); //DEBUG
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
         }
@@ -67,33 +67,39 @@ function ajaxLoadDiv(view, targetDiv) {
 }
 
 function timeStamp() {
+	
     d = new Date();
     return (d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 }
 
 function timeOutCalled() {
+	
     console.log("Timeout Called")
 }
 
 //Load Views ======================================================
 
 function loadLogin() {
+	
     console.log(timeStamp() + " " + "loadLogin() called"); //DEBUG
     ajaxLoadDiv("login.view", "page");
 }
 
-//TODO Set admin dropdown above new ticket to appear so that admins can submit tickets for employees.
 function loadDashboard() {
+	
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
     getTickets();
 }
 
 function loadTickets() {
+	
     console.log(timeStamp() + " " + "loadTickets() called"); //DEBUG
     ajaxLoadDiv("pasttickets.view", "ticketview");
     let tickets = localStorage.getItem("tickets");
-    console.log(tickets);
+
+    let tbodybenis = document.getElementById("testbenis");
+    console.log(tbodybenis);
     
     for (let i=0;i<tickets.length;i++) {
     	
@@ -134,27 +140,25 @@ function loadTickets() {
 }
 
 function loadCurrentTickets() {
+	
     console.log(timeStamp() + " " + "loadCurrentTickets() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadAllReimbs() {
+	
     console.log(timeStamp() + " " + "loadAllReimbs() called"); //DEBUG
     ajaxLoadDiv("admindashboard.view", "page");
 }
 
 //Functions ===============================================
 
-//TODO Use screenshot from discord to determine the resulting error from logging in and fix it.
-
 function login() {
+	
+    console.log(timeStamp() + " " + "login() called"); //DEBUG
     window.setTimeout(null, 20000);
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
-
-    console.log(timeStamp() + " " + "login() called"); //DEBUG
-    console.log(timeStamp() + " " + "username = " + username); //DEBUG
-    console.log(timeStamp() + " " + "password = " + password); //DEBUG
 
     let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
@@ -163,8 +167,8 @@ function login() {
     }
 }
 
-//TODO Set an element for this in the navbar to log out and called loadLogin()
 function logout() {
+	
     console.log(timeStamp() + " " + "logout() called"); //DEBUG
     localStorage.removeItem("jwt");
     loadLogin();
@@ -177,27 +181,24 @@ function register() {
     let firstname = document.getElementById("registerfirst").value;
     let lastname = document.getElementById("registerlast").value;
     let email = document.getElementById("registeremail").value;
-    console.log(timeStamp() + " " + "verifyUsername() called"); //DEBUG
-    console.log(timeStamp() + " " + "username =" + username); //DEBUG
-    console.log(timeStamp() + " " + "password =" + password); //DEBUG
-    console.log(timeStamp() + " " + "firstname =" + firstname); //DEBUG
-    console.log(timeStamp() + " " + "lastname =" + lastname); //DEBUG
-    console.log(timeStamp() + " " + "email =" + email); //DEBUG
+    //console.log(timeStamp() + " " + "verifyUsername() called"); //DEBUG
+    //console.log(timeStamp() + " " + "username =" + username); //DEBUG
+    //console.log(timeStamp() + " " + "password =" + password); //DEBUG
+    //console.log(timeStamp() + " " + "firstname =" + firstname); //DEBUG
+    //console.log(timeStamp() + " " + "lastname =" + lastname); //DEBUG
+    //console.log(timeStamp() + " " + "email =" + email); //DEBUG
 
     let credentials = [username, password, firstname, lastname, email];
 
     ajaxCall("POST", "account", credentials, "principal");
 }
 
-//TODO set the logic so that the admin role naturally just "owns" all tickets.
-//TODO convert incoming ticket information from milliseconds into date-time values.
 function getTickets() {
-
+	
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
+    
     let content = ["pasttickets"];
-
     let tickets = ajaxCall("POST", "dashboard", content, "tickets");
-    console.log(timeStamp() + " " + tickets);
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadTickets();
@@ -225,9 +226,6 @@ function addReimbursement() {
     }
 }
 
-/*TODO force this function to create nodes using the incoming information from getTickets() and
-inject them into the page view*/
-
 function viewAllReimbursements() {
 
     console.log(timeStamp() + " " + "viewAllReimbursements() called"); //DEBUG
@@ -242,7 +240,6 @@ function viewAllReimbursements() {
     }
 }
 
-//TODO discuss adding approve/deny buttons to the table similar to daniel and tuckers project
 function updateReimbursementStatus() {
 
     console.log(timeStamp() + " " + "updateReimbursementStatus() called"); //DEBUG
@@ -259,7 +256,6 @@ function updateReimbursementStatus() {
     }
 }
 
-//TODO Set the dropdown above the ticketview to call this function and filter the reimbursements.
 function filterAllReimbs() {
 
     console.log(timeStamp() + " " + "filterAllReimbs() called"); //DEBUG
@@ -280,7 +276,7 @@ function filterAllReimbs() {
 
 
 function verifyField(field) {
-    console.log(timeStamp() + " " + "verifyField(" + field + ") called"); //DEBUG
+    //console.log(timeStamp() + " " + "verifyField(" + field + ") called"); //DEBUG
     return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24);
 }
 
@@ -301,7 +297,7 @@ function toggleButton(buttonId, status) {
 }
 
 function verifyName(firstname, lastname) {
-    console.log(timeStamp() + " " + "verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
+    //console.log(timeStamp() + " " + "verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
     if (firstname.length < 3 || lastname.length < 3) {
 
         document.getElementById("registerfirst").value = "";
@@ -322,7 +318,7 @@ function verifyName(firstname, lastname) {
 }
 
 function verifyPhone(phone) {
-    console.log(timeStamp() + " " + "verifyPhone(" + phone + ") called"); //DEBUG
+    //console.log(timeStamp() + " " + "verifyPhone(" + phone + ") called"); //DEBUG
     if ((/^\d{10}$/.test(phone))) {
         return true;
     }
@@ -330,7 +326,7 @@ function verifyPhone(phone) {
 }
 
 function verifyEmail(email) {
-    console.log(timeStamp() + " " + "verifyEmail(" + email + ") called"); //DEBUG
+    //console.log(timeStamp() + " " + "verifyEmail(" + email + ") called"); //DEBUG
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         return true;
     }
@@ -340,7 +336,7 @@ function verifyEmail(email) {
 }
 
 function verifyLoginFields() {
-    console.log(timeStamp() + " " + "verifyLoginFields() called"); //DEBUG
+    //console.log(timeStamp() + " " + "verifyLoginFields() called"); //DEBUG
     document.getElementById("registerusername").value = '';
     document.getElementById("registerpassword").value = '';
     document.getElementById("registerfirst").value = '';
@@ -360,7 +356,7 @@ function verifyLoginFields() {
 }
 
 function verifyRegisterFields() {
-    console.log(timeStamp() + " " + "verifyRegisterFields() called");
+    //console.log(timeStamp() + " " + "verifyRegisterFields() called");
 
     //Clear any forms in the login div since we can't log in and register at the same time
     document.getElementById("loginusername").value = '';
