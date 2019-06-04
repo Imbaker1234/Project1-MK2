@@ -6,8 +6,8 @@
 
 
                 <h4>New Ticket</h4>
-                <div class="form">
-                    <input data-type="currency" id="currency-field" name="currency-field"
+                <div class="form-group">
+                    <input data-type="currency" id="reimb_amount" name="currency-field"
                            pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
                            placeholder="$1,000.00" type="text" value="">
                 </div>
@@ -17,18 +17,16 @@
                           name="" rows="5"></textarea>
                 </div>
                 <div class="form-group">
-                    <select id="expense_type" name="expense_type">
+                    <select id="reimb_type" name="expense_type">
                         <option value="1">Lodging</option>
                         <option value="2">Travel</option>
                         <option value="3">Food</option>
                         <option value="4">Other</option>
                     </select>
                 </div>
-                <div id="dashboardupload">
-                    <form enctype="multipart/form-data" method="post">
+                    <div class="form-group">
                         <input multiple name="files[]" type="file"/>
-                        <input name="submit" type="submit" value="Upload File"/>
-                    </form>
+                        <input button id="requestsubmit" type="submit" onclick ="addReimbursement()" value="Submit Request"/>
                 </div>
 
             </div>

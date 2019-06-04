@@ -49,18 +49,18 @@ public class ReimbursementServlet extends HttpServlet {
 		String role = principal.getRole();
 
 		switch (role) {
-//TODO benis convert ROLES TO INTEGER FOR REIMBS AND PRINCIPAL
+		
 		case "employee":
-			log.info("ReimbursementServlet.doPost() : Line 55 : Case 1 : \"employee\"");
+			
 			if (input2.equals("pasttickets")) {
-				log.info("Received input == \"pasttickets\": Servlet calling for past tickets belonging to the " +
-						"principal");
+				log.info("Received input \"pasttickets\": Servlet calling for past tickets belonging to " +
+						principal.getUsername());
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else {
-				log.info("Recieved input != \"pasttickets\": Servlet calling to add Reimbursement");
-				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+				log.info("Recieved input \"addticket\": Servlet calling to add Reimbursement");
+				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2]);
 				if (reimbAdded == true) {
 					writer.write(mapper.writeValueAsString(reimbAdded));
 				} else {
@@ -95,7 +95,7 @@ public class ReimbursementServlet extends HttpServlet {
 
 			} else {
 				log.info("ReimbursementServlet calling for a new Reimbursement.");
-				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2], userinput[3]);
+				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2]);
 				if (reimbAdded == true) {
 					writer.write(mapper.writeValueAsString(reimbAdded));
 				} else {

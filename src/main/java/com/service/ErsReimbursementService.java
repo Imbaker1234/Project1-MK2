@@ -25,7 +25,7 @@ public class ErsReimbursementService {
 		return pasttickets;
 	}
 
-	public boolean addReimbRequest(Principal user, String author, String amt, String desc, String type) {
+	public boolean addReimbRequest(Principal user, String amt, String desc, String type) {
 		log.info("in reimb service addReimbRequest method");
 		
 		Double amtReformat;
@@ -39,7 +39,7 @@ public class ErsReimbursementService {
 			return false;
 		}
 		
-		return rdao.addReimbursement(author, amtReformat, desc, typeReformat);
+		return rdao.addReimbursement(user.getUsername(), amtReformat, desc, typeReformat);
 	}
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {

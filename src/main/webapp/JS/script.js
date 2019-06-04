@@ -14,6 +14,7 @@ window.onload = function () {
     }
 };
 
+
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
@@ -85,16 +86,49 @@ function loadLogin() {
 function loadDashboard() {
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
-    // let userToWelcome = localStorage.principal
-    const principals = JSON.parse(localStorage.principal);
-    // document.getElementById("dashboardwelcomeuser").innerText = "Welcome " + principals.username;
 }
 
-function loadTickets(tickets) {
+function loadTickets() {
     console.log(timeStamp() + " " + "loadTickets() called"); //DEBUG
     ajaxLoadDiv("pasttickets.view", "ticketview");
-    //this later to some sort of sub div on the dashboard.
-    console.log("LOAD TICKETS")
+    let tickets = localStorage.getItem("tickets");
+    console.log(tickets);
+    
+    for (let i=0;i<tickets.length;i++) {
+    	
+    	let ticketrow = document.createElement("tr");
+    	
+    	let idcell = document.createElement("td");
+    	let amtcell = document.createElement("td");
+    	let submitdatecell = document.createElement("td");
+    	let resolvedatecell = document.createElement("td");
+    	let desccell = document.createElement("td");
+    	let receiptcell = document.createElement("td");
+    	let authorcell = document.createElement("td");
+    	let statuscell = document.createElement("td");
+    	
+    	let tbody = document.getElementById("tbody");
+    	
+    	ticketrow.appendChild(idcell);
+    	ticketrow.appendChild(amtcell);
+    	ticketrow.appendChild(submitdatecell);
+    	ticketrow.appendChild(resolvedatecell);
+    	ticketrow.appendChild(desccell);
+    	ticketrow.appendChild(receiptcell);
+    	ticketrow.appendChild(authorcell);
+    	ticketrow.appendChild(statuscell);
+    	tbody.appendChild(ticketrow);
+    	
+    	idcell.innerText = tickets[0];
+    	amtcell.innerText = tickets[1];
+    	submitdatecell.innerText = tickets[2];
+    	resolvecell.innerText = tickets[3];
+    	desccell.innerText = tickets[4];
+    	receiptcell.innerText = tickets[5];
+    	authorcell.innerText = tickets[6];
+    	statuscell.innerText = tickets[7];
+    	
+    }
 
 }
 
@@ -161,11 +195,11 @@ function getTickets() {
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
     let content = ["pasttickets"];
 
-    var tickets = ajaxCall("POST", "dashboard", content);
+    var tickets = ajaxCall("POST", "dashboard", content, "tickets");
     console.log(timeStamp() + " " + tickets);
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        loadTickets(tickets);
+        loadTickets();
     }
 }
 
@@ -175,14 +209,18 @@ function addReimbursement() {
 
     let amt = document.getElementById("reimb_amount").value;
     let desc = document.getElementById("reimb_desc").value;
-    let type = document.getElementById("id_expense_type").value;
+    let type = document.getElementById("reimb_type").value;
+    if (amt == "" || desc == "" || type == "") {
+    	console.log("empty fields");
+    	return;
+    }
     let content = [amt, desc, type];
 
-    ajaxCall("POST", "dashboard", content);
-    console.log(timeStamp() + " " + window.localStorage.currenttickets);
+    ajaxCall("POST", "dashboard", content, "addedticket");
+    console.log(timeStamp() + " " + window.localStorage.getItem("addedticket"));
 
-    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        loadCurrentTickets();
+    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, call the getTickets method
+        getTickets();
     }
 }
 
@@ -213,7 +251,7 @@ function updateReimbursementStatus() {
     let content = [reimb_id, newstatus];
 
     ajaxCall("POST", "dashboard", content, "updatecheck");
-    console.log(timeStamp() + " " + window.localStorage.updatecheck);
+    console.log(timeStamp() + " " + window.localStorage.getItem("updatecheck"));
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadAllReimbs();
@@ -229,7 +267,7 @@ function filterAllReimbs() {
     let content = [filtered_status];
 
     ajaxCall("POST", "dashboard", content, "filteredlist");
-    console.log(timeStamp() + " " + window.localStorage.filteredlist);
+    console.log(timeStamp() + " " + window.localStorage.getItem("filteredlist"));
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
         loadAllReimbs();
