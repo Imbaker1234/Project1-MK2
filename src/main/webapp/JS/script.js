@@ -89,7 +89,6 @@ function loadDashboard() {
 	
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
-    getTickets();
 }
 
 function loadTickets() {
@@ -97,9 +96,6 @@ function loadTickets() {
     console.log(timeStamp() + " " + "loadTickets() called"); //DEBUG
     ajaxLoadDiv("pasttickets.view", "ticketview");
     let tickets = localStorage.getItem("tickets");
-
-    let tbodybenis = document.getElementById("testbenis");
-    console.log(tbodybenis);
     
     for (let i=0;i<tickets.length;i++) {
     	
@@ -114,7 +110,7 @@ function loadTickets() {
     	let authorcell = document.createElement("td");
     	let statuscell = document.createElement("td");
     	
-    	let tbodybenis = document.getElementById("testbenis");
+    	let tbody = document.getElementById("tbody");
     	
     	ticketrow.appendChild(idcell);
     	ticketrow.appendChild(amtcell);
@@ -124,7 +120,7 @@ function loadTickets() {
     	ticketrow.appendChild(receiptcell);
     	ticketrow.appendChild(authorcell);
     	ticketrow.appendChild(statuscell);
-    	tbodybenis.appendChild(ticketrow);
+    	tbody.appendChild(ticketrow);
     	
     	idcell.innerText = "hellotest";
     	amtcell.innerText = tickets[1];
