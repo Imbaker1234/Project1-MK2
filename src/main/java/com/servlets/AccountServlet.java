@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsUsersService;
 import com.util.JwtConfig;
 import com.util.JwtGenerator;
+import com.util.NodeToArray;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +41,7 @@ public class AccountServlet extends HttpServlet {
 		response.setContentType("application/json");
 
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
-		String[] userinput = nodeToArray(rootNode);
+		String[] userinput = NodeToArray.convert(rootNode);
 		
 		if (userinput.length == 2) {
             log.info("AccountServlet.doPost() : Line 45 : Logging in user");
@@ -63,16 +65,5 @@ public class AccountServlet extends HttpServlet {
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
 		} 
-	}
-
-	public String[] nodeToArray(ArrayNode rootNode) {
-
-		String[] array = new String[rootNode.size()];
-
-		for (int i = 0; i < rootNode.size(); i++) {
-			array[i] = rootNode.get(i).asText();
-
-		}
-		return array;
 	}
 }

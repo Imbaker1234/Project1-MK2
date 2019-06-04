@@ -107,7 +107,7 @@ function loadTickets() {
     	let authorcell = document.createElement("td");
     	let statuscell = document.createElement("td");
     	
-    	let tbody = document.getElementById("tbody");
+    	let tbodybenis = document.getElementById("testbenis");
     	
     	ticketrow.appendChild(idcell);
     	ticketrow.appendChild(amtcell);
@@ -117,12 +117,12 @@ function loadTickets() {
     	ticketrow.appendChild(receiptcell);
     	ticketrow.appendChild(authorcell);
     	ticketrow.appendChild(statuscell);
-    	tbody.appendChild(ticketrow);
+    	tbodybenis.appendChild(ticketrow);
     	
-    	idcell.innerText = tickets[0];
+    	idcell.innerText = "hellotest";
     	amtcell.innerText = tickets[1];
     	submitdatecell.innerText = tickets[2];
-    	resolvecell.innerText = tickets[3];
+    	resolvedatecell.innerText = tickets[3];
     	desccell.innerText = tickets[4];
     	receiptcell.innerText = tickets[5];
     	authorcell.innerText = tickets[6];
@@ -195,7 +195,7 @@ function getTickets() {
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
     let content = ["pasttickets"];
 
-    var tickets = ajaxCall("POST", "dashboard", content, "tickets");
+    let tickets = ajaxCall("POST", "dashboard", content, "tickets");
     console.log(timeStamp() + " " + tickets);
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
@@ -216,7 +216,7 @@ function addReimbursement() {
     }
     let content = [amt, desc, type];
 
-    ajaxCall("POST", "dashboard", content, "addedticket");
+    ajaxCall("PUT", "dashboard", content, "addedticket");
     console.log(timeStamp() + " " + window.localStorage.getItem("addedticket"));
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, call the getTickets method
@@ -250,7 +250,7 @@ function updateReimbursementStatus() {
     let id = document.getElementById("reimb_id").value;
     let content = [reimb_id, newstatus];
 
-    ajaxCall("POST", "dashboard", content, "updatecheck");
+    ajaxCall("PATCH", "dashboard", content, "updatecheck");
     console.log(timeStamp() + " " + window.localStorage.getItem("updatecheck"));
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page

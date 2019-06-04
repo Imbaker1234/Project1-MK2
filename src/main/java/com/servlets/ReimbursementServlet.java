@@ -5,6 +5,8 @@ import com.POJO.Principal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsReimbursementService;
+import com.util.NodeToArray;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,14 +25,17 @@ public class ReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LogManager.getLogger(ReimbursementServlet.class);
 	private final ErsReimbursementService reimbService = new ErsReimbursementService();
-
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		doPost(request, response);
-		log.info("ReimbursementServlet.doGet() called");
-
 	}
+	
+	/**
+	 * doPatch method of servlet is called when a user wants to retrieve a table of reimbursements from the database.
+	 * Employees will only have access to their history, but admins may retrieve their history, all reimbs, or a filtered
+	 * grouping from all reimbs
+	 */
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,111 +47,99 @@ public class ReimbursementServlet extends HttpServlet {
 		response.setContentType("application/json");
 
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
-		String[] userinput = nodeToArray(rootNode);
+		String[] userinput = NodeToArray.convert(rootNode);
 
 		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getRole();
 
 		switch (role) {
-		
+
 		case "employee":
-			
+
 			if (input2.equals("pasttickets")) {
-				log.info("Received input \"pasttickets\": Servlet calling for past tickets belonging to " +
-						principal.getUsername());
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
-			} else {
-				log.info("Recieved input \"addticket\": Servlet calling to add Reimbursement");
-				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2]);
-				if (reimbAdded == true) {
-					writer.write(mapper.writeValueAsString(reimbAdded));
-				} else {
-					writer.write(mapper.writeValueAsString(null));
-				}
 			}
 			break;
 
-			case "admin": //TODO Discuss removing the pasttickets method from admin as they should be viewing all tickets
-				// at all times.
-				log.info("ReimbursementServlet.doPost() : Line 55 : Case 1 : \"admin\": Servlet calling for tickets" +
-						"belonging to the principal");
+		case "admin":
+
 			if (input2.equals("pasttickets")) {
 				reimbService.viewPastTickets(principal);
 				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else if (input2.equals("viewallreimbs")) {
-				log.info("Recieved input != \"viewallreimbs\": Servlet calling to add Reimbursement");
 				ArrayList<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
-				//TODO Discuss why this checks against any value instead of each individual value.
 			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
 				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
+			}
+			break;
+		}
+	}
+	
+	/**
+	 * doPut method of servlet is called when a user wants to add a reimbursement request to the database
+	 */
 
-				//TODO Discuss why this runs regardless of true or false.
-			} else if (userinput[1].equals("true") || userinput[1].equals("false")) {
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		log.info("Reimb doPut() called.");
+
+		PrintWriter writer = response.getWriter();
+		ObjectMapper mapper = new ObjectMapper();
+		response.setContentType("application/json");
+
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] userinput = NodeToArray.convert(rootNode);
+
+		Principal principal = (Principal) request.getAttribute("principal");
+		Boolean reimbAdded = false;
+
+			reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2]);
+
+			if (reimbAdded == true) {
+				writer.write(mapper.writeValueAsString(reimbAdded));
+			} else {
+				writer.write(mapper.writeValueAsString(null));
+			}
+	}
+	
+	/**
+	 * doPatch method of servlet is called when an admin wants to resolve a reimbursement request
+	 */
+
+	protected void doPatch(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		log.info("Reimb doPatch() called.");
+
+		PrintWriter writer = response.getWriter();
+		ObjectMapper mapper = new ObjectMapper();
+		response.setContentType("application/json");
+
+		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
+		String[] userinput = NodeToArray.convert(rootNode);
+
+		Principal principal = (Principal) request.getAttribute("principal");
+		String role = principal.getRole();
+
+		switch (role) {
+
+		case "admin":
+
+			if (userinput[1].equals("true") || userinput[1].equals("false")) {
 				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
-
-			} else {
-				log.info("ReimbursementServlet calling for a new Reimbursement.");
-				Boolean reimbAdded = reimbService.addReimbRequest(principal, userinput[0], userinput[1], userinput[2]);
-				if (reimbAdded == true) {
-					writer.write(mapper.writeValueAsString(reimbAdded));
-				} else {
-					writer.write(mapper.writeValueAsString(null));
-				}
 
 			}
 			break;
 		}
 
 	}
-
-	public String[] nodeToArray(ArrayNode rootNode) {
-
-		String[] array = new String[rootNode.size()];
-
-		for (int i = 0; i < rootNode.size(); i++) {
-			array[i] = rootNode.get(i).asText();
-
-		}
-		return array;
-	}
 }
-
-/*
- * @Override protected void doPost(HttpServletRequest request,
- * HttpServletResponse response) throws IOException, ServletException {
- * log.info("request recieved by ReimbursementServlet");
- * 
- * PrintWriter writer = response.getWriter(); ObjectMapper mapper = new
- * ObjectMapper(); ErsReimbursement newReimb = null;
- * 
- * ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
- * String[] userinput = nodeToArray(rootNode); ErsUsers loggedUser = new
- * ErsUsers(userinput[0], userinput[1], userinput[2], null, null, null, null);
- * //ErsReimbursement reimbReq = new
- * ErsReimbursement(userinput[3],userinput[4],userinput[5],userinput[6],
- * userinput[7], userinput[8], // userinput[9], userinput[10],userinput[11],
- * userinput[12]);
- * 
- *
- * //reimbService.getTickets(user);
- * 
- * }
- * 
- * public String[] nodeToArray(ArrayNode rootNode) {
- * 
- * String[] array = new String[rootNode.size()];
- * 
- * for (int i = 0; i < rootNode.size(); i++) { array[i] =
- * rootNode.get(i).asText();
- * 
- * } return array; } }
- */
