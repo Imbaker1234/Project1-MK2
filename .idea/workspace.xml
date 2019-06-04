@@ -7,21 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3d29d9d-b02b-4cc7-a9ae-36d21bd290e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Assets/Images/EElogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Assets/Images/EElogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Assets/Images/broken-noise.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CSS/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CSS/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CSS/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/CSS/login.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,17 +75,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+            <state relative-caret-position="120">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+            <state relative-caret-position="169">
+              <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -151,7 +139,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
@@ -279,15 +267,15 @@
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/dashboard.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/login.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/index.css" />
-        <option value="$PROJECT_DIR$/src/main/webapp/partials/login.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/Staged-HTML/Staged-Dashboard.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/ReimbursementServlet.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql" />
-        <option value="$PROJECT_DIR$/src/main/webapp/JS/script.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/partials/pasttickets.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/partials/login.html" />
+        <option value="$PROJECT_DIR$/src/main/webapp/JS/script.js" />
       </list>
     </option>
   </component>
@@ -325,10 +313,10 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1929" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-1930" />
+    <option name="y" value="-10" />
+    <option name="width" value="1939" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -602,6 +590,7 @@
         <option name="BuildArtifacts" enabled="true">
           <artifact name="IBJK-Project-One/" />
           <artifact name="IBJK-Project-One:war" />
+          <artifact name="IBJK-Project-One:war exploded" />
         </option>
       </method>
     </configuration>
@@ -625,7 +614,7 @@
       <workItem from="1559570153455" duration="3296000" />
       <workItem from="1559573497815" duration="9461000" />
       <workItem from="1559590902319" duration="2378000" />
-      <workItem from="1559619029061" duration="8392000" />
+      <workItem from="1559619029061" duration="9074000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed JS Syntax errors that were keeping the page from loading properly. &#10;&#10;Put in console.log messages to show which lines loaded properly in the JS. &#10;&#10;Added a .properties file. &#10;&#10;Adjusted Tomcat folder so that Tomcat will have full control of it. &#10;&#10;Set up OJDBC as a global libary.">
       <created>1559415450757</created>
@@ -795,11 +784,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559580431360</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Revamped login and dashboard pages. Updated javascript. Disabled onload as it wasn't checking accurately for JWTs and was loading the login instead.">
+      <created>1559628299733</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1559628299734</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115120000" />
+    <option name="totallyTimeSpent" value="115802000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -814,7 +810,7 @@
     <frame x="-1927" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.16040269" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09932886" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -825,7 +821,7 @@
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.509915" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.509915" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -847,12 +843,12 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.020134227" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.20067114" />
+      <window_info anchor="right" id="Database" order="6" weight="0.20067114" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16040269" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09932886" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -885,7 +881,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.020134227" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.3147651" />
+      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.20067114" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout-to-restore>
@@ -919,7 +915,8 @@
     <MESSAGE value="Adjusted color and positioning on login page." />
     <MESSAGE value="Adjusted height and position on the page DIV. Still haven't figured out what is causing the page div to be white. Dashboard returns as blue. Started using static px height on the page div." />
     <MESSAGE value="Removed bootstrap stylings and implementing raw CSS for more manageability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed bootstrap stylings and implementing raw CSS for more manageability." />
+    <MESSAGE value="Revamped login and dashboard pages. Updated javascript. Disabled onload as it wasn't checking accurately for JWTs and was loading the login instead." />
+    <option name="LAST_COMMIT_MESSAGE" value="Revamped login and dashboard pages. Updated javascript. Disabled onload as it wasn't checking accurately for JWTs and was loading the login instead." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1170,13 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -1223,13 +1213,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -1241,6 +1224,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="242" column="69" selection-start-line="242" selection-start-column="69" selection-end-line="242" selection-end-column="69" />
         </state>
       </provider>
     </entry>

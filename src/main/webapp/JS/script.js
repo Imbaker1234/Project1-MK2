@@ -1,15 +1,15 @@
 window.onload = function () {
-    // if (localStorage.jwt) {
-    //     console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
-    //     loadDashboard();
-    // } else {
-    //     console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
-    //     loadLogin();
-    // }
-    //
-    // if (localStorage.principal) {
-    //     var principals = JSON.parse(localStorage.principal);
-    // }
+    if (localStorage.jwt) {
+        console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
+        loadDashboard();
+    } else {
+        console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
+        loadLogin();
+    }
+
+    if (localStorage.principal) {
+        var principals = JSON.parse(localStorage.principal);
+    }
 };
 
 //Functionalities =================================================
@@ -230,16 +230,17 @@ function verifyField(field) {
 
 function toggleButton(buttonId, status) {
     if (status) {
+        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slow");
         document.getElementById(buttonId).classList.remove("invisible");
-        document.getElementById(buttonId).classList.add("animated", "fadeIn");
         document.getElementById(buttonId).classList.remove("fadeIn");
         //If the status is true then set the button the pulse endlessly.
-        document.getElementById(buttonId).classList.add("pulse", "infinite");
+        document.getElementById(buttonId).classList.add("pulse", "infinite", "slow");
         document.getElementById(buttonId).disabled = false;
     } else {
         //If the status is false
         document.getElementById(buttonId).classList.remove('animated', 'pulse', 'infinite');
         document.getElementById(buttonId).disabled = true;
+        document.getElementById(buttonId).classList.add("invisible");
     }
 }
 
