@@ -1,6 +1,5 @@
 package com.servlets;
 
-import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
 import com.POJO.ReimbPrinc;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,11 +71,11 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else if (input2.equals("alltickets")) {
-				List<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
+				List<ReimbPrinc> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
 			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
-				List<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
+				List<ReimbPrinc> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 			}
 			break;

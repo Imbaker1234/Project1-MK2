@@ -150,7 +150,9 @@ function getTickets(listType) {
         	}
     	}, 3000);
 	    
-    	addOtherAdminCommands();
+    	if (window.localStorage.getItem("commands")) {
+    		return;
+    	}
 	    
 	}
 	else if (jwt && listType === "pasttickets") {
@@ -349,29 +351,4 @@ function toggleButton(buttonId, status) {
         document.getElementById(buttonId).disabled = true;
         document.getElementById(buttonId).classList.add("invisible");
     }
-}
-
-function addOtherAdminCommands() {
-	
-    let filterbypending = document.createElement("h6");
-    let filterbyapproved = document.createElement("h6");
-    let filterbydenied = document.createElement("h6");
-    
-    let ticketdiv = document.getElementById("ticketdiv");
-    ticketdiv.appendChild(filterbypending);
-    ticketdiv.appendChild(filterbyapproved);
-    ticketdiv.appendChild(filterbydenied);
-    
-    filterbypending.innerText = "Admin: Pending Filter";
-    let pending = getTickets("Pending");
-    filterbypending.addEventListener("click", pending);
-    
-    filterbyapproved.innerText = "Admin: Approved Filter";
-    let approved = getTickets("Approved");
-    filterbyapproved.addEventListener("click", approved);
-    
-    filterbydenied.innerText = "Admin: Denied Filter";
-    let denied = getTickets("Denied");
-    filterbydenied.addEventListener("click", denied);
-    
 }

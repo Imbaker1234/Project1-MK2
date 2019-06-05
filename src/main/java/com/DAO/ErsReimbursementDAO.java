@@ -22,7 +22,7 @@ public class ErsReimbursementDAO {
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement";
+			String sql = "SELECT * FROM ers_reimbursement ORDER BY reimb_id";
 			PreparedStatement stmt = connect.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 

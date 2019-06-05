@@ -48,7 +48,12 @@
 
 	<div class="column light">
 		<div id="ticketdiv">
+		
 			<h6 id="adminview" onclick="getTickets(&quot;alltickets&quot;)">Admin: View All</h6>
+			<h6 id="adminview2" onclick="getTickets(&quot;Pending&quot;)">Admin: Filter by Pending</h6>
+			<h6 id="adminview3" onclick="getTickets(&quot;Approved&quot;)">Admin: Filter by Approved</h6>
+			<h6 id="adminview4" onclick="getTickets(&quot;Denied&quot;)">Admin: Filter by Denied</h6>
+			
 			<h3 onclick="getTickets(&quot;pasttickets&quot;)">Click to View Ticket History</h3>
 			<table id="ticketview"></table>
 		</div>

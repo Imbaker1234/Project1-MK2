@@ -20,34 +20,13 @@ public class ErsReimbursementService {
 		log.info("ErsReimbursementService : Line 17 : viewPastTickets() called");
 
 		List<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
-		List<ReimbPrinc> pasttickets2 = new ArrayList<>();
 		
 		if (pasttickets.size() == 0) {
 			log.info("ErsReimbursementService : Line 21 : viewPastTickets() : No past tickets");
 			return null;
 
 		}
-		
-		//convert ErsReimbursement List to ReimbPrinc list
-		for (ErsReimbursement i : pasttickets) {
-			int id = i.getReimbId();
-			Double amt = i.getReimbAmount();
-			String desc = i.getReimbDescription();
-			String submit = i.getReimbSubmitted().toString().substring(0,10);
-			//System.out.println(submit); //DEBUG
-			String resolve = "";
-			if (i.getReimbResolved() != null) {
-			resolve = i.getReimbResolved().toString().substring(0,10);
-			}
-			String status = "";
-			if (i.getReimbStatusId() == 1) status = "Pending";
-			if (i.getReimbStatusId() == 2) status = "Resolved";
-			if (i.getReimbStatusId() == 3) status = "Denied";
-			ReimbPrinc e = new ReimbPrinc(id, amt, submit, resolve, desc, status);
-			pasttickets2.add(e);
-		}
-		
-		return pasttickets2;
+		return reimbToPrince(pasttickets);
 	}
 
 	public boolean addReimbRequest(Principal user, String amt, String desc, String type) {
@@ -63,7 +42,6 @@ public class ErsReimbursementService {
 			log.info("ErsReimbursementService : Line 38 : addReimbRequest() : NumberFormatterException : Field Invalid");
 			return false;
 		}
-
 		return rdao.addReimbursement(user.getUsername(), amtReformat, desc, typeReformat);
 	}
 
@@ -78,12 +56,10 @@ public class ErsReimbursementService {
 			log.info("ErsReimbursementService : Line 53 : approveDenyReimb() : NumberFormatterException : Field Invalid");
 			return false;
 		}
-
 		return rdao.updateReimbursementStatus(user, statusupdate, reimbidReformat);
-
 	}
 
-	public List<ErsReimbursement> filterReimbs(String reimbStatus) {
+	public List<ReimbPrinc> filterReimbs(String reimbStatus) {
 		log.info("ErsReimbursementService : Line in reimb service approveDenyReimb method");
 
 		int reimbStatusId;
@@ -104,14 +80,39 @@ public class ErsReimbursementService {
 			return null;
 			
 		}
-		return rdao.retrieveAllReimbsByStatus(reimbStatusId);
-
+		List<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByStatus(reimbStatusId);
+		return reimbToPrince(pasttickets);
 	}
 
-	public List<ErsReimbursement> viewAllReimbs() {
+	public List<ReimbPrinc> viewAllReimbs() {
+		
 		log.info("ErsReimbursementService : Line in reimb service viewAllReimbs method");
-
-		return rdao.retrieveAllReimbs();
+		List<ErsReimbursement> pasttickets = rdao.retrieveAllReimbs();
+		return reimbToPrince(pasttickets);
+		
 	}
+	
+	public List<ReimbPrinc> reimbToPrince(List<ErsReimbursement> pasttickets) {
 
+		List<ReimbPrinc> outputlist = new ArrayList<>();
+		
+		for (ErsReimbursement i : pasttickets) {
+			int id = i.getReimbId();
+			Double amt = i.getReimbAmount();
+			String desc = i.getReimbDescription();
+			String submit = i.getReimbSubmitted().toString().substring(0,10);
+			//System.out.println(submit); //DEBUG
+			String resolve = "";
+			if (i.getReimbResolved() != null) {
+			resolve = i.getReimbResolved().toString().substring(0,10);
+			}
+			String status = "";
+			if (i.getReimbStatusId() == 1) status = "Pending";
+			if (i.getReimbStatusId() == 2) status = "Resolved";
+			if (i.getReimbStatusId() == 3) status = "Denied";
+			ReimbPrinc e = new ReimbPrinc(id, amt, submit, resolve, desc, status);
+			outputlist.add(e);
+		}
+		return outputlist;
+	}
 }
