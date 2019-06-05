@@ -38,7 +38,6 @@ function ajaxCall(method, endPoint, incoming, store) {
                 //console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
-                    //console.log(timeStamp() + " " + "Line 33"); //DEBUG
                     if (xhr.responseText) {
                         // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                         if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
@@ -90,50 +89,12 @@ function loadDashboard() {
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
 }
-
+/*
 function loadTickets() {
 	
     console.log(timeStamp() + " " + "loadTickets() called"); //DEBUG
-    ajaxLoadDiv("pasttickets.view", "ticketview");
-    let tickets = localStorage.getItem("tickets");
-    
-    for (let i=0;i<tickets.length;i++) {
-    	
-    	let ticketrow = document.createElement("tr");
-    	
-    	let idcell = document.createElement("td");
-    	let amtcell = document.createElement("td");
-    	let submitdatecell = document.createElement("td");
-    	let resolvedatecell = document.createElement("td");
-    	let desccell = document.createElement("td");
-    	let receiptcell = document.createElement("td");
-    	let authorcell = document.createElement("td");
-    	let statuscell = document.createElement("td");
-    	
-    	let tbody = document.getElementById("tbody");
-    	
-    	ticketrow.appendChild(idcell);
-    	ticketrow.appendChild(amtcell);
-    	ticketrow.appendChild(submitdatecell);
-    	ticketrow.appendChild(resolvedatecell);
-    	ticketrow.appendChild(desccell);
-    	ticketrow.appendChild(receiptcell);
-    	ticketrow.appendChild(authorcell);
-    	ticketrow.appendChild(statuscell);
-    	tbody.appendChild(ticketrow);
-    	
-    	idcell.innerText = "hellotest";
-    	amtcell.innerText = tickets[1];
-    	submitdatecell.innerText = tickets[2];
-    	resolvedatecell.innerText = tickets[3];
-    	desccell.innerText = tickets[4];
-    	receiptcell.innerText = tickets[5];
-    	authorcell.innerText = tickets[6];
-    	statuscell.innerText = tickets[7];
-    	
-    }
-
-}
+    ajaxLoadDiv("dashboard.view", "ticketview");
+}*/
 
 function loadCurrentTickets() {
 	
@@ -197,7 +158,44 @@ function getTickets() {
     let tickets = ajaxCall("POST", "dashboard", content, "tickets");
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        loadTickets();
+        
+        let tickets = localStorage.getItem("tickets");
+        console.log(tickets); //DEBUG
+        for (let i=0;i<tickets.length;i++) {
+        	
+        	let ticketrow = document.createElement("tr");
+        	
+        	let idcell = document.createElement("td");
+        	let amtcell = document.createElement("td");
+        	let submitdatecell = document.createElement("td");
+        	let resolvedatecell = document.createElement("td");
+        	let desccell = document.createElement("td");
+        	let receiptcell = document.createElement("td");
+        	let authorcell = document.createElement("td");
+        	let statuscell = document.createElement("td");
+        	
+        	let tbody = document.getElementById("tbody");
+        	
+        	ticketrow.appendChild(idcell);
+        	ticketrow.appendChild(amtcell);
+        	ticketrow.appendChild(submitdatecell);
+        	ticketrow.appendChild(resolvedatecell);
+        	ticketrow.appendChild(desccell);
+        	ticketrow.appendChild(receiptcell);
+        	ticketrow.appendChild(authorcell);
+        	ticketrow.appendChild(statuscell);
+        	tbody.appendChild(ticketrow);
+        	
+        	idcell.innerText = "hellotest";
+        	amtcell.innerText = tickets[1];
+        	submitdatecell.innerText = tickets[2];
+        	resolvedatecell.innerText = tickets[3];
+        	desccell.innerText = tickets[4];
+        	receiptcell.innerText = tickets[5];
+        	authorcell.innerText = tickets[6];
+        	statuscell.innerText = tickets[7];
+        	
+        }
     }
 }
 
