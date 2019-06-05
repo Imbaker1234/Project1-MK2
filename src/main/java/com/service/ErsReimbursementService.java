@@ -3,26 +3,51 @@ package com.service;
 import com.DAO.ErsReimbursementDAO;
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
+import com.POJO.ReimbPrinc;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ErsReimbursementService {
 
 	private static Logger log = LogManager.getLogger(ErsReimbursementService.class);
 	private ErsReimbursementDAO rdao = new ErsReimbursementDAO();
 
-	public ArrayList<ErsReimbursement> viewPastTickets(Principal user) {
+	public List<ReimbPrinc> viewPastTickets(Principal user) {
 		log.info("ErsReimbursementService : Line 17 : viewPastTickets() called");
 
-		ArrayList<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
+		List<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
+		List<ReimbPrinc> pasttickets2 = new ArrayList<>();
+		
 		if (pasttickets.size() == 0) {
 			log.info("ErsReimbursementService : Line 21 : viewPastTickets() : No past tickets");
 			return null;
 
 		}
-		return pasttickets;
+		
+		//convert ErsReimbursement List to ReimbPrinc list
+		for (ErsReimbursement i : pasttickets) {
+			int id = i.getReimbId();
+			Double amt = i.getReimbAmount();
+			String desc = i.getReimbDescription();
+			String submit = i.getReimbSubmitted().toString().substring(0,10);
+			//System.out.println(submit); //DEBUG
+			String resolve = "";
+			if (i.getReimbResolved() != null) {
+			resolve = i.getReimbResolved().toString().substring(0,10);
+			}
+			String status = "";
+			if (i.getReimbStatusId() == 1) status = "Pending";
+			if (i.getReimbStatusId() == 2) status = "Resolved";
+			if (i.getReimbStatusId() == 3) status = "Denied";
+			ReimbPrinc e = new ReimbPrinc(id, amt, submit, resolve, desc, status);
+			pasttickets2.add(e);
+		}
+		
+		return pasttickets2;
 	}
 
 	public boolean addReimbRequest(Principal user, String amt, String desc, String type) {
@@ -58,7 +83,7 @@ public class ErsReimbursementService {
 
 	}
 
-	public ArrayList<ErsReimbursement> filterReimbs(String reimbStatus) {
+	public List<ErsReimbursement> filterReimbs(String reimbStatus) {
 		log.info("ErsReimbursementService : Line in reimb service approveDenyReimb method");
 
 		int reimbStatusId;
@@ -83,7 +108,7 @@ public class ErsReimbursementService {
 
 	}
 
-	public ArrayList<ErsReimbursement> viewAllReimbs() {
+	public List<ErsReimbursement> viewAllReimbs() {
 		log.info("ErsReimbursementService : Line in reimb service viewAllReimbs method");
 
 		return rdao.retrieveAllReimbs();

@@ -29,7 +29,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<input multiple name="files[]" type="file" /> <input button
+					<input multiple name="files[]" type="file" /> <input
 						id="requestsubmit" type="submit" onclick="addReimbursement()"
 						value="Submit Request" />
 				</div>
@@ -47,10 +47,10 @@
 
 
 	<div class="column light">
-			<div id="ticketdiv">
-				<h3>Reimbursement Requests</h3>
-				<table id="ticketview"></table>
-			</div>
+		<div id="ticketdiv">
+			<h6 onclick="getAllTickets()">Admin Button for now</h6>
+			<h3 onclick="getPastTickets()">Click to View Ticket History</h3>
+			<table id="ticketview"></table>
 		</div>
 	</div>
 </div>

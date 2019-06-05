@@ -35,7 +35,7 @@ public class ErsUsersService {
 		Pattern pattern = Pattern.compile(emailRegex);
 
 		for (String s : incoming) {
-			if (s.equals("") || s.contains(" ") || s.length() > 25)
+			if (s.equals("") || s.contains(" ") || s.length() > 25 || s.length() < 3)
 				return null;
 		}
 

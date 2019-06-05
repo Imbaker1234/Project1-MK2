@@ -2,6 +2,7 @@ package com.servlets;
 
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
+import com.POJO.ReimbPrinc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.service.ErsReimbursementService;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/dashboard")
 public class ReimbursementServlet extends HttpServlet {
@@ -58,7 +59,7 @@ public class ReimbursementServlet extends HttpServlet {
 		case "employee":
 
 			if (input2.equals("pasttickets")) {
-				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
+				List<ReimbPrinc> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			}
@@ -67,16 +68,15 @@ public class ReimbursementServlet extends HttpServlet {
 		case "admin":
 
 			if (input2.equals("pasttickets")) {
-				reimbService.viewPastTickets(principal);
-				ArrayList<ErsReimbursement> pasttickets = reimbService.viewPastTickets(principal);
+				List<ReimbPrinc> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
 			} else if (input2.equals("viewallreimbs")) {
-				ArrayList<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
+				List<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
 			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
-				ArrayList<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
+				List<ErsReimbursement> filteredReimbs = reimbService.filterReimbs(input2);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 			}
 			break;

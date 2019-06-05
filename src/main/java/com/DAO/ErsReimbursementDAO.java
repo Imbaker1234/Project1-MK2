@@ -2,6 +2,7 @@ package com.DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,9 +16,9 @@ public class ErsReimbursementDAO {
 	private static Logger log = LogManager.getLogger(ErsReimbursementDAO.class);
 
 	
-	public ArrayList<ErsReimbursement> retrieveAllReimbs() {
+	public List<ErsReimbursement> retrieveAllReimbs() {
 		log.info("in reimb DAO retrieveAllReimbs method");
-		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
+		List<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -33,14 +34,14 @@ public class ErsReimbursementDAO {
 		return reimbursementlist;
 	}
 
-	public ArrayList<ErsReimbursement> retrieveAllReimbsByAuthor(Principal user) {
+	public List<ErsReimbursement> retrieveAllReimbsByAuthor(Principal user) {
 		log.info("in reimb DAO retrieveAllReimbsByAuthor method");
 		int ersUsersId = user.getId();
-		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
+		List<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ? ORDER BY reimb_id";
 			PreparedStatement stmt = connect.prepareStatement(sql);
 			stmt.setInt(1, ersUsersId);
 			ResultSet rs = stmt.executeQuery();
@@ -53,13 +54,13 @@ public class ErsReimbursementDAO {
 		return null;
 	}
 
-	public ArrayList<ErsReimbursement> retrieveAllReimbsByStatus(int reimbStatusId) {
+	public List<ErsReimbursement> retrieveAllReimbsByStatus(int reimbStatusId) {
 		log.info("in reimb DAO retrieveAllReimbsByStatus method");
-		ArrayList<ErsReimbursement> reimbursementlist = new ArrayList<>();
+		List<ErsReimbursement> reimbursementlist = new ArrayList<>();
 
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ?";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ? ORDER BY reimb_id";
 			PreparedStatement stmt = connect.prepareStatement(sql);
 			stmt.setInt(1, reimbStatusId);
 			ResultSet rs = stmt.executeQuery();
@@ -117,7 +118,7 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	private ArrayList<ErsReimbursement> mapResultSet(ArrayList<ErsReimbursement> reimbursementlist, ResultSet rs) throws SQLException {
+	private List<ErsReimbursement> mapResultSet(List<ErsReimbursement> reimbursementlist, ResultSet rs) throws SQLException {
 		log.info("in reimb DAO mapResultSet");
 		if (rs != null) {
 

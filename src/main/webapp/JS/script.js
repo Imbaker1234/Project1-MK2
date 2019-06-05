@@ -2,12 +2,14 @@
 
 window.onload = function () {
 
-    if (localStorage.jwt || localStorage.principal) {
+    if (window.localStorage.getItem("jwt")) {
         console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
         loadDashboard();
+        
     } else {
         console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
         loadLogin();
+        
     }
     //Removed principals split as they can just be referred to by the names.
 };
@@ -38,7 +40,7 @@ function ajaxCall(method, endPoint, incoming, store) {
                     if (xhr.responseText) {
                         // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                         if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-                        console.log(timeStamp() + " JWT Results\n" + localStorage.jwt);
+                        //console.log(timeStamp() + " JWT Results\n" + localStorage.jwt);
                         //if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
                         return xhr.responseText;
                     }
@@ -109,15 +111,15 @@ function loadAllReimbs() {
 
 //Functions ===============================================
 
-function login(loginusername, loginpassword) {
-
+function login() {
     console.log(timeStamp() + " " + "login(" + loginusername + ", " + loginpassword + ") called"); //DEBUG
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
 
     let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
-    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT at this point load the dashboard.
+    
+    if (window.localStorage.getItem("jwt")) { //If they have a JWT at this point load the dashboard.
         loadDashboard();
     }
 }
@@ -149,8 +151,11 @@ function register() {
     ajaxCall("POST", "account", credentials, "principal");
 }
 
-function tableJSON(myJSON, targetDiv) {
+function tableJSON() {
 
+	console.log(timeStamp() + " " + "tableJSON() called");
+	
+	let myJSON = JSON.parse(localStorage.getItem("tickets"));
     // EXTRACT VALUE FOR HTML HEADER.
     let col = [];
     for (let i = 0; i < myJSON.length; i++) {
@@ -186,13 +191,12 @@ function tableJSON(myJSON, targetDiv) {
     }
 
     // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-    targetDiv = document.getElementById(targetDiv);
+    targetDiv = document.getElementById("ticketview");
     targetDiv.innerHTML = "";
     targetDiv.appendChild(table);
 }
 
-function getTickets() {
-
+function getPastTickets() {
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
 
     let content = ["pasttickets"];
@@ -201,18 +205,31 @@ function getTickets() {
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
 
         let tickets = localStorage.getItem("tickets");
-        return JSON.parse(localStorage.getItem("tickets"));
-
     }
+    setTimeout(tableJSON, 3000);
+}
+
+function getAllTickets() {
+	
+	console.log(timeStamp() + " " + "getAllTickets() called"); //DEBUG
+	
+	let principal = JSON.parse(window.localStorage.getItem("principal"));
+	console.log(principal);
+	let role = principal[2];
+		console.log(role);
+		
+	if (role == "admin") {
+    console.log(timeStamp() + " " + "viewAllReimbursements() called"); //DEBUG
+
+    let content = ["viewallreimbs"];
+
+    ajaxCall("POST", "dashboard", content, "tickets");
+    setTimeout(tableJSON, 3000);
+}
 }
 
 //TODO Create separate function in SQL database to retrieve the "Reduced view" of ID, Description, and amount.
 //TODO Leverage popper.js to call for the full details of ONE ticket and display it on click of any ticket ID.
-
-function populateTicketView() {
-    let theTickets = getTickets();
-    tableJSON(theTickets, "ticketdiv");
-}
 
 function addReimbursement() {
 
@@ -231,21 +248,7 @@ function addReimbursement() {
     console.log(timeStamp() + " " + window.localStorage.getItem("addedticket"));
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, call the getTickets method
-        getTickets();
-    }
-}
-
-function viewAllReimbursements() {
-
-    console.log(timeStamp() + " " + "viewAllReimbursements() called"); //DEBUG
-
-    let content = [viewallreimbs];
-
-    ajaxCall("POST", "dashboard", content, "allreimbs");
-    console.log(timeStamp() + " " + window.localStorage.allreimbs);
-
-    if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        loadAllReimbs();
+    	setTimeout(populateTicketView(getTickets), 3000);
     }
 }
 
@@ -301,53 +304,6 @@ function verifyField(field) {
     return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24);
 }
 
-function toggleButton(buttonId, status) {
-    if (status) {
-        document.getElementById(buttonId).classList.add("pulse", "infinite", "slow");
-        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slow");
-        document.getElementById(buttonId).classList.remove("invisible");
-        setTimeout(waitBeforeRemoving => {
-            document.getElementById(buttonId).classList.remove("fadeIn");
-        }, 250);
-        //If the status is true then set the button the pulse endlessly.
-        document.getElementById(buttonId).disabled = false;
-    } else {
-        //If the status is false
-        document.getElementById(buttonId).classList.remove('animated', 'pulse', 'infinite');
-        document.getElementById(buttonId).disabled = true;
-        document.getElementById(buttonId).classList.add("invisible");
-    }
-}
-
-function verifyName(firstname, lastname) {
-    //console.log(timeStamp() + " " + "verifyName(" + firstname + "," + lastname + ") called"); //DEBUG
-    if (firstname.length < 3 || lastname.length < 3) {
-
-        document.getElementById("registerfirst").value = "";
-        document.getElementById("registerlast").value = "";
-        alert("Name cannot be less than 3 characters.");
-        return false;
-
-    }
-    if (firstname.includes(" ") || lastname.includes(" ")) {
-
-        document.getElementById("registerfirst").value = "";
-        document.getElementById("registerlast").value = "";
-        alert("Name cannot contain spaces.");
-        return false;
-
-    }
-    return true;
-}
-
-function verifyPhone(phone) {
-    //console.log(timeStamp() + " " + "verifyPhone(" + phone + ") called"); //DEBUG
-    if ((/^\d{10}$/.test(phone))) {
-        return true;
-    }
-    return false;
-}
-
 function verifyEmail(email) {
     //console.log(timeStamp() + " " + "verifyEmail(" + email + ") called"); //DEBUG
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -359,7 +315,8 @@ function verifyEmail(email) {
 }
 
 function verifyLoginFields() {
-    //console.log(timeStamp() + " " + "verifyLoginFields() called"); //DEBUG
+	
+    console.log(timeStamp() + " " + "verifyLoginFields() called"); //DEBUG
     document.getElementById("registerusername").value = '';
     document.getElementById("registerpassword").value = '';
     document.getElementById("registerfirst").value = '';
@@ -379,6 +336,9 @@ function verifyLoginFields() {
 }
 
 function verifyRegisterFields() {
+	
+	console.log(timeStamp() + " " + "verifyRegisterFields() called"); //DEBUG
+	toggleButton("registersubmitbutton", true);
     //console.log(timeStamp() + " " + "verifyRegisterFields() called");
 
     //Clear any forms in the login div since we can't log in and register at the same time
@@ -396,13 +356,31 @@ function verifyRegisterFields() {
     let email = document.getElementById("registeremail").value;
 
     //If all the forms are verified then active the "Start Getting Paid" button.
-    if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyField(email)) {
+    if (verifyField(username) && verifyField(password) && verifyField(first) && verifyField(last) && verifyEmail(email)) {
         console.log(timeStamp() + " " + "Credentials valid. toggling button");
         toggleButton("registersubmitbutton", true);
 
         //If they are not valid then disable the register button.
     } else {
         toggleButton("registersubmitbutton", false);
+    }
+}
+
+function toggleButton(buttonId, status) {
+    if (status) {
+        document.getElementById(buttonId).classList.add("pulse", "infinite", "slow");
+        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slow");
+        document.getElementById(buttonId).classList.remove("invisible");
+        setTimeout(waitBeforeRemoving => {
+            document.getElementById(buttonId).classList.remove("fadeIn");
+        }, 250);
+        //If the status is true then set the button the pulse endlessly.
+        document.getElementById(buttonId).disabled = false;
+    } else {
+        //If the status is false
+        document.getElementById(buttonId).classList.remove('animated', 'pulse', 'infinite');
+        document.getElementById(buttonId).disabled = true;
+        document.getElementById(buttonId).classList.add("invisible");
     }
 }
 

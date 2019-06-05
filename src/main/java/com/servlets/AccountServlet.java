@@ -43,6 +43,7 @@ public class AccountServlet extends HttpServlet {
 		String[] userinput = NodeToArray.convert(rootNode);
 		
 		if (userinput.length == 2) {
+			
             log.info("AccountServlet: Line 47 : AccountServlet.doPost() : Line 45 : Logging in user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
@@ -50,11 +51,12 @@ public class AccountServlet extends HttpServlet {
 			writer.write(mapper.writeValueAsString(principal));
 
 			String token = JwtGenerator.createJwt(user);
-			log.info("AccountServlet: Line 56 : doPost() : JWT returned\n" + token);
+			log.info("AccountServlet: Line 56 : doPost() : JWT returned\n");
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
-
-            log.info("AccountServlet: Line 56 : AccountServlet.doPost() : Sending out response: " + response.getHeaderNames());
+            log.info("AccountServlet: Line 56 : AccountServlet.doPost() : Sending out response");
+            
         } else if (userinput.length == 5) { // This clause is entered register
+        	
             log.info("AccountServlet: Line 58 : AccountServlet.doPost() : Line 55 : Registering new user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),

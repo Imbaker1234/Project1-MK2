@@ -1,83 +1,68 @@
-<div class="row"> <!--DESIGNATES A ROW ON THE PAGE-->
-    <div class="column light"> <!--DESIGNATES A DARKER COLOR FOR THIS COLUMN-->
-        <div class="content-basket"> <!--DESIGNATES A "BASKET" FOR SPACING-->
-            <div id="logindiv"> <!--DESIGNATES THE NAME OF THE DIV-->
-                <h3>Login</h3>
-                <p>
-                    <br>
-                    <form-group class="login-form">
-                    <input class="form-group" id="loginusername" onchange="verifyLoginFields()"
-                           placeholder="Your Email *"
-                           type="text" value=""/>
-                    <br>
-                    <input class="form-group" id="loginpassword" onchange="verifyLoginFields()"
-                           placeholder="Your Password *" type="password" value=""/>
-                    <br>
-                    <br>
-                        <button class="btnSubmit invisible" disabled id="loginsubmitbutton"
-                                onclick="login(document.getElementById('loginusername').value,document.getElementById('loginpassword').value)">
-                            Welcome Back
-                        </button>
+<div class="row">
+	<!--DESIGNATES A ROW ON THE PAGE-->
+	<div class="column light">
+		<!--DESIGNATES A DARKER COLOR FOR THIS COLUMN-->
+		<div class="content-basket">
+			<!--DESIGNATES A "BASKET" FOR SPACING-->
+			<div id="logindiv">
+				<!--DESIGNATES THE NAME OF THE DIV-->
+				<h3>Login</h3>
+				<p>
+					<br>
+					<input class="form-group" id="loginusername"
+						onchange="verifyLoginFields()" placeholder="Your Username *"
+						type="text" value="" />
+						<br>
+						<input class="form-group"
+						id="loginpassword" onchange="verifyLoginFields()"
+						placeholder="Your Password *" type="password" value="" />
+						<br>
+					<br>
+					<button class="btnSubmit invisible" disabled id="loginsubmitbutton"
+						onclick="login()">Welcome Back</button>
+				</p>
+			</div>
+		</div>
+	</div>
 
-                    </form-group>
-
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="divider">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <img alt="" height="120" id="centerimg" src="Assets/Images/EELogo.png">
-    </div>
+	<div class="divider">
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <img alt="" height="120" id="centerimg"
+			src="Assets/Images/EELogo.png">
+	</div>
 
 
-    <div class="column dark">
-        <div class="content-basket">
-            <div id="registerdiv">
-                <h3>Register</h3>
-                <p>
-                <form>
-
-                    <input class="form-group" id="registerusername" onchange="verifyRegisterFields()"
-                           placeholder="User Name *"
-                           type="text" value=""/>
-                    <br>
-                    <input class="form-group" id="registerpassword" onchange="verifyRegisterFields()"
-                           placeholder="Password *" type="password"
-                           value=""/>
-
-                    <br>
-                    <input class="form-group" id="registerfirst" onchange="verifyRegisterFields()"
-                           placeholder="First Name" type="text"
-                           value=""/>
-
-                    <br>
-                    <input class="form-group" id="registerlast" onchange="verifyRegisterFields()"
-                           placeholder="Last Name" type="text"
-                           value=""/>
-                    <br>
-
-                    <input class="form-group" id="registeremail" onchange="verifyRegisterFields()"
-                           placeholder="Email" type="email"
-                           value=""/>
-                    <br>
-
-                    <input button class="btnSubmit invisible" disabled id="registersubmitbutton"
-                           onclick="register()"
-                           type="submit" value="Start Getting Paid"/>
-                </form>
-                </p>
-            </div>
-        </div>
-    </div>
+	<div class="column dark">
+		<div class="content-basket">
+			<div id="registerdiv">
+				<h3>Register</h3>
+				<p>
+					<input class="form-group" id="registerusername"
+						onchange="verifyRegisterFields()" placeholder="User Name *"
+						type="text" value="" />
+						<br>
+						<input class="form-group"
+						id="registerpassword" onchange="verifyRegisterFields()"
+						placeholder="Password *" type="password" value="" />
+						<br>
+						<input
+						class="form-group" id="registerfirst"
+						onchange="verifyRegisterFields()" placeholder="First Name"
+						type="text" value="" />
+						<br>
+						<input class="form-group"
+						id="registerlast" onchange="verifyRegisterFields()"
+						placeholder="Last Name" type="text" value="" />
+						<br>
+						<input
+						class="form-group" id="registeremail"
+						onchange="verifyRegisterFields()" placeholder="Email" type="email"
+						value="" />
+						<br>
+					<button class="btnSubmit invisible" disabled id="registersubmitbutton" onclick="register()">Start Getting Paid</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!--<div class="container login-container">-->
