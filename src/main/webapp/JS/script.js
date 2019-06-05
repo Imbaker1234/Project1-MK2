@@ -17,7 +17,7 @@ window.onload = function () {
 
 //Functionalities ===========================================================================================================================
 
-function ajaxCall(method, endPoint, incoming, store) {
+function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
 
     //console.log(ajax call made"); //DEBUG
     let outgoing = JSON.stringify(incoming);
@@ -38,10 +38,16 @@ function ajaxCall(method, endPoint, incoming, store) {
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
                     if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-                }
-            }
-        }
-    };
+                    
+                    if (targetDiv) {
+                		ajaxLoadDiv(view, targetDiv);
+                	}
+                    		
+                	}
+                  
+            	}
+        	}
+    	};
 }
 
 function ajaxLoadDiv(view, targetDiv) {
@@ -77,16 +83,6 @@ function loadDashboard() {
 	return;
 }
 
-function loginLoadDashboard(testfunction) {
-
-	if (localStorage.getItem("jwt")) {
-    console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
-    ajaxLoadDiv("dashboard.view", "page");
-	}
-	console.log("load dashboard failed");
-	return;
-}
-
 //Functions =============================================================================================================================
 
 function login() {
@@ -94,8 +90,7 @@ function login() {
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
     let credentials = [username, password];
-    let testfunction = ajaxCall("POST", "account", credentials, "principal");
-    loginLoadDashboard(testfunction);
+    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page");
 }
 
 function logout() {
@@ -115,9 +110,7 @@ function register() {
     let email = document.getElementById("registeremail").value;
     let credentials = [username, password, firstname, lastname, email];
 
-    	loadDashboard( function() {
-    		ajaxCall("POST", "account", credentials, "principal");
-    	});
+    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page");
 }
 
 function getTickets(listType) {
@@ -125,38 +118,15 @@ function getTickets(listType) {
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
     let jwt = window.localStorage.getItem("jwt");
 	let principal = JSON.parse(window.localStorage.getItem("principal"));
-	let admin = false;
-	let employee = false;
+	let admin;
+	let employee;
 	if (principal.role === "admin") admin = true;
 	else employee = true;
 	
-	if (jwt && admin && listType != "pasttickets") {
-		
-		let contents = [listType];
-		ajaxCall("POST", "dashboard", contents, "tickets");
-    	let tickets = window.localStorage.getItem("tickets");
-    
-    	setTimeout(function() {
-
-        	//tickets found
-    		if (tickets) tableJSON();
-    		
-    		//no tickets found
-        	else {
-        		let noticketsheader = document.createElement("h6");
-        		let ticketview = document.getElementById("ticketview");
-        		ticketview.appendChild(noticketsheader);
-        		noticketsheader.innerText = "No reimbursements found.";
-        	
-        	}
-    	}, 3000);
-	    
-    	if (window.localStorage.getItem("commands")) {
-    		return;
-    	}
-	    
+	if (jwt && employee && listType != "pasttickets") {
+		return null;
 	}
-	else if (jwt && listType === "pasttickets") {
+	else if (jwt) {
 		let contents = [listType];
 		ajaxCall("POST", "dashboard", contents, "tickets");
     	let tickets = window.localStorage.getItem("tickets");
@@ -293,6 +263,15 @@ function timeOutCalled() {
 function tableJSON() {
 
 	console.log(timeStamp() + " " + "tableJSON() called");
+	let tickets = localStorage.getItem("tickets");
+	if (tickets == null) {
+
+		let noticketsheader = document.createElement("h6");
+		let ticketview = document.getElementById("ticketview");
+		ticketview.appendChild(noticketsheader);
+		noticketsheader.innerText = "No reimbursements found.";
+		return null;
+	}
 	
 	let myJSON = JSON.parse(localStorage.getItem("tickets"));
     // EXTRACT VALUE FOR HTML HEADER.
