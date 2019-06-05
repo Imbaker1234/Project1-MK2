@@ -11,20 +11,37 @@ public class RequestViewHelper {
     public static String process(HttpServletRequest request) {
 
         log.info("RequestViewHelper: Process() called\n" + request.getRequestURI() + " was the URI provided.\n"); //DEBUG
-        switch (request.getRequestURI()) {
+        String incoming = "/" + request.getRequestURI().split("/")[request.getRequestURI().split("/").length - 1];
 
-            case "/IBJK_Project_One/login.view":
+        log.info("RequestViewHelper parsed the URI : (" + request.getRequestURI() + ") into " + incoming);
+        switch (incoming) {
+
+            case "/login.view":
                 return "partials/login.html";
 
-            case "/IBJK-Project-One/dashboard.view":
+            case "/dashboard.view":
                 return "partials/dashboard.html";
 
-            case "/IBJK_Project_One/pasttickets.view":
+            case "/pasttickets.view":
                 return "partials/pasttickets.html";
 
             default:
                 log.info("RequestViewHelper called the default in switch case");
                 return "/partials/index.html";
+
+
+//            case "/IBJK_Project_One/login.view":
+//                return "partials/login.html";
+//
+//            case "/IBJK-Project-One/dashboard.view":
+//                return "partials/dashboard.html";
+//
+//            case "/IBJK_Project_One/pasttickets.view":
+//                return "partials/pasttickets.html";
+//
+//            default:
+//                log.info("RequestViewHelper called the default in switch case");
+//                return "/partials/index.html";
         }
     }
 }

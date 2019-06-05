@@ -27,9 +27,9 @@ public class TokenAuthenticationFilter extends HttpFilter {
 		String header = request.getHeader(JwtConfig.HEADER);
 		log.info("TokenAuthenticationFilter.doFilter() was passed " + request.getHeader(JwtConfig.HEADER) + "\n" +
 				"as the header.");
-		if (header == null || !header.startsWith(JwtConfig.PREFIX)) {
+		if (header == null || !header.startsWith(JwtConfig.PREFIX)) { //Check to see if they have a JWT that matches
 			log.warn("No matching JWT Header. Request originates from an unauthenticated origin.");
-			request.setAttribute("isAuthenticated", false);
+			request.setAttribute("isAuthenticated", false); //Mark them as not authenticated.
 			chain.doFilter(request, response);
 			return;
 			

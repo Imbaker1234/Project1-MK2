@@ -38,6 +38,7 @@ function ajaxCall(method, endPoint, incoming, store) {
                     if (xhr.responseText) {
                         // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                         if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
+                        console.log(timeStamp() + " JWT Results\n" + localStorage.jwt);
                         //if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
                         return xhr.responseText;
                     }
@@ -107,10 +108,9 @@ function loadAllReimbs() {
 
 //Functions ===============================================
 
-function login() {
-	
-    console.log(timeStamp() + " " + "login() called"); //DEBUG
-    window.setTimeout(null, 20000);
+function login(loginusername, loginpassword) {
+
+    console.log(timeStamp() + " " + "login(" + loginusername + ", " + loginpassword + ") called"); //DEBUG
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
 

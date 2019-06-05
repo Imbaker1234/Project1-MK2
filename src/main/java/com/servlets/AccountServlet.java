@@ -50,6 +50,7 @@ public class AccountServlet extends HttpServlet {
 			writer.write(mapper.writeValueAsString(principal));
 
 			String token = JwtGenerator.createJwt(user);
+			log.info("AccountServlet: Line 56 : doPost() : JWT returned\n" + token);
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
             log.info("AccountServlet: Line 56 : AccountServlet.doPost() : Sending out response: " + response.getHeaderNames());

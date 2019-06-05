@@ -14,8 +14,9 @@
                            placeholder="Your Password *" type="password" value=""/>
                     <br>
                     <br>
-                    <input button class="btnSubmit invisible" disabled id="loginsubmitbutton" onclick="login()"
-                           type="submit" value="Login"/>
+                    <input button class="btnSubmit invisible" disabled id="loginsubmitbutton"
+                           onclick="login(document.getElementById('loginusername').value,document.getElementById('loginpassword').value)"
+                           value="Login"/>
                 </form>
 
                 </p>
