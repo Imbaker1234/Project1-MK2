@@ -19,12 +19,12 @@ window.onload = function () {
 
 function ajaxCall(method, endPoint, incoming, store) {
 
-    //console.log(timeStamp() + " " + "ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
+    //console.log(ajax call made"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
     let xhr = new XMLHttpRequest();
     xhr.open(method, endPoint, true);
-    if (localStorage.getItem("jwt")) { //If the user has a jwt in localstorage then attach it as the authorization.
+    if (localStorage.getItem("jwt")) {
         xhr.setRequestHeader("Authorization", localStorage.getItem("jwt"));
     }
     xhr.send(outgoing);
@@ -32,18 +32,12 @@ function ajaxCall(method, endPoint, incoming, store) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             let result = JSON.parse(xhr.responseText);
+            
             if (result) {
                 //console.log(timeStamp() + " " + "Results retrieved from AJAX call"); //DEBUG
-                //console.log(timeStamp() + " " + xhr.responseText); //DEBUG
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
-                    if (xhr.responseText) {
-                        // console.log(timeStamp() + " " + xhr.responseText); //DEBUG
-                        if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-                        //console.log(timeStamp() + " JWT Results\n" + localStorage.jwt);
-                        //if (localStorage.getItem("jwt")) console.log(timeStamp() + " " + "JWT STORED!\n\n" + localStorage.getItem("jwt")); //DEBUG
-                        return xhr.responseText;
-                    }
+                    if (xhr.getResponseHeader("Authorization")) localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
                 }
             }
         }
@@ -75,7 +69,17 @@ function loadLogin() {
 
 function loadDashboard() {
 
-	if (window.localStorage.getItem("jwt")) {
+	if (localStorage.getItem("jwt")) {
+    console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
+    ajaxLoadDiv("dashboard.view", "page");
+	}
+	console.log("load dashboard failed");
+	return;
+}
+
+function loginLoadDashboard(testfunction) {
+
+	if (localStorage.getItem("jwt")) {
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
 	}
@@ -89,12 +93,9 @@ function login() {
     console.log(timeStamp() + " " + "login() called"); //DEBUG
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
-
     let credentials = [username, password];
-    ajaxCall("POST", "account", credentials, "principal");
-    if (window.localStorage.getItem("jwt")) {
-    setTimeout(loadDashboard, 3000);
-    }
+    let testfunction = ajaxCall("POST", "account", credentials, "principal");
+    loginLoadDashboard(testfunction);
 }
 
 function logout() {
@@ -114,14 +115,9 @@ function register() {
     let email = document.getElementById("registeremail").value;
     let credentials = [username, password, firstname, lastname, email];
 
-    ajaxCall("POST", "account", credentials, "principal");
-    
-    setTimeout(function() {
-
-    if (window.localStorage.getItem("jwt")) {
-    	loadDashboard;
-    }
-    }, 6000);
+    	loadDashboard( function() {
+    		ajaxCall("POST", "account", credentials, "principal");
+    	});
 }
 
 function getTickets(listType) {
