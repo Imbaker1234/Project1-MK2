@@ -29,10 +29,11 @@ html, body {
     width: 45%;
     padding: 5%;
     box-shadow: 20px 20px 20px 20px black;
+    border-radius: 25px;
 }
 
 .content-basket {
-    width: 95%;
+    width: 100%;
     alignment: center;
 }
 
@@ -87,4 +88,20 @@ iframe {
     border-radius: 1.5rem;
     padding: 2%;
     alignment: center;
+}
+
+
+table {
+    margin: 0;
+    color: white;
+    font-size: 10px;
+}
+
+table > th {
+    margin: 5px;
+}
+
+#ticketdiv {
+    overflow-y: auto;
+    width: 100%;
 }

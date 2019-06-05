@@ -5,7 +5,7 @@
                 <h3>Login</h3>
                 <p>
                     <br>
-                <form class="login-form">
+                    <form-group class="login-form">
                     <input class="form-group" id="loginusername" onchange="verifyLoginFields()"
                            placeholder="Your Email *"
                            type="text" value=""/>
@@ -14,10 +14,12 @@
                            placeholder="Your Password *" type="password" value=""/>
                     <br>
                     <br>
-                    <input button class="btnSubmit invisible" disabled id="loginsubmitbutton"
-                           onclick="login(document.getElementById('loginusername').value,document.getElementById('loginpassword').value)"
-                           value="Login"/>
-                </form>
+                        <button class="btnSubmit invisible" disabled id="loginsubmitbutton"
+                                onclick="login(document.getElementById('loginusername').value,document.getElementById('loginpassword').value)">
+                            Welcome Back
+                        </button>
+
+                    </form-group>
 
                 </p>
             </div>

@@ -47,36 +47,9 @@
 
 
 	<div class="column light">
-		<div class="content-basket">
 			<div id="ticketdiv">
 				<h3>Reimbursement Requests</h3>
-				<select onchange="getTickets()">
-					<option value="pending">Pending</option>
-					<option value="approved">Approved</option>
-					<option value="denied">Denied</option>
-				</select>
-				<div id="ticketview">
-
-					<table class="table" id="tickettable">
-						<thead>
-							<tr>
-								<th scope="col">ID#</th>
-								<th scope="col">AMOUNT</th>
-								<th scope="col">SUBMITTED</th>
-								<th scope="col">RESOLVED</th>
-								<th scope="col">DESCRIPTION</th>
-								<th scope="col">RECEIPT</th>
-								<th scope="col">AUTHOR</th>
-								<th scope="col">STATUS</th>
-
-							</tr>
-						</thead>
-						<tbody id="tbody">
-
-						</tbody>
-					</table>
-
-				</div>
+				<table id="ticketview"></table>
 			</div>
 		</div>
 	</div>

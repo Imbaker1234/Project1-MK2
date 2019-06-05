@@ -16,7 +16,7 @@ window.onload = function () {
 //Functionalities =================================================
 
 function ajaxCall(method, endPoint, incoming, store) {
-	
+
     console.log(timeStamp() + " " + "ajaxCall(method = " + method + "," + "endPoint = " + endPoint + ", incoming = " + incoming + ", store = " + store + ") called"); //DEBUG
     let outgoing = JSON.stringify(incoming);
 
@@ -49,7 +49,7 @@ function ajaxCall(method, endPoint, incoming, store) {
 }
 
 function ajaxLoadDiv(view, targetDiv) {
-	
+
     //console.log(timeStamp() + " " + "ajaxLoadDiv(" + view + ", " + targetDiv + ") called"); //DEBUG
     let xhr = new XMLHttpRequest();
     xhr.open("GET", view, true);
@@ -64,29 +64,30 @@ function ajaxLoadDiv(view, targetDiv) {
 }
 
 function timeStamp() {
-	
+
     d = new Date();
     return (d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 }
 
 function timeOutCalled() {
-	
+
     console.log("Timeout Called")
 }
 
 //Load Views ======================================================
 
 function loadLogin() {
-	
+
     console.log(timeStamp() + " " + "loadLogin() called"); //DEBUG
     ajaxLoadDiv("login.view", "page");
 }
 
 function loadDashboard() {
-	
+
     console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
 }
+
 /*
 function loadTickets() {
 	
@@ -95,13 +96,13 @@ function loadTickets() {
 }*/
 
 function loadCurrentTickets() {
-	
+
     console.log(timeStamp() + " " + "loadCurrentTickets() called"); //DEBUG
     ajaxLoadDiv("dashboard.view", "page");
 }
 
 function loadAllReimbs() {
-	
+
     console.log(timeStamp() + " " + "loadAllReimbs() called"); //DEBUG
     ajaxLoadDiv("admindashboard.view", "page");
 }
@@ -122,9 +123,10 @@ function login(loginusername, loginpassword) {
 }
 
 function logout() {
-	
+
     console.log(timeStamp() + " " + "logout() called"); //DEBUG
     localStorage.removeItem("jwt");
+    localStorage.removeItem("principal");
     loadLogin();
 }
 
@@ -147,53 +149,69 @@ function register() {
     ajaxCall("POST", "account", credentials, "principal");
 }
 
+function tableJSON(myJSON, targetDiv) {
+
+    // EXTRACT VALUE FOR HTML HEADER.
+    let col = [];
+    for (let i = 0; i < myJSON.length; i++) {
+        for (let key in myJSON[i]) {
+            if (col.indexOf(key) === -1) {
+                col.push(key);
+            }
+        }
+    }
+
+    // CREATE DYNAMIC TABLE.
+    let table = document.createElement("table");
+
+    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+    let tr = table.insertRow(-1);                   // TABLE ROW.
+
+    for (let i = 0; i < col.length; i++) {
+        let th = document.createElement("th");      // TABLE HEADER.
+        th.innerHTML = col[i];
+        tr.appendChild(th);
+    }
+
+    // ADD JSON DATA TO THE TABLE AS ROWS.
+    for (let i = 0; i < myJSON.length; i++) {
+
+        tr = table.insertRow(-1);
+
+        for (let j = 0; j < col.length; j++) {
+            let tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = myJSON[i][col[j]];
+        }
+    }
+
+    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+    targetDiv = document.getElementById(targetDiv);
+    targetDiv.innerHTML = "";
+    targetDiv.appendChild(table);
+}
+
 function getTickets() {
-	
+
     console.log(timeStamp() + " " + "getTickets() called"); //DEBUG
-    
+
     let content = ["pasttickets"];
     let tickets = ajaxCall("POST", "dashboard", content, "tickets");
 
     if (window.localStorage.getItem("jwt") != "") { //If they have a JWT, load the page
-        
+
         let tickets = localStorage.getItem("tickets");
-        console.log(tickets); //DEBUG
-        for (let i=0;i<tickets.length;i++) {
-        	
-        	let ticketrow = document.createElement("tr");
-        	
-        	let idcell = document.createElement("td");
-        	let amtcell = document.createElement("td");
-        	let submitdatecell = document.createElement("td");
-        	let resolvedatecell = document.createElement("td");
-        	let desccell = document.createElement("td");
-        	let receiptcell = document.createElement("td");
-        	let authorcell = document.createElement("td");
-        	let statuscell = document.createElement("td");
-        	
-        	let tbody = document.getElementById("tbody");
-        	
-        	ticketrow.appendChild(idcell);
-        	ticketrow.appendChild(amtcell);
-        	ticketrow.appendChild(submitdatecell);
-        	ticketrow.appendChild(resolvedatecell);
-        	ticketrow.appendChild(desccell);
-        	ticketrow.appendChild(receiptcell);
-        	ticketrow.appendChild(authorcell);
-        	ticketrow.appendChild(statuscell);
-        	tbody.appendChild(ticketrow);
-        	
-        	idcell.innerText = "hellotest";
-        	amtcell.innerText = tickets[1];
-        	submitdatecell.innerText = tickets[2];
-        	resolvedatecell.innerText = tickets[3];
-        	desccell.innerText = tickets[4];
-        	receiptcell.innerText = tickets[5];
-        	authorcell.innerText = tickets[6];
-        	statuscell.innerText = tickets[7];
-        	
-        }
+        return JSON.parse(localStorage.getItem("tickets"));
+
     }
+}
+
+//TODO Create separate function in SQL database to retrieve the "Reduced view" of ID, Description, and amount.
+//TODO Leverage popper.js to call for the full details of ONE ticket and display it on click of any ticket ID.
+
+function populateTicketView() {
+    let theTickets = getTickets();
+    tableJSON(theTickets, "ticketdiv");
 }
 
 function addReimbursement() {
@@ -204,8 +222,8 @@ function addReimbursement() {
     let desc = document.getElementById("reimb_desc").value;
     let type = document.getElementById("reimb_type").value;
     if (amt == "" || desc == "" || type == "") {
-    	console.log("empty fields");
-    	return;
+        console.log("empty fields");
+        return;
     }
     let content = [amt, desc, type];
 
@@ -263,6 +281,18 @@ function filterAllReimbs() {
 }
 
 
+//TODO this one doesn't work quite yet. More research needed. NOT MVP.
+function convertToDate(unix_timestamp) {
+    // Create a new JavaScript Date object based on the timestamp
+// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    let date = new Date(unix_timestamp * 1000);
+    let year = "0" + date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+
+// Will display time in 10:30:23 format
+    return (month + '-' + day + '-' + year);
+}
 //=============== Credential Verification =========================
 
 
@@ -273,11 +303,13 @@ function verifyField(field) {
 
 function toggleButton(buttonId, status) {
     if (status) {
-        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slower");
-        document.getElementById(buttonId).classList.remove("invisible");
-        document.getElementById(buttonId).classList.remove("fadeIn");
-        //If the status is true then set the button the pulse endlessly.
         document.getElementById(buttonId).classList.add("pulse", "infinite", "slow");
+        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slow");
+        document.getElementById(buttonId).classList.remove("invisible");
+        setTimeout(waitBeforeRemoving => {
+            document.getElementById(buttonId).classList.remove("fadeIn");
+        }, 250);
+        //If the status is true then set the button the pulse endlessly.
         document.getElementById(buttonId).disabled = false;
     } else {
         //If the status is false
@@ -377,7 +409,7 @@ function verifyRegisterFields() {
 //=======================BLOBHALLA=================================
 
 
-console.log(timeStamp() + " " + "JS v1.1 Loaded");
+console.log(timeStamp() + " " + "JS v1.2 Loaded");
 
 
 //==================REFERENCE SCRIPT===============================
