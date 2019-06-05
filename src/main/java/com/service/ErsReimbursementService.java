@@ -14,11 +14,11 @@ public class ErsReimbursementService {
 	private ErsReimbursementDAO rdao = new ErsReimbursementDAO();
 
 	public ArrayList<ErsReimbursement> viewPastTickets(Principal user) {
-        log.info("in reimb service getTickets method");
+		log.info("ErsReimbursementService : Line 17 : viewPastTickets() called");
 
 		ArrayList<ErsReimbursement> pasttickets = rdao.retrieveAllReimbsByAuthor(user);
 		if (pasttickets.size() == 0) {
-			log.info("No past tickets");
+			log.info("ErsReimbursementService : Line 21 : viewPastTickets() : No past tickets");
 			return null;
 
 		}
@@ -26,7 +26,7 @@ public class ErsReimbursementService {
 	}
 
 	public boolean addReimbRequest(Principal user, String amt, String desc, String type) {
-		log.info("in reimb service addReimbRequest method");
+		log.info("ErsReimbursementService : Line in reimb service addReimbRequest method");
 		
 		Double amtReformat;
 		int typeReformat;
@@ -35,22 +35,22 @@ public class ErsReimbursementService {
 			typeReformat = Integer.parseInt(type);
 			
 		} catch (NumberFormatException e) {
-			log.warn("Invalid field input.");
+			log.info("ErsReimbursementService : Line 38 : addReimbRequest() : NumberFormatterException : Field Invalid");
 			return false;
 		}
-		
+
 		return rdao.addReimbursement(user.getUsername(), amtReformat, desc, typeReformat);
 	}
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
-		log.info("in reimb service approveDenyReimb method");
-		
+		log.info("ErsReimbursementService : Line 46 : approveDenyReimb() called");
+
 		int reimbidReformat;
 		try {
 			reimbidReformat = Integer.parseInt(reimbId);
-			
+
 		} catch (NumberFormatException e) {
-			log.warn("Invalid field input.");
+			log.info("ErsReimbursementService : Line 53 : approveDenyReimb() : NumberFormatterException : Field Invalid");
 			return false;
 		}
 
@@ -59,7 +59,7 @@ public class ErsReimbursementService {
 	}
 
 	public ArrayList<ErsReimbursement> filterReimbs(String reimbStatus) {
-		log.info("in reimb service approveDenyReimb method");
+		log.info("ErsReimbursementService : Line in reimb service approveDenyReimb method");
 
 		int reimbStatusId;
 		switch (reimbStatus) {
@@ -84,7 +84,7 @@ public class ErsReimbursementService {
 	}
 
 	public ArrayList<ErsReimbursement> viewAllReimbs() {
-		log.info("in reimb service viewAllReimbs method");
+		log.info("ErsReimbursementService : Line in reimb service viewAllReimbs method");
 
 		return rdao.retrieveAllReimbs();
 	}

@@ -19,16 +19,15 @@ public class FrontControllerServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		log.info("request recieved by FrontControllerServlet");
+        log.info("FrontControllerServlet : Line 22 : Request recieved by FrontControllerServlet" +
+                "\n" + request.getRequestURI());
 
 
         //Requests a particular file path based on the view that is called.
 		String returnHTML = RequestViewHelper.process(request);
-        log.info("returnHTML: " + returnHTML);
 
         //Forwards the request and response
-        log.info("Request:" + request.toString());
-        log.info("Response:" + response.toString());
+        log.info("FrontControllerServlet : Line 30 : Request:" + request.getRequestURI() + "forwarded to (returnHTML)" + returnHTML + "endpoint");
 		request.getRequestDispatcher(returnHTML).forward(request, response);
 	}
 

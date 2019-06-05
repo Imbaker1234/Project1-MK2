@@ -8,7 +8,6 @@ import com.service.ErsUsersService;
 import com.util.JwtConfig;
 import com.util.JwtGenerator;
 import com.util.NodeToArray;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,8 +32,8 @@ public class AccountServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		log.info("AccountServlet recieved request: " + request.toString());
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        log.info("AccountServlet: Line 37 : AccountServlet.doPost() : Received Request.");
 
 		PrintWriter writer = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +43,7 @@ public class AccountServlet extends HttpServlet {
 		String[] userinput = NodeToArray.convert(rootNode);
 		
 		if (userinput.length == 2) {
-            log.info("AccountServlet.doPost() : Line 45 : Logging in user");
+            log.info("AccountServlet: Line 47 : AccountServlet.doPost() : Line 45 : Logging in user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
@@ -53,15 +52,15 @@ public class AccountServlet extends HttpServlet {
 			String token = JwtGenerator.createJwt(user);
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
-			log.info("Sending out response: " + response.getHeaderNames());
+            log.info("AccountServlet: Line 56 : AccountServlet.doPost() : Sending out response: " + response.getHeaderNames());
         } else if (userinput.length == 5) { // This clause is entered register
-            log.info("AccountServlet.doPost() : Line 55 : Registering new user");
+            log.info("AccountServlet: Line 58 : AccountServlet.doPost() : Line 55 : Registering new user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
 			writer.write(mapper.writeValueAsString(principal));
-			
-			String token = JwtGenerator.createJwt(user);
+
+            String token = JwtGenerator.createJwt(user);
 			response.addHeader(JwtConfig.HEADER, JwtConfig.PREFIX + token);
 
 		} 

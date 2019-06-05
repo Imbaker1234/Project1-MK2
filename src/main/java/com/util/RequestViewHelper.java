@@ -13,16 +13,12 @@ public class RequestViewHelper {
         log.info("RequestViewHelper: Process() called\n" + request.getRequestURI() + " was the URI provided.\n"); //DEBUG
         switch (request.getRequestURI()) {
 
-
-            case "/IBJK-Project-One/login.view":
             case "/IBJK_Project_One/login.view":
                 return "partials/login.html";
-                
-            case "/IBJK_Project_One_/dashboard.view":
+
             case "/IBJK-Project-One/dashboard.view":
                 return "partials/dashboard.html";
 
-            case "/IBJK-Project-One/pasttickets.view":
             case "/IBJK_Project_One/pasttickets.view":
                 return "partials/pasttickets.html";
 

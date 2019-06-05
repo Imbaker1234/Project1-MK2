@@ -3,7 +3,6 @@ package com.service;
 import com.DAO.ErsUsersDAO;
 import com.POJO.ErsUsers;
 import com.util.PasswordEncryption;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +28,7 @@ public class ErsUsersService {
 	 */
 
 	public ErsUsers validateCredentials(String... incoming) {
-		log.info("in ERSUsersService validateCredentials method");
+		log.info("ErsUsersService: Line 32 : in ERSUsersService validateCredentials method");
 
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
 				+ "A-Z]{2,7}$";
@@ -41,13 +40,14 @@ public class ErsUsersService {
 		}
 
 		if (incoming.length == 2) {
-			log.info("validating credentials for login");
+			log.info("ErsUsersService: Line 44 : 2 arguments provided. Validating credentials for login");
 
 			ErsUsers user = udao.getByCredentials(incoming[0], incoming[1]);
+			log.info("ErsUsersService: Line 47 : ErsUsersService retrieved\n" + user.toString());
 			return user;
 
 		} else if (udao.getByUsername(incoming[0]) == null && pattern.matcher(incoming[4]).matches()) {
-			log.info("validating credentials for registered account");
+			log.info("ErsUsersService: Line 51 : 5 arguments provided. Validating credentials for registered account");
 
 			String incUsername = incoming[0];
 			String salt = PasswordEncryption.generateSalt(512).get();
@@ -55,10 +55,16 @@ public class ErsUsersService {
 			String incFirst = incoming[2];
 			String incLast = incoming[3];
 			String incEmail = incoming[4];
-			log.info("Successfully populated incoming fields from JSON");
+			log.info("ErsUsersService: Line 59 : Successfully populated incoming fields from JSON");
 			ErsUsers user = new ErsUsers(incUsername, passKey, incFirst, incLast, incEmail);
-			Boolean insert = udao.addUser(user, salt);
-			return insert == true ? user : null;
+			boolean insert = udao.addUser(user, salt);
+
+			if (insert) {
+				log.info("ErsUsersService: Line 64 : User successfully added.");
+			} else {
+				log.info("ErsUsersService: Line 66 : User not added.");
+				return null;
+			}
 
 		}
 		return null;

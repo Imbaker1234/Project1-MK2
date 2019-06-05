@@ -1,18 +1,15 @@
 //TODO Check for 403 errors when you pass in a bad JWT. Redirect users who get this response to login.
 
 window.onload = function () {
-	
-    if (localStorage.jwt) {
+
+    if (localStorage.jwt || localStorage.principal) {
         console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
         loadDashboard();
     } else {
         console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
         loadLogin();
     }
-
-    if (localStorage.principal) {
-        var principals = JSON.parse(localStorage.principal);
-    }
+    //Removed principals split as they can just be referred to by the names.
 };
 
 
@@ -276,7 +273,7 @@ function verifyField(field) {
 
 function toggleButton(buttonId, status) {
     if (status) {
-        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slow");
+        document.getElementById(buttonId).classList.add("animated", "fadeIn", "slower");
         document.getElementById(buttonId).classList.remove("invisible");
         document.getElementById(buttonId).classList.remove("fadeIn");
         //If the status is true then set the button the pulse endlessly.

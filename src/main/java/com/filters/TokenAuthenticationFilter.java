@@ -1,6 +1,11 @@
 package com.filters;
 
-import java.io.IOException;
+import com.POJO.Principal;
+import com.util.JwtConfig;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -8,15 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.POJO.Principal;
-import com.util.JwtConfig;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import java.io.IOException;
 
 @WebFilter("/*")
 public class TokenAuthenticationFilter extends HttpFilter {
@@ -28,10 +25,10 @@ public class TokenAuthenticationFilter extends HttpFilter {
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		log.info("Request intercepted by TokenAuthenticationFilter.doFilter()");
 		String header = request.getHeader(JwtConfig.HEADER);
-		
-		log.info(header);
+		log.info("TokenAuthenticationFilter.doFilter() was passed " + request.getHeader(JwtConfig.HEADER) + "\n" +
+				"as the header.");
 		if (header == null || !header.startsWith(JwtConfig.PREFIX)) {
-			log.warn("Request originates from an unauthenticated origin.");
+			log.warn("No matching JWT Header. Request originates from an unauthenticated origin.");
 			request.setAttribute("isAuthenticated", false);
 			chain.doFilter(request, response);
 			return;
@@ -43,7 +40,7 @@ public class TokenAuthenticationFilter extends HttpFilter {
 		try {
 
 			Claims claims = Jwts.parser().setSigningKey(JwtConfig.SIGNING_KEY).parseClaimsJws(token).getBody();
-
+			log.info("Parsing token holder's claims.");
 			Principal principal = new Principal();
 			principal.setId(Integer.parseInt(claims.getId()));
 			principal.setUsername(claims.getSubject());
