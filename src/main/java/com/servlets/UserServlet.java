@@ -20,10 +20,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/account")
-public class AccountServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = LogManager.getLogger(AccountServlet.class);
+	private static Logger log = LogManager.getLogger(UserServlet.class);
 	private final ErsUsersService userService = new ErsUsersService();
 
 	@Override

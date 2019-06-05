@@ -71,7 +71,7 @@ public class ReimbursementServlet extends HttpServlet {
 				List<ReimbPrinc> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
-			} else if (input2.equals("viewallreimbs")) {
+			} else if (input2.equals("alltickets")) {
 				List<ErsReimbursement> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 

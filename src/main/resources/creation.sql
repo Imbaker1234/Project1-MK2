@@ -75,7 +75,7 @@ create table ERS_REIMBURSEMENT
 )
 /
 
-create PROCEDURE new_user(username VARCHAR2,
+create or replace PROCEDURE new_user(username VARCHAR2,
                           password VARCHAR2,
                           firstname VARCHAR2,
                           lastname VARCHAR2,
@@ -90,7 +90,7 @@ BEGIN
 END;
 /
 
-create PROCEDURE new_reimb(p_AUTHOR IN VARCHAR2,
+create or replace PROCEDURE new_reimb(p_AUTHOR IN VARCHAR2,
                            p_AMOUNT IN number,
                            p_DESCRIPTION IN VARCHAR2,
                            p_TYPE number)

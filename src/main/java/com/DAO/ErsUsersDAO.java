@@ -96,6 +96,7 @@ public class ErsUsersDAO {
 				String userLastName = rs.getString(5);
 				String userEmail = rs.getString(6);
 				int userRoleId = rs.getInt(7);
+				System.out.println("attention +" + userRoleId);
 				salt = rs.getString(8);
 				ErsUsers user = new ErsUsers(ersUsersId, ersUsername, ersPassword, userFirstName, userLastName,
 						userEmail, userRoleId);

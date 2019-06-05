@@ -23,13 +23,11 @@ public class TokenAuthenticationFilter extends HttpFilter {
 
 	@Override
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.info("Request intercepted by TokenAuthenticationFilter.doFilter()");
+		
 		String header = request.getHeader(JwtConfig.HEADER);
-		log.info("TokenAuthenticationFilter.doFilter() was passed " + request.getHeader(JwtConfig.HEADER) + "\n" +
-				"as the header.");
+		
 		if (header == null || !header.startsWith(JwtConfig.PREFIX)) { //Check to see if they have a JWT that matches
-			log.warn("No matching JWT Header. Request originates from an unauthenticated origin.");
-			request.setAttribute("isAuthenticated", false); //Mark them as not authenticated.
+			request.setAttribute("isAuthenticated", false);
 			chain.doFilter(request, response);
 			return;
 			
@@ -40,7 +38,7 @@ public class TokenAuthenticationFilter extends HttpFilter {
 		try {
 
 			Claims claims = Jwts.parser().setSigningKey(JwtConfig.SIGNING_KEY).parseClaimsJws(token).getBody();
-			log.info("Parsing token holder's claims.");
+			
 			Principal principal = new Principal();
 			principal.setId(Integer.parseInt(claims.getId()));
 			principal.setUsername(claims.getSubject());

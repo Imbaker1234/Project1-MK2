@@ -43,7 +43,7 @@ public class ErsUsersService {
 			log.info("ErsUsersService: Line 44 : 2 arguments provided. Validating credentials for login");
 
 			ErsUsers user = udao.getByCredentials(incoming[0], incoming[1]);
-			log.info("ErsUsersService: Line 47 : ErsUsersService retrieved\n" + user.toString());
+			log.info("ErsUsersService: Line 47 : ErsUsersService retrieved\n");
 			return user;
 
 		} else if (udao.getByUsername(incoming[0]) == null && pattern.matcher(incoming[4]).matches()) {
