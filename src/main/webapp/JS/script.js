@@ -92,7 +92,9 @@ function login() {
 
     let credentials = [username, password];
     ajaxCall("POST", "account", credentials, "principal");
+    if (window.localStorage.getItem("jwt")) {
     setTimeout(loadDashboard, 3000);
+    }
 }
 
 function logout() {
@@ -114,9 +116,12 @@ function register() {
 
     ajaxCall("POST", "account", credentials, "principal");
     
+    setTimeout(function() {
+
     if (window.localStorage.getItem("jwt")) {
-        loadDashboard();
+    	loadDashboard;
     }
+    }, 6000);
 }
 
 function getTickets(listType) {
@@ -194,7 +199,7 @@ function addReimbursement() {
     let content = [amt, desc, type];
 
     ajaxCall("PUT", "dashboard", content, "addedticket");
-    console.log(timeStamp() + " " + window.localStorage.getItem("addedticket"));
+    console.log(timeStamp() + " " + window.localStorage.getItem("addedticket")); //DEBUG
 
     if (window.localStorage.getItem("jwt")) {
     	setTimeout(getTickets("pasttickets"), 3000);
@@ -228,7 +233,6 @@ function verifyEmail(email) {
         return true;
     }
     document.getElementById("registeremail").value = "";
-    alert("Invalid email syntax.");
     return false;
 }
 

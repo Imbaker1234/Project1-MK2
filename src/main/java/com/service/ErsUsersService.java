@@ -61,6 +61,9 @@ public class ErsUsersService {
 
 			if (insert) {
 				log.info("ErsUsersService: Line 64 : User successfully added.");
+				ErsUsers user2 = udao.getByCredentials(incoming[0], incoming[1]);
+				System.out.println(user2 + user2.getErsUsername() + user2.getErsUsersId());
+				return user2;
 			} else {
 				log.info("ErsUsersService: Line 66 : User not added.");
 				return null;
