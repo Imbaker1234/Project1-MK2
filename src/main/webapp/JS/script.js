@@ -104,7 +104,6 @@ function revealAdminPowers() {
             </span>
             <br>
 `;
-        //APPROVED AND PENDING SELECT OPTIONS HAVE SWITCHED VALUES DUE TO A LOGIC ERROR IN THE JAVA SERVER LEVEL
     }
 }
 

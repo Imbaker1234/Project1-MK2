@@ -51,8 +51,8 @@ public class ErsReimbursementService {
 		int statusReformat = 0;
 		try {
 			reimbidReformat = Integer.parseInt(reimbId);
-			if (statusupdate.equals("Approved")) statusReformat = 1;
-			else if (statusupdate.equals("Denied")) statusReformat = 2;
+			if (statusupdate.equals("Approved")) statusReformat = 2;
+			else if (statusupdate.equals("Denied")) statusReformat = 3;
 			
 		} catch (NumberFormatException e) {
 			log.info("ErsReimbursementService : Line 53 : approveDenyReimb() : NumberFormatterException : Field Invalid");
