@@ -1,15 +1,14 @@
 package com.DAO;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
 import com.util.ConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ErsReimbursementDAO {
 	
@@ -68,8 +67,8 @@ public class ErsReimbursementDAO {
 			return mapResultSet(reimbursementlist, rs);
 
 		} catch (Exception e) {
-			e.printStackTrace();;
-		}
+            e.printStackTrace();
+        }
 		return null;
 	}
 
@@ -102,8 +101,8 @@ public class ErsReimbursementDAO {
 
 			connect.setAutoCommit(false);
 
-			String sql = "UPDATE ers_reimbursement SET reimb_status_id = ?, reimb_resolver = ? WHERE reimb_id = ?";
-			PreparedStatement stmt = connect.prepareStatement(sql);
+            String sql = "{ call RESOLVE_REIMB(?, ?, ?)}";
+            CallableStatement stmt = connect.prepareCall(sql);
 			stmt.setString(1, statusupdate);
 			stmt.setInt(2, user.getId());
 			stmt.setInt(3, reimbId);
