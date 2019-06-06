@@ -96,6 +96,7 @@ function loadDashboard() {
 }
 */
 function revealAdminPowers() {
+    console.log(timeStamp() + "revealAdminPowers() called");
     let principal = JSON.parse(window.localStorage.getItem("principal"));
     let admin;
     if (principal.role === "admin") admin = true;
