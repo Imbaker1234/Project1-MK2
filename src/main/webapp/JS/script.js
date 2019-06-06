@@ -86,8 +86,8 @@ function revealAdminPowers() {
                 <form-group id="ticket_choice">
                     <input type="text" id="ticket_selector" placeholder="Ticket ID #">
                 <select name="" id="approve_deny">
-                    <option value="approve">Approve</option>
-                    <option value="deny">Deny</option>
+                    <option value="Approved">Approve</option>
+                    <option value="Denied">Deny</option>
                 </select>
                 <input id="resolve_ticket" type="submit" onclick="updateReimbursementStatus()"
                        value="Resolve"/>
@@ -173,21 +173,17 @@ function addReimbursement() {
     ajaxCall("PUT", "dashboard", content, "addedticket");
     console.log(timeStamp() + " " + window.localStorage.getItem("addedticket")); //DEBUG
 
-    if (window.localStorage.getItem("jwt")) {
-        setTimeout(tableJSON(getTickets("pasttickets")), 3000);
-    }
 }
 
 function updateReimbursementStatus() {
 
     console.log(timeStamp() + " " + "updateReimbursementStatus() called"); //DEBUG
 
-    let newstatus = document.getElementById("approve_deny").value;
     let reimb_id = document.getElementById("ticket_selector").value;
+    let newstatus = document.getElementById("approve_deny").value;
     let content = [reimb_id, newstatus];
 
-    ajaxCall("PATCH", "dashboard", content, "updatecheck");
-    console.log(timeStamp() + " " + window.localStorage.getItem("updatecheck"));
+    ajaxCall("POST", "dashboard", content);
 
 }
 

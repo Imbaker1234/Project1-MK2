@@ -109,6 +109,7 @@ public class ErsReimbursementDAO {
 
 			stmt.executeUpdate();
 			connect.commit();
+			log.info("reimbursement updated successfully");
 			return true;
 
 		} catch (Exception e) {

@@ -44,8 +44,9 @@ public class ErsReimbursementService {
 		return rdao.addReimbursement(user.getUsername(), amtReformat, desc, typeReformat);
 	}
 
-	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
+	public boolean approveDenyReimb(Principal user, String reimbId, String statusupdate) {
         log.info("ErsReimbursementService : approveDenyReimb() called");
+        
 		int reimbidReformat;
 		int statusReformat = 0;
 		try {

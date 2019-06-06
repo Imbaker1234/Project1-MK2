@@ -35,6 +35,8 @@ public class ReimbursementServlet extends HttpServlet {
 	 * doPatch method of servlet is called when a user wants to retrieve a table of reimbursements from the database.
 	 * Employees will only have access to their history, but admins may retrieve their history, all reimbs, or a filtered
 	 * grouping from all reimbs
+	 * 
+	 * This is also used when an admin wants to resolve a reimbursement request because doPatch was giving us problems
 	 */
 
 	@Override
@@ -51,7 +53,7 @@ public class ReimbursementServlet extends HttpServlet {
 
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getRole();
-
+		
 		switch (role) {
 
 		case "employee":
@@ -76,6 +78,12 @@ public class ReimbursementServlet extends HttpServlet {
 			} else if (userinput[0].equals("Pending") || userinput[0].equals("Approved") || userinput[0].equals("Denied")) {
 				List<ReimbPrinc> filteredReimbs = reimbService.filterReimbs(userinput[0]);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
+				
+			} else if (userinput[1].equals("Approved") || userinput[1].equals("Denied")) {
+				log.info("Update reimb input validated");
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[0], userinput[1]);
+				writer.write(mapper.writeValueAsString(updatedUserCheck));
+				
 			}
 			break;
 		}
@@ -108,36 +116,5 @@ public class ReimbursementServlet extends HttpServlet {
 				writer.write(mapper.writeValueAsString(null));
 			}
 	}
-	
-	/**
-	 * doPatch method of servlet is called when an admin wants to resolve a reimbursement request
-	 */
 
-	protected void doPatch(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		log.info("Reimb doPatch() called.");
-
-		PrintWriter writer = response.getWriter();
-		ObjectMapper mapper = new ObjectMapper();
-		response.setContentType("application/json");
-
-		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
-		String[] userinput = NodeToArray.convert(rootNode);
-
-		Principal principal = (Principal) request.getAttribute("principal");
-		String role = principal.getRole();
-
-		switch (role) {
-
-		case "admin":
-
-			if (userinput[1].equals("true") || userinput[1].equals("false")) {
-				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[0], userinput[1]);
-				writer.write(mapper.writeValueAsString(updatedUserCheck));
-
-			}
-			break;
-		}
-
-	}
 }
