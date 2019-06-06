@@ -4,11 +4,11 @@ window.onload = function () {
 
     if (window.localStorage.getItem("jwt")) {
         console.log(timeStamp() + " " + "window.onload() called : JWT Found: Loading Dashboard");
-        loadDashboard();
+        ajaxLoadDiv("dashboard.view", "page");
 
     } else {
         console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
-        loadLogin();
+        ajaxLoadDiv("login.view", "page");
 
     }
     //Removed principals split as they can just be referred to by the names.
@@ -61,18 +61,24 @@ function ajaxLoadDiv(view, targetDiv) {
         //console.log(timeStamp() + " " + "Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText); //DEBUG
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
+            
+            if (view === "dashboard.view" && window.localStorage.getItem("jwt")) {
+                revealAdminPowers();
+                tableJSON( getTickets("pasttickets") );
+            	
+            }
         }
     }
 }
 
 //Load Views =================================================================================================================================
-
+/*
 function loadLogin() {
 
     console.log(timeStamp() + " " + "loadLogin() called"); //DEBUG
     ajaxLoadDiv("login.view", "page");
-}
-
+}*/
+/*
 function loadDashboard() {
 
     if (window.localStorage.getItem("jwt")) {
@@ -86,10 +92,13 @@ function loadDashboard() {
         console.log("load dashboard failed");
 
 }
-
+*/
 function revealAdminPowers() {
+    let principal = JSON.parse(window.localStorage.getItem("principal"));
+    let admin;
+    if (principal.role === "admin") admin = true;
 	
-    if (window.localStorage.principal.role == 'admin') {
+    if (admin) {
         console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
         document.getElementById("admin").innerHTML =
         `                <span>
@@ -115,7 +124,8 @@ function revealAdminPowers() {
             <br>
 `;
 
-    document.getElementById("activate_ticket_filter").addEventListener("click", getTickets(document.getElementById("ticket_filter").value));
+    document.getElementById("activate_ticket_filter").addEventListener("click",
+    		tableJSON( getTickets((document.getElementById("ticket_filter").value))));
     }
 }
 
@@ -134,7 +144,7 @@ function logout() {
     console.log(timeStamp() + " " + "logout() called"); //DEBUG
     window.localStorage.removeItem("jwt");
     window.localStorage.removeItem("principal");
-    loadLogin();
+    ajaxLoadDiv("login.view", "page");
 }
 
 function register() {
@@ -148,6 +158,7 @@ function register() {
 
     ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page");
 }
+
 
 function getTickets(listType) {
 
@@ -165,25 +176,8 @@ function getTickets(listType) {
         let contents = [listType];
         ajaxCall("POST", "dashboard", contents, "tickets");
         let tickets = window.localStorage.getItem("tickets");
-
-        setTimeout(function () {
-
-            //tickets found
-            if (tickets) tableJSON();
-
-            //no tickets found
-            else {
-                let noticketsheader = document.createElement("h6");
-                let ticketview = document.getElementById("ticketview");
-                ticketview.appendChild(noticketsheader);
-                noticketsheader.innerText = "No reimbursements found.";
-
-            }
-        }, 3000);
     }
 }
-
-//TODO Leverage popper.js to call for the full details of ONE ticket and display it on click of any ticket ID.
 
 function addReimbursement() {
 
@@ -202,7 +196,7 @@ function addReimbursement() {
     console.log(timeStamp() + " " + window.localStorage.getItem("addedticket")); //DEBUG
 
     if (window.localStorage.getItem("jwt")) {
-        setTimeout(getTickets("pasttickets"), 3000);
+        setTimeout(tableJSON( getTickets("pasttickets") ), 3000);
     }
 }
 
@@ -294,7 +288,7 @@ function timeOutCalled() {
     console.log("Timeout Called");
 }
 
-function tableJSON() {
+function tableJSON(getTickets) {
 
     console.log(timeStamp() + " " + "tableJSON() called");
     let tickets = window.localStorage.getItem("tickets");
