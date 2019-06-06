@@ -1,6 +1,12 @@
 html, body {
-    overflow: -moz-hidden-unscrollable;
+    overflow: scroll;
+!important;
     background-color: #03002e;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
 .navbar {
@@ -30,6 +36,7 @@ html, body {
     padding: 5%;
     box-shadow: 20px 20px 20px 20px black;
     border-radius: 25px;
+    overflow: scroll;
 }
 
 .content-basket {
@@ -69,11 +76,6 @@ p {
     border-color: #E7E6DD;
 }
 
-iframe {
-    width: 90%;
-    height: 90%;
-    border-color: #E7E6DD;
-}
 
 #reimb_desc {
     resize: none;
@@ -114,9 +116,7 @@ th {
     border: 1px solid white;
 }
 
-td {
-}
 #ticketdiv {
-    overflow-y: auto;
     width: 100%;
+    overflow: scroll;
 }

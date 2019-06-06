@@ -78,9 +78,9 @@ function loadDashboard() {
     if (localStorage.getItem("jwt")) {
         console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
         ajaxLoadDiv("dashboard.view", "page");
-        if ((localStorage.principal + "").contains("\"role\":\"admin\"")) {
+        if (localStorage.principal.role == 'admin') {
             console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
-            revealAdminPowers();
+            setTimeout(revealAdminPowers(), 1000);
         }
     }
     getTickets("pasttickets");
@@ -94,22 +94,26 @@ function revealAdminPowers() {
                 <form-group id="ticket_choice">
                     <input type="text" id="ticket_selector" placeholder="Ticket ID #">
                 <select name="" id="approve_deny">
-                    <option value="True">Approve</option>
-                    <option value="Deny">Deny</option>
+                    <option value="true">Approve</option>
+                    <option value="deny">Deny</option>
                 </select>
                 <input id="resolve_ticket" type="submit" onclick=""
                        value="Resolve"/>
                 </form-group>
-            </span>
                 <br>
                 <br>
-                <select class="invisible" name="filter" id="ticket_filter" onchange="getTickets(this.value)">
-                    <option value="'alltickets')">Admin: View All</option>
-                    <option value="'Pending')">Admin: Filter by Pending</option>
-                    <option value="'Approved')">Admin: Filter by Approved</option>
-                    <option value="'Denied')">Admin: Filter by Denied</option>
+                <select name="filter" id="ticket_filter">
+                    <option value="alltickets">View All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Denied">Denied</option>
                 </select>
+                <button type="submit" id="activate_ticket_filter">Filter</button>
+            </span>
+            <br>
 `;
+
+    document.getElementById("activate_ticket_filter").addEventListener("click", getTickets(document.getElementById("ticket_filter").value));
 }
 
 //Functions =============================================================================================================================
@@ -174,8 +178,8 @@ function getTickets(listType) {
 
             }
         }, 3000);
-    } else
-        }
+    }
+}
 
 //TODO Leverage popper.js to call for the full details of ONE ticket and display it on click of any ticket ID.
 
