@@ -45,13 +45,8 @@
 
     <div class="column light">
         <div id="ticketdiv">
+        <button id="pasttickets" onclick="tableJSON( getTickets('pasttickets') )">Past Tickets</button>
             <div id="admin"></div>
-            <!--			-->
-            <!--			<h6 value ="&quot;alltickets&quot;)">Admin: View All</h6>-->
-            <!--			<h6 id="adminview2" onclick="getTickets(&quot;Pending&quot;)">Admin: Filter by Pending</h6>-->
-            <!--			<h6 id="adminview3" onclick="getTickets(&quot;Approved&quot;)">Admin: Filter by Approved</h6>-->
-            <!--			<h6 id="adminview4" onclick="getTickets(&quot;Denied&quot;)">Admin: Filter by Denied</h6>-->
-            <!--			-->
             <table id="ticketview"></table>
         </div>
     </div>

@@ -49,7 +49,6 @@ public class ReimbursementServlet extends HttpServlet {
 		ArrayNode rootNode = mapper.readValue(request.getReader(), ArrayNode.class);
 		String[] userinput = NodeToArray.convert(rootNode);
 
-		String input2 = userinput[0];
 		Principal principal = (Principal) request.getAttribute("principal");
 		String role = principal.getRole();
 
@@ -57,7 +56,7 @@ public class ReimbursementServlet extends HttpServlet {
 
 		case "employee":
 
-			if (input2.equals("pasttickets")) {
+			if (userinput[0].equals("pasttickets")) {
 				List<ReimbPrinc> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
@@ -66,16 +65,16 @@ public class ReimbursementServlet extends HttpServlet {
 
 		case "admin":
 
-			if (input2.equals("pasttickets")) {
+			if (userinput[0].equals("pasttickets")) {
 				List<ReimbPrinc> pasttickets = reimbService.viewPastTickets(principal);
 				writer.write(mapper.writeValueAsString(pasttickets));
 
-			} else if (input2.equals("alltickets")) {
+			} else if (userinput[0].equals("alltickets")) {
 				List<ReimbPrinc> allReimbs = reimbService.viewAllReimbs();
 				writer.write(mapper.writeValueAsString(allReimbs));
 
-			} else if (input2.equals("Pending") || input2.equals("Approved") || input2.equals("Denied")) {
-				List<ReimbPrinc> filteredReimbs = reimbService.filterReimbs(input2);
+			} else if (userinput[0].equals("Pending") || userinput[0].equals("Approved") || userinput[0].equals("Denied")) {
+				List<ReimbPrinc> filteredReimbs = reimbService.filterReimbs(userinput[0]);
 				writer.write(mapper.writeValueAsString(filteredReimbs));
 			}
 			break;
@@ -133,7 +132,7 @@ public class ReimbursementServlet extends HttpServlet {
 		case "admin":
 
 			if (userinput[1].equals("true") || userinput[1].equals("false")) {
-				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[1], userinput[2]);
+				Boolean updatedUserCheck = reimbService.approveDenyReimb(principal, userinput[0], userinput[1]);
 				writer.write(mapper.writeValueAsString(updatedUserCheck));
 
 			}

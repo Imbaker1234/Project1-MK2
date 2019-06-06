@@ -95,7 +95,7 @@ public class ErsReimbursementDAO {
 		return false;
 	}
 
-	public boolean updateReimbursementStatus(Principal user, String statusupdate, int reimbId) {
+	public boolean updateReimbursementStatus(Principal user, int statusupdate, int reimbId) {
 		log.info("in reimb DAO updateReimbursementStatus method");
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 
@@ -103,7 +103,7 @@ public class ErsReimbursementDAO {
 
             String sql = "{ call RESOLVE_REIMB(?, ?, ?)}";
             CallableStatement stmt = connect.prepareCall(sql);
-			stmt.setString(1, statusupdate);
+			stmt.setInt(1, statusupdate);
 			stmt.setInt(2, user.getId());
 			stmt.setInt(3, reimbId);
 

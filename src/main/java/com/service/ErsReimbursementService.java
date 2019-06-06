@@ -46,16 +46,18 @@ public class ErsReimbursementService {
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
         log.info("ErsReimbursementService : approveDenyReimb() called");
-
 		int reimbidReformat;
+		int statusReformat = 0;
 		try {
 			reimbidReformat = Integer.parseInt(reimbId);
-
+			if (statusupdate.equals("Approved")) statusReformat = 1;
+			else if (statusupdate.equals("Denied")) statusReformat = 2;
+			
 		} catch (NumberFormatException e) {
 			log.info("ErsReimbursementService : Line 53 : approveDenyReimb() : NumberFormatterException : Field Invalid");
 			return false;
 		}
-		return rdao.updateReimbursementStatus(user, statusupdate, reimbidReformat);
+		return rdao.updateReimbursementStatus(user, statusReformat, reimbidReformat);
 	}
 
 	public List<ReimbPrinc> filterReimbs(String reimbStatus) {

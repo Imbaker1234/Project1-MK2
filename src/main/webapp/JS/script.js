@@ -73,28 +73,6 @@ function ajaxLoadDiv(view, targetDiv) {
     }
 }
 
-//Load Views =================================================================================================================================
-/*
-function loadLogin() {
-
-    console.log(timeStamp() + " " + "loadLogin() called"); //DEBUG
-    ajaxLoadDiv("login.view", "page");
-}*/
-/*
-function loadDashboard() {
-
-    if (window.localStorage.getItem("jwt")) {
-        console.log(timeStamp() + " " + "loadDashboard() called"); //DEBUG
-        ajaxLoadDiv("dashboard.view", "page");
-        
-        revealAdminPowers();
-        getTickets("pasttickets");
-        
-    }
-        console.log("load dashboard failed");
-
-}
-*/
 function revealAdminPowers() {
     console.log(timeStamp() + "revealAdminPowers() called");
     let principal = JSON.parse(window.localStorage.getItem("principal"));
@@ -108,18 +86,18 @@ function revealAdminPowers() {
                 <form-group id="ticket_choice">
                     <input type="text" id="ticket_selector" placeholder="Ticket ID #">
                 <select name="" id="approve_deny">
-                    <option value="true">Approve</option>
+                    <option value="approve">Approve</option>
                     <option value="deny">Deny</option>
                 </select>
-                <input id="resolve_ticket" type="submit" onclick=""
+                <input id="resolve_ticket" type="submit" onclick="updateReimbursementStatus()"
                        value="Resolve"/>
                 </form-group>
                 <br>
                 <br>
                 <select name="filter" id="ticket_filter">
                     <option value="alltickets">View All</option>
-                    <option value="Approved">Pending</option>
-                    <option value="Pending">Approved</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
                     <option value="Denied">Denied</option>
                 </select>
                 <button type="submit" id="activate_ticket_filter" onclick="tableJSON(getTickets((document.getElementById('ticket_filter').value)))">Filter</button>
@@ -176,7 +154,6 @@ function getTickets(listType) {
     } else if (jwt) {
         let contents = [listType];
         ajaxCall("POST", "dashboard", contents, "tickets");
-        let tickets = window.localStorage.getItem("tickets");
     }
 }
 
@@ -205,8 +182,8 @@ function updateReimbursementStatus() {
 
     console.log(timeStamp() + " " + "updateReimbursementStatus() called"); //DEBUG
 
-    let newstatus = document.getElementById("reimb_amount").value;
-    let id = document.getElementById("reimb_id").value;
+    let newstatus = document.getElementById("approve_deny").value;
+    let reimb_id = document.getElementById("ticket_selector").value;
     let content = [reimb_id, newstatus];
 
     ajaxCall("PATCH", "dashboard", content, "updatecheck");
