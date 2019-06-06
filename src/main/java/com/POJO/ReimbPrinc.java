@@ -16,4 +16,17 @@ class ReimbPrinc {
 	private String description;
 	private String status;
 
+
+    @Override
+    public String toString() {
+        String returnVar = "ReimbPrinc{" +
+                "#=" + id +
+                ", $$=" + amount +
+                ", Submitted='" + submitDate + '\'' +
+                ", Resolved='" + resolvedDate + '\'' +
+                ", Desc.='" + description + '\'' +
+                ", Status='" + status + '\'' +
+                '}';
+        return returnVar;
+    }
 }

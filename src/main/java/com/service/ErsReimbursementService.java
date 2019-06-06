@@ -4,7 +4,6 @@ import com.DAO.ErsReimbursementDAO;
 import com.POJO.ErsReimbursement;
 import com.POJO.Principal;
 import com.POJO.ReimbPrinc;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +29,7 @@ public class ErsReimbursementService {
 	}
 
 	public boolean addReimbRequest(Principal user, String amt, String desc, String type) {
-		log.info("ErsReimbursementService : Line in reimb service addReimbRequest method");
+        log.info("ErsReimbursementService : addReimbRequest() called");
 		
 		Double amtReformat;
 		int typeReformat;
@@ -39,14 +38,14 @@ public class ErsReimbursementService {
 			typeReformat = Integer.parseInt(type);
 			
 		} catch (NumberFormatException e) {
-			log.info("ErsReimbursementService : Line 38 : addReimbRequest() : NumberFormatterException : Field Invalid");
+            log.info("ErsReimbursementService : addReimbRequest() : NumberFormatterException : Field Invalid");
 			return false;
 		}
 		return rdao.addReimbursement(user.getUsername(), amtReformat, desc, typeReformat);
 	}
 
 	public boolean approveDenyReimb(Principal user, String statusupdate, String reimbId) {
-		log.info("ErsReimbursementService : Line 46 : approveDenyReimb() called");
+        log.info("ErsReimbursementService : approveDenyReimb() called");
 
 		int reimbidReformat;
 		try {
@@ -60,7 +59,7 @@ public class ErsReimbursementService {
 	}
 
 	public List<ReimbPrinc> filterReimbs(String reimbStatus) {
-		log.info("ErsReimbursementService : Line in reimb service approveDenyReimb method");
+        log.info("ErsReimbursementService : filterReimbs() called");
 
 		int reimbStatusId;
 		switch (reimbStatus) {
@@ -85,9 +84,10 @@ public class ErsReimbursementService {
 	}
 
 	public List<ReimbPrinc> viewAllReimbs() {
-		
-		log.info("ErsReimbursementService : Line in reimb service viewAllReimbs method");
+
+        log.info("ErsReimbursementService : viewAllReimbs() called");
 		List<ErsReimbursement> pasttickets = rdao.retrieveAllReimbs();
+        log.info("Past Tickets\n" + pasttickets);
 		return reimbToPrince(pasttickets);
 		
 	}
@@ -113,6 +113,7 @@ public class ErsReimbursementService {
 			ReimbPrinc e = new ReimbPrinc(id, amt, submit, resolve, desc, status);
 			outputlist.add(e);
 		}
+        log.info("ErsReimbersementService: OutputList :\n" + outputlist);
 		return outputlist;
 	}
 }

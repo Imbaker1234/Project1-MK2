@@ -94,13 +94,28 @@ iframe {
 table {
     margin: 0;
     color: white;
-    font-size: 10px;
+    font-size: 14px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid white;
+    text-align: center;
 }
 
-table > th {
-    margin: 5px;
+td {
+    border-collapse: collapse;
+    border: 1px solid white;
+    padding: 3px;
+    width: 125px;
 }
 
+th {
+    height: 50px;
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+
+td {
+}
 #ticketdiv {
     overflow-y: auto;
     width: 100%;

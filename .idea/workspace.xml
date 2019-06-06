@@ -8,7 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f3d29d9d-b02b-4cc7-a9ae-36d21bd290e3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/POJO/ReimbPrinc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/POJO/ReimbPrinc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/CSS/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/CSS/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -61,6 +65,13 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="AWS MK2" type="feb32156:DbDataSourceImpl" />
         <item name="IBJKP1: schema" type="3abd1b6a:OraImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ERS_REIMBURSEMENT_STATUS: table" type="942f455b:OraImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="AWS MK2" type="feb32156:DbDataSourceImpl" />
+        <item name="IBJKP1: schema" type="3abd1b6a:OraImplModel$Schema" />
         <item name="routines" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
@@ -71,46 +82,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/util/JwtGenerator.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            <state relative-caret-position="187">
+              <caret line="122" column="70" selection-start-line="122" selection-start-column="70" selection-end-line="122" selection-end-column="70" />
+              <folding>
+                <element signature="e#171#577#0" />
+                <element signature="e#218#357#0" />
+                <element signature="n#!!block;n#addReimbursement#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/Principal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="285" column="34" selection-start-line="285" selection-start-column="34" selection-end-line="285" selection-end-column="34" />
-              <folding>
-                <element signature="n#!!block;n#ajaxCall#0" />
-                <element signature="n#!!block;n#ajaxLoadDiv#0" />
-                <element signature="n#!!block;n#timeStamp#0" />
-                <element signature="n#!!block;n#timeOutCalled#0" />
-                <element signature="n#!!block;n#loadLogin#0" />
-                <element signature="n#!!block;n#loadDashboard#0" />
-                <element signature="n#!!block;n#loadCurrentTickets#0" />
-                <element signature="n#!!block;n#loadAllReimbs#0" />
-                <element signature="n#!!block;n#login#0" />
-                <element signature="n#!!block;n#logout#0" />
-                <element signature="n#!!block;n#register#0" />
-                <element signature="n#!!block;n#tableJSON#0" />
-                <element signature="n#!!block;n#addReimbursement#0" />
-                <element signature="n#!!block;n#viewAllReimbursements#0" />
-                <element signature="n#!!block;n#updateReimbursementStatus#0" />
-                <element signature="n#!!block;n#filterAllReimbs#0" />
-                <element signature="n#!!block;n#verifyField#0" />
-                <element signature="n#!!block;n#toggleButton#0" />
-                <element signature="e#10388#10908#0" />
-                <element signature="n#!!block;n#verifyName#0" />
-                <element signature="n#!!block;n#verifyPhone#0" />
-                <element signature="n#!!block;n#verifyEmail#0" />
-                <element signature="n#!!block;n#verifyLoginFields#0" />
-                <element signature="n#!!block;n#verifyRegisterFields#0" />
-              </folding>
+            <state relative-caret-position="176">
+              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/ReimbPrinc.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console_1.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="32">
+              <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_STATUS">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state projectRestartId="ccd8148d-ad12-4303-9a14-4553379f39fe">
+              <filtering>
+                <filter text="" />
+              </filtering>
             </state>
           </provider>
         </entry>
@@ -118,8 +137,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="48" column="30" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
+            <state relative-caret-position="358">
+              <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -127,17 +146,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+            <state>
+              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -145,8 +155,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1664">
-              <caret line="104" column="20" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
+            <state relative-caret-position="166">
+              <caret line="99" column="28" lean-forward="true" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -164,14 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>class</find>
-      <find>h</find>
-      <find>exexp</find>
-      <find>head</find>
-      <find>scrollbar</find>
-      <find>loadTickets</find>
-      <find>tickets</find>
-      <find>color</find>
       <find>toggle</find>
       <find>btn</find>
       <find>console.log(</find>
@@ -185,7 +187,6 @@
       <find>dark</find>
       <find>timm</find>
       <find>timeOut()</find>
-      <find>login()</find>
       <find>getTick</find>
       <find>I</find>
       <find>log.info(&quot;</find>
@@ -194,6 +195,15 @@
       <find>logout</find>
       <find>logout()</find>
       <find>tableJSON</find>
+      <find>key</find>
+      <find>,</find>
+      <find>id=&quot;adminview&quot; onclick=&quot;getTickets(</find>
+      <find>timestamp</find>
+      <find>dashboard</find>
+      <find>loadDashboard(</find>
+      <find>dashboar</find>
+      <find>loadDashboard()</find>
+      <find>login()</find>
     </findStrings>
     <replaceStrings>
       <replace>dashboard</replace>
@@ -203,6 +213,7 @@
       <replace>log.info(&quot;ErsReimbursementService : Line</replace>
       <replace>log.info(&quot;JwtGenerator : Line</replace>
       <replace>let</replace>
+      <replace>value =&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -260,15 +271,17 @@
         <option value="$PROJECT_DIR$/src/main/webapp/partials/BrokenLogin.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/ErsUsersService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/FrontControllerServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/util/RequestViewHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/filters/TokenAuthenticationFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/util/JwtGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/partials/login.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/POJO/ReimbPrinc.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console_1.sql" />
         <option value="$PROJECT_DIR$/src/main/webapp/CSS/index.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/partials/dashboard.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/JS/script.js" />
       </list>
     </option>
@@ -308,17 +321,129 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="691" />
-    <option name="y" value="-25" />
-    <option name="width" value="819" />
-    <option name="height" value="860" />
+    <option name="x" value="2347" />
+    <option name="y" value="-26" />
+    <option name="width" value="984" />
+    <option name="height" value="575" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="POJO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="servlets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="JS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="partials" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="com.intellij.database" type="1e004dc1:ScratchProjectViewPane$MyRootNode$1$1" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="com.intellij.database" type="1e004dc1:ScratchProjectViewPane$MyRootNode$1$1" />
+              <item name="schema" type="1e004dc1:ScratchProjectViewPane$MyRootNode$1$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -362,19 +487,20 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.41" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.41" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/IBJK_Project_One_war_exploded/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="IBJK-Project-One:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/IBJK_Project_One" />
+            <option name="CONTEXT_PATH" value="/IBJK_Project_One_war_exploded" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Tomcat_8_5_41_IBJK-Project-One_2" />
       </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <log_file checked="false" alias="Tomcat Localhost Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost.*" />
+      <predefined_log_file id="Tomcat Catalina" />
       <predefined_log_file id="Tomcat Manager" />
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
@@ -536,6 +662,10 @@
       <workItem from="1559689701858" duration="1232000" />
       <workItem from="1559691052433" duration="20732000" />
       <workItem from="1559739616816" duration="970000" />
+      <workItem from="1559774384203" duration="1055000" />
+      <workItem from="1559778174588" duration="2979000" />
+      <workItem from="1559781219869" duration="3779000" />
+      <workItem from="1559785051104" duration="6085000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed JS Syntax errors that were keeping the page from loading properly. &#10;&#10;Put in console.log messages to show which lines loaded properly in the JS. &#10;&#10;Added a .properties file. &#10;&#10;Adjusted Tomcat folder so that Tomcat will have full control of it. &#10;&#10;Set up OJDBC as a global libary.">
       <created>1559415450757</created>
@@ -772,7 +902,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146513000" />
+    <option name="totallyTimeSpent" value="160411000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -784,10 +914,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="1913" y="-7" width="735" height="1255" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.42105263" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.044444446" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -797,35 +927,36 @@
       <window_info id="Learn" order="7" />
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.39660057" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32858416" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39626002" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39786857" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32792792" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Console" order="8" weight="0.4716714" />
+      <window_info anchor="bottom" id="Database Console" order="8" weight="0.29652715" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="10" weight="0.3286119" />
       <window_info anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5013369" side_tool="true" weight="0.50141644" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.3286119" />
-      <window_info anchor="bottom" id="Messages" order="16" weight="0.3243626" />
-      <window_info anchor="bottom" id="SQL Generator" order="17" sideWeight="0.4986631" weight="0.04532578" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32858416" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="15" show_stripe_button="false" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="16" weight="0.3241318" />
+      <window_info anchor="bottom" id="SQL Generator" order="17" sideWeight="0.4986631" weight="0.3365984" />
+      <window_info anchor="bottom" id="Phaser Chains" order="18" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" show_stripe_button="false" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
       <window_info anchor="right" id="Maven" order="3" weight="0.020134227" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.2" />
+      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.044444446" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.42105263" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.31407407" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -835,8 +966,8 @@
       <window_info id="Learn" order="7" />
       <window_info id="Web" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4973357" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32858416" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.39626002" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39786857" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -847,18 +978,19 @@
       <window_info anchor="bottom" id="Docker" order="10" weight="0.3286119" />
       <window_info anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5013369" side_tool="true" weight="0.50141644" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.3286119" />
-      <window_info anchor="bottom" id="Messages" order="16" weight="0.3243626" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32858416" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="15" show_stripe_button="false" weight="0.3286119" />
+      <window_info anchor="bottom" id="Messages" order="16" weight="0.3241318" />
       <window_info anchor="bottom" id="SQL Generator" order="17" sideWeight="0.4986631" weight="0.04532578" />
+      <window_info anchor="bottom" id="Phaser Chains" order="18" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" show_stripe_button="false" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
       <window_info anchor="right" id="Maven" order="3" weight="0.020134227" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.2" />
+      <window_info active="true" anchor="right" id="Database" order="6" visible="true" weight="0.31879196" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout-to-restore>
@@ -905,12 +1037,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/servlets/FrontControllerServlet.java</url>
           <line>21</line>
           <properties />
@@ -942,40 +1068,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Pre-Lombok/ErsUsers.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
-          <caret line="117" selection-start-line="117" selection-end-line="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Pre-Lombok/Principal.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1720">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://3932d7ce-91fd-4817-b9f7-fc947b4a342e/schema/IBJKP1/table/ERS_USER_ROLES" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/Saved-Content.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/ErsUsers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/Assets/Images/ExExpenseSymbol.png" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/Principal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/Animate.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="71560">
@@ -1046,20 +1139,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/dashboard.css" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/login.css" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/Staged-HTML/Staged-Dashboard.html" />
-    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_STATUS">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="6ca75a93-3f8c-4df1-af53-1277d0766e29">
-          <filtering />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_USERS">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="91c7385d-4f80-4cd9-9157-ee4ac6c4f30b">
-          <filtering />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1156,13 +1235,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="1" selection-start-line="1" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="77">
@@ -1170,15 +1242,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="c1efc640-2b72-48e2-8f27-9e65afb5b908">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/util/JwtGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -1186,63 +1250,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsReimbursementDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="48" column="30" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
+        <state relative-caret-position="1856">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ErsReimbursementService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1376">
+          <caret line="95" column="37" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbSrc:///ea955fd6/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/routine/NEW_REIMB.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT_STATUS">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="ccd8148d-ad12-4303-9a14-4553379f39fe">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_USERS">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="ccd8148d-ad12-4303-9a14-4553379f39fe">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console_1.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbSrc:///ea955fd6/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/routine/RESOLVE_REIMB.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://251f4e6d-8f83-4554-a7d0-ed057d3e40e7/schema/IBJKP1/table/ERS_REIMBURSEMENT">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="ccd8148d-ad12-4303-9a14-4553379f39fe">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/Principal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/ReimbPrinc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+        <state>
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1664">
-          <caret line="104" column="20" selection-start-line="104" selection-start-column="20" selection-end-line="104" selection-end-column="20" />
+        <state relative-caret-position="166">
+          <caret line="99" column="28" lean-forward="true" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/partials/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/JS/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="285" column="34" selection-start-line="285" selection-start-column="34" selection-end-line="285" selection-end-column="34" />
+        <state relative-caret-position="187">
+          <caret line="122" column="70" selection-start-line="122" selection-start-column="70" selection-end-line="122" selection-end-column="70" />
           <folding>
-            <element signature="n#!!block;n#ajaxCall#0" />
-            <element signature="n#!!block;n#ajaxLoadDiv#0" />
-            <element signature="n#!!block;n#timeStamp#0" />
-            <element signature="n#!!block;n#timeOutCalled#0" />
-            <element signature="n#!!block;n#loadLogin#0" />
-            <element signature="n#!!block;n#loadDashboard#0" />
-            <element signature="n#!!block;n#loadCurrentTickets#0" />
-            <element signature="n#!!block;n#loadAllReimbs#0" />
-            <element signature="n#!!block;n#login#0" />
-            <element signature="n#!!block;n#logout#0" />
-            <element signature="n#!!block;n#register#0" />
-            <element signature="n#!!block;n#tableJSON#0" />
+            <element signature="e#171#577#0" />
+            <element signature="e#218#357#0" />
             <element signature="n#!!block;n#addReimbursement#0" />
-            <element signature="n#!!block;n#viewAllReimbursements#0" />
-            <element signature="n#!!block;n#updateReimbursementStatus#0" />
-            <element signature="n#!!block;n#filterAllReimbs#0" />
-            <element signature="n#!!block;n#verifyField#0" />
-            <element signature="n#!!block;n#toggleButton#0" />
-            <element signature="e#10388#10908#0" />
-            <element signature="n#!!block;n#verifyName#0" />
-            <element signature="n#!!block;n#verifyPhone#0" />
-            <element signature="n#!!block;n#verifyEmail#0" />
-            <element signature="n#!!block;n#verifyLoginFields#0" />
-            <element signature="n#!!block;n#verifyRegisterFields#0" />
           </folding>
         </state>
       </provider>
