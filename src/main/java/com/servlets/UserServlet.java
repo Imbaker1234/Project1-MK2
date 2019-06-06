@@ -43,8 +43,8 @@ public class UserServlet extends HttpServlet {
 		String[] userinput = NodeToArray.convert(rootNode);
 		
 		if (userinput.length == 2) {
-			
-            log.info("AccountServlet: Line 47 : AccountServlet.doPost() : Line 45 : Logging in user");
+
+			log.info("AccountServlet : AccountServlet.doPost() : Logging in user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
@@ -56,8 +56,8 @@ public class UserServlet extends HttpServlet {
             log.info("AccountServlet: Line 56 : AccountServlet.doPost() : Sending out response");
             
         } else if (userinput.length == 5) { // This clause is entered register
-        	
-            log.info("AccountServlet: Line 58 : AccountServlet.doPost() : Line 55 : Registering new user");
+
+			log.info("AccountServlet : AccountServlet.doPost() : Registering new user");
 			ErsUsers user = userService.validateCredentials(userinput[0], userinput[1], userinput[2], userinput[3], userinput[4]);
             Principal principal = new Principal(user.getErsUsersId(), user.getErsUsername(),
                     user.getUserRoleName(user.getUserRoleId()));
