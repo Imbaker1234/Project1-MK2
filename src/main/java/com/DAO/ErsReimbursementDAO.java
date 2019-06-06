@@ -104,7 +104,7 @@ public class ErsReimbursementDAO {
             String sql = "{ call RESOLVE_REIMB(?, ?, ?)}";
             CallableStatement stmt = connect.prepareCall(sql);
 			stmt.setInt(1, statusupdate);
-			stmt.setInt(2, user.getId());
+			stmt.setString(2, user.getUsername());
 			stmt.setInt(3, reimbId);
 
 			stmt.executeUpdate();

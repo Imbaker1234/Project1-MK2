@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f3d29d9d-b02b-4cc7-a9ae-36d21bd290e3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/JS/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/JS/script.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -88,24 +87,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/POJO/Principal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/CSS/index.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/UserServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
@@ -126,10 +107,32 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsUsersDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret lean-forward="true" />
+              <folding>
+                <element signature="method#getByUsername#0;class#ErsUsersDAO#0" />
+                <element signature="method#mapResultSet#0;class#ErsUsersDAO#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsReimbursementDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+            <state relative-caret-position="16">
+              <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -297,6 +300,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/JS/script.js" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/DAO/ErsReimbursementDAO.java" />
       </list>
     </option>
   </component>
@@ -378,6 +382,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExExpense.omar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="DAO" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="IBJK-Project-One" type="b2602c69:ProjectViewProjectNode" />
@@ -678,7 +691,7 @@
       <workItem from="1559778174588" duration="2979000" />
       <workItem from="1559781219869" duration="3779000" />
       <workItem from="1559785051104" duration="25861000" />
-      <workItem from="1559847332216" duration="1934000" />
+      <workItem from="1559847332216" duration="3643000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed JS Syntax errors that were keeping the page from loading properly. &#10;&#10;Put in console.log messages to show which lines loaded properly in the JS. &#10;&#10;Added a .properties file. &#10;&#10;Adjusted Tomcat folder so that Tomcat will have full control of it. &#10;&#10;Set up OJDBC as a global libary.">
       <created>1559415450757</created>
@@ -932,11 +945,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559831360954</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="With the addition of the admin and &quot;proper&quot; tickets we will not be able to properly.">
+      <created>1559852407039</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1559852407039</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Updated DAO to utilize callable statement for the RESOLVE_REIMB procedure.">
+      <created>1559853666214</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1559853666214</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182121000" />
+    <option name="totallyTimeSpent" value="183830000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1037,8 +1064,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="Added verification, activation, and deactivation to the register section of the login partial." />
-    <MESSAGE value="Started the beginning of making elements active vs inactive.&#10;&#10;When you type in Register it now clears all the fields from Login and vice versa." />
     <MESSAGE value="Added logs to Account Servlet." />
     <MESSAGE value="Added JWT Authorization: Principal Key-Value pairs to xhr.headers for the ajaxCall method in script.js" />
     <MESSAGE value="Adjusted xhr.setheader to after xhr.open." />
@@ -1062,7 +1087,9 @@
     <MESSAGE value="Ticket views populating appropriately for admins. Spotty for regular users though only one was tested with.&#10;&#10;Set additional functionality at the end of the login method to convert the string that was the principal into a true Javascript Object so that we could reference its key value pairs.&#10;&#10;Setup a &quot;revealAdminPowers&quot; function so that we could dynamically inject HTML containing the functionality for admins on the load of the dashboard if the users role is equal to 'admin'." />
     <MESSAGE value="Populating tickets. No scrollbars." />
     <MESSAGE value="Button working. Denied not pulling the right tickets. Just shows all of them but we also don't have any denied reimbs. It might work fine once we have some." />
-    <option name="LAST_COMMIT_MESSAGE" value="Button working. Denied not pulling the right tickets. Just shows all of them but we also don't have any denied reimbs. It might work fine once we have some." />
+    <MESSAGE value="With the addition of the admin and &quot;proper&quot; tickets we will not be able to properly." />
+    <MESSAGE value="Updated DAO to utilize callable statement for the RESOLVE_REIMB procedure." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated DAO to utilize callable statement for the RESOLVE_REIMB procedure." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1233,30 +1260,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsUsersDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="method#getByUsername#0;class#ErsUsersDAO#0" />
-            <element signature="method#addUser#0;class#ErsUsersDAO#0" />
-            <element signature="method#mapResultSet#0;class#ErsUsersDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/servlets/AccountServlet.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/util/JwtGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsReimbursementDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1856">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
@@ -1378,8 +1386,26 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/251f4e6d-8f83-4554-a7d0-ed057d3e40e7/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        <state relative-caret-position="16">
+          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsReimbursementDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/DAO/ErsUsersDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="method#getByUsername#0;class#ErsUsersDAO#0" />
+            <element signature="method#mapResultSet#0;class#ErsUsersDAO#0" />
+          </folding>
         </state>
       </provider>
     </entry>
