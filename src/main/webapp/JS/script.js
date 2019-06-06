@@ -1,3 +1,5 @@
+let principal;
+
 //Onload ====================================================================================================================================
 
 window.onload = function () {
@@ -61,11 +63,11 @@ function ajaxLoadDiv(view, targetDiv) {
         //console.log(timeStamp() + " " + "Ready State " + xhr.readyState + " // Status " + xhr.status + ", " + xhr.statusText); //DEBUG
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
-            
+
             if (view === "dashboard.view" && window.localStorage.getItem("jwt")) {
                 revealAdminPowers();
                 tableJSON( getTickets("pasttickets") );
-            	
+
             }
         }
     }
@@ -97,11 +99,11 @@ function revealAdminPowers() {
     let principal = JSON.parse(window.localStorage.getItem("principal"));
     let admin;
     if (principal.role === "admin") admin = true;
-	
+
     if (admin) {
         console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
         document.getElementById("admin").innerHTML =
-        `                <span>
+            `                <span>
                 <form-group id="ticket_choice">
                     <input type="text" id="ticket_selector" placeholder="Ticket ID #">
                 <select name="" id="approve_deny">
@@ -115,17 +117,15 @@ function revealAdminPowers() {
                 <br>
                 <select name="filter" id="ticket_filter">
                     <option value="alltickets">View All</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
+                    <option value="Approved">Pending</option>
+                    <option value="Pending">Approved</option>
                     <option value="Denied">Denied</option>
                 </select>
-                <button type="submit" id="activate_ticket_filter">Filter</button>
+                <button type="submit" id="activate_ticket_filter" onclick="tableJSON(getTickets((document.getElementById('ticket_filter').value)))">Filter</button>
             </span>
             <br>
 `;
-
-    document.getElementById("activate_ticket_filter").addEventListener("click",
-    		tableJSON( getTickets((document.getElementById("ticket_filter").value))));
+        //APPROVED AND PENDING SELECT OPTIONS HAVE SWITCHED VALUES DUE TO A LOGIC ERROR IN THE JAVA SERVER LEVEL
     }
 }
 
@@ -196,7 +196,7 @@ function addReimbursement() {
     console.log(timeStamp() + " " + window.localStorage.getItem("addedticket")); //DEBUG
 
     if (window.localStorage.getItem("jwt")) {
-        setTimeout(tableJSON( getTickets("pasttickets") ), 3000);
+        setTimeout(tableJSON(getTickets("pasttickets")), 3000);
     }
 }
 
