@@ -9,6 +9,8 @@ window.onload = function () {
     } else {
         console.log(timeStamp() + " " + "window.onload() called : JWT Not Found: Loading Login");
         ajaxLoadDiv("login.view", "page");
+        if (document.getElementById("logoutbutton")) 
+            document.getElementById("navbar").removeChild( document.getElementById("navbar").childNodes[3]);
 
     }
 };
@@ -75,6 +77,11 @@ function ajaxLoadDiv(view, targetDiv) {
             if (view === "dashboard.view")  {
             	let principal = JSON.parse(window.localStorage.getItem("principal"));
             	document.getElementById("dashboardwelcomeuser").innerText = "Welcome " + principal.username + "!";
+            	let logout = document.createElement("button");
+            	document.getElementById("navbar").appendChild(logout);
+            	logout.innerHTML =`
+                <id="logoutbutton" onclick="logout()">Logout</button>
+                `;
             }
             if (view === "dashboard.view" && window.localStorage.getItem("jwt")) {
                 revealAdminPowers();
@@ -100,6 +107,7 @@ function logout() {
     window.localStorage.removeItem("jwt");
     window.localStorage.removeItem("principal");
     ajaxLoadDiv("login.view", "page");
+    document.getElementById("navbar").removeChild( document.getElementById("navbar").childNodes[3]);
 }
 
 function register() {
