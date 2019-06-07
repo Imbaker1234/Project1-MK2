@@ -16,7 +16,7 @@ window.onload = function () {
 
 //Functionalities ===========================================================================================================================
 
-function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
+function ajaxCall(method, endPoint, incoming, store, view, targetDiv, fieldcheck) {
 
     //console.log(ajax call made"); //DEBUG
     let outgoing = JSON.stringify(incoming);
@@ -39,16 +39,25 @@ function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
                     if (xhr.getResponseHeader("Authorization")) window.localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
                     if (targetDiv) ajaxLoadDiv(view, targetDiv);
                     if (store === "tickets") tableJSON();
-                    if ( (store === "add" || store === "resolve") && result.toString() === "true") alert("Success!");
+                    if ( (store === "add" || store === "resolve") && result.toString() === "true") {
+                    	alert("Success!");
+                    	document.getElementById("reimb_amount").value = "";
+                    	document.getElementById("reimb_desc").value = "";
+                    	document.getElementById("reimb_type").value = 1;
+                    }
                     if ( (store === "add" || store === "resolve") && result.toString() === "false") alert("Invalid input.");
-
+                   
                 }
             }
             else {
             	alert("Invalid input.");
-            }
+            	
+            } 
         }
-    };
+        if (fieldcheck == "login" && xhr.readyState == 4 && xhr.status == 500) alert("Invalid credentials.");
+        if (fieldcheck == "register" && xhr.readyState == 4 && xhr.status == 500) alert("That username/email is already taken.");
+    }; 
+
 }
 
 function ajaxLoadDiv(view, targetDiv) {
@@ -75,42 +84,6 @@ function ajaxLoadDiv(view, targetDiv) {
     }
 }
 
-function revealAdminPowers() {
-    console.log(timeStamp() + "revealAdminPowers() called");
-    let principal = JSON.parse(window.localStorage.getItem("principal"));
-    let admin;
-    if (principal.role === "admin") admin = true;
-
-    if (admin) {
-        console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
-        document.getElementById("admin").innerHTML =
-            `                
-            <br>
-            <span>
-                <form-group id="ticket_choice">
-                    <input type="text" id="ticket_selector" placeholder="Ticket ID #">
-                <select name="" id="approve_deny">
-                    <option value="Approved">Approve</option>
-                    <option value="Denied">Deny</option>
-                </select>
-                <input id="resolve_ticket" type="submit" onclick="updateReimbursementStatus()"
-                       value="Resolve"/>
-                </form-group>
-                <br>
-                <br>
-                <select name="filter" id="ticket_filter">
-                    <option value="alltickets">View All</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Denied">Denied</option>
-                </select>
-                <button type="submit" id="activate_ticket_filter" onclick="getTickets((document.getElementById('ticket_filter').value))">Filter</button>
-            </span>
-            <br /><br /><br />
-`;
-    }
-}
-
 //Functions =============================================================================================================================
 
 function login() {
@@ -118,7 +91,7 @@ function login() {
     let username = document.getElementById("loginusername").value;
     let password = document.getElementById("loginpassword").value;
     let credentials = [username, password];
-    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page");
+    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page", "login");
 }
 
 function logout() {
@@ -138,7 +111,7 @@ function register() {
     let email = document.getElementById("registeremail").value;
     let credentials = [username, password, firstname, lastname, email];
 
-    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page");
+    ajaxCall("POST", "account", credentials, "principal", "dashboard.view", "page", "register");
 }
 
 
@@ -170,8 +143,14 @@ function addReimbursement() {
     let desc = document.getElementById("reimb_desc").value;
     let type = document.getElementById("reimb_type").value;
     if (amt == "" || desc == "" || type == "") {
-        console.log("empty fields");
+        alert("You have empty fields!");
         return;
+        
+    }
+    else if (isNaN(amt) || amt < 0) {
+    	alert("That is not a valid reimbursement amount.");
+    	return;
+    	
     }
     let content = [amt, desc, type];
 
@@ -196,7 +175,7 @@ function updateReimbursementStatus() {
 
 function verifyField(field) {
     //console.log(timeStamp() + " " + "verifyField(" + field + ") called"); //DEBUG
-    return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24);
+    return !(field == "" || field.includes(" ") || field.length < 3 || field.length > 24 || !isNaN(field));
 }
 
 function verifyEmail(email) {
@@ -204,7 +183,6 @@ function verifyEmail(email) {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         return true;
     }
-    document.getElementById("registeremail").value = "";
     return false;
 }
 
@@ -254,7 +232,7 @@ function verifyRegisterFields() {
 console.log(timeStamp() + " " + "JS v1.2 Loaded");
 
 
-//UTILITY FUNCTIONS=======================================================================================================================
+//UTILITY =======================================================================================================================================
 
 
 function timeStamp() {
@@ -264,6 +242,42 @@ function timeStamp() {
 
 function timeOutCalled() {
     console.log("Timeout Called");
+}
+
+function revealAdminPowers() {
+    console.log(timeStamp() + "revealAdminPowers() called");
+    let principal = JSON.parse(window.localStorage.getItem("principal"));
+    let admin;
+    if (principal.role === "admin") admin = true;
+
+    if (admin) {
+        console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
+        document.getElementById("admin").innerHTML =
+            `                
+            <br>
+            <span>
+                <form-group id="ticket_choice">
+                    <input type="text" id="ticket_selector" placeholder="Ticket ID #">
+                <select name="" id="approve_deny">
+                    <option value="Approved">Approve</option>
+                    <option value="Denied">Deny</option>
+                </select>
+                <input id="resolve_ticket" type="submit" onclick="updateReimbursementStatus()"
+                       value="Resolve"/>
+                </form-group>
+                <br>
+                <br>
+                <select name="filter" id="ticket_filter">
+                    <option value="alltickets">View All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Denied">Denied</option>
+                </select>
+                <button type="submit" id="activate_ticket_filter" onclick="getTickets((document.getElementById('ticket_filter').value))">Filter</button>
+            </span>
+            <br /><br /><br />
+`;
+    }
 }
 
 function tableJSON() {
