@@ -38,10 +38,9 @@ function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
                     window.localStorage.setItem(store, xhr.responseText);
                     if (xhr.getResponseHeader("Authorization")) window.localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
                     if (targetDiv) ajaxLoadDiv(view, targetDiv);
-                    
                     if (store === "tickets") tableJSON();
-                    if ( (store === "add" || store === "resolve") && store === "true") alert("Success!");
-                    if ( (store === "add" || store === "resolve") && store === "false") alert("Invalid input.");
+                    if ( (store === "add" || store === "resolve") && result.toString() === "true") alert("Success!");
+                    if ( (store === "add" || store === "resolve") && result.toString() === "false") alert("Invalid input.");
 
                 }
             }
