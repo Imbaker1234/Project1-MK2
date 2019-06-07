@@ -144,6 +144,41 @@ BEGIN
 END;
 /
 
+create or replace PROCEDURE resolve_reimb(p_REIMB_ID in number,
+                               p_RESOLVER in VARCHAR2,
+                               p_STATUS_ID in number)
+    IS
+
+    --DECLARE VARIABLES
+    v_RESOLVER    ERS_USERS.ERS_USERNAME%TYPE;
+    --Here we declare %TYPE in case
+    v_RESOLVER_ID ERS_USERS.ERS_USERS_ID%TYPE;
+
+BEGIN
+
+    --SET VARIABLES FROM PARAMETERS
+    v_RESOLVER := UPPER(p_RESOLVER);
+    --Converting to uppercase to
+    --ignore case sensitivity
+
+    --GET THE AUTHOR_ID
+    SELECT ERS_USERS_ID INTO v_RESOLVER_ID
+    FROM ERS_USERS
+    WHERE UPPER(ERS_USERNAME) = v_RESOLVER;
+    --Converting to uppercase
+    --to ignore case sensitivity
+
+    UPDATE ERS_REIMBURSEMENT
+    SET REIMB_RESOLVED  = systimestamp,
+        REIMB_RESOLVER  = v_RESOLVER_ID,
+        REIMB_STATUS_ID = p_STATUS_ID
+    WHERE REIMB_ID = p_REIMB_ID;
+
+    --COMMIT OPEN TRANSACTIONS
+    COMMIT;
+END;
+/
+
 INSERT INTO ers_user_roles VALUES (1, 'employee');
 INSERT INTO ers_user_roles VALUES (2, 'admin');
 

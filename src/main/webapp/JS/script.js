@@ -1,5 +1,3 @@
-let principal;
-
 //Onload ====================================================================================================================================
 
 window.onload = function () {
@@ -13,7 +11,6 @@ window.onload = function () {
         ajaxLoadDiv("login.view", "page");
 
     }
-    //Removed principals split as they can just be referred to by the names.
 };
 
 
@@ -44,6 +41,9 @@ function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
                     if (targetDiv) {
                         ajaxLoadDiv(view, targetDiv);
                     }
+                    if(store === "tickets") {
+                    	tableJSON();
+                    }
 
                 }
 
@@ -64,9 +64,12 @@ function ajaxLoadDiv(view, targetDiv) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById(targetDiv).innerHTML = xhr.responseText;
 
+            if (view === "dashboard.view")  {
+            	let principal = JSON.parse(window.localStorage.getItem("principal"));
+            	document.getElementById("dashboardwelcomeuser").innerText = "Welcome " + principal.username + "!";
+            }
             if (view === "dashboard.view" && window.localStorage.getItem("jwt")) {
                 revealAdminPowers();
-                tableJSON( getTickets("pasttickets") );
 
             }
         }
@@ -82,7 +85,9 @@ function revealAdminPowers() {
     if (admin) {
         console.log(timeStamp() + " Admin Role Detected. Revealing Admin UI");
         document.getElementById("admin").innerHTML =
-            `                <span>
+            `                
+            <br>
+            <span>
                 <form-group id="ticket_choice">
                     <input type="text" id="ticket_selector" placeholder="Ticket ID #">
                 <select name="" id="approve_deny">
@@ -100,9 +105,9 @@ function revealAdminPowers() {
                     <option value="Approved">Approved</option>
                     <option value="Denied">Denied</option>
                 </select>
-                <button type="submit" id="activate_ticket_filter" onclick="tableJSON(getTickets((document.getElementById('ticket_filter').value)))">Filter</button>
+                <button type="submit" id="activate_ticket_filter" onclick="getTickets((document.getElementById('ticket_filter').value))">Filter</button>
             </span>
-            <br>
+            <br /><br /><br />
 `;
     }
 }
@@ -150,9 +155,11 @@ function getTickets(listType) {
 
     if (jwt && employee && listType != "pasttickets") {
         return null;
+        
     } else if (jwt) {
         let contents = [listType];
         ajaxCall("POST", "dashboard", contents, "tickets");
+        
     }
 }
 
@@ -261,7 +268,7 @@ function timeOutCalled() {
     console.log("Timeout Called");
 }
 
-function tableJSON(getTickets) {
+function tableJSON() {
 
     console.log(timeStamp() + " " + "tableJSON() called");
     let tickets = window.localStorage.getItem("tickets");

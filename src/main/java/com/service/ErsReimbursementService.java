@@ -111,7 +111,7 @@ public class ErsReimbursementService {
 			}
 			String status = "";
 			if (i.getReimbStatusId() == 1) status = "Pending";
-			if (i.getReimbStatusId() == 2) status = "Resolved";
+			if (i.getReimbStatusId() == 2) status = "Approved";
 			if (i.getReimbStatusId() == 3) status = "Denied";
 			ReimbPrinc e = new ReimbPrinc(id, amt, submit, resolve, desc, status);
 			outputlist.add(e);

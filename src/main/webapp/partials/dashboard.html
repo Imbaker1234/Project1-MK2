@@ -1,53 +1,53 @@
 <div class="row">
-    <!--DESIGNATES A ROW ON THE PAGE-->
-    <div class="column dark">
-        <!--DESIGNATES A DARKER COLOR FOR THIS COLUMN-->
-        <div class="content-basket">
-            <!--DESIGNATES A "BASKET" FOR SPACING-->
-            <div id="reimbdiv">
-                <!--DESIGNATES THE NAME OF THE DIV-->
-                <h3 class="text" id="dashboardwelcomeuser">Welcome
-                    ${principalUser}</h3>
+	<!--DESIGNATES A ROW ON THE PAGE-->
+	<div class="column dark">
+		<!--DESIGNATES A DARKER COLOR FOR THIS COLUMN-->
+		<div class="content-basket">
+			<!--DESIGNATES A "BASKET" FOR SPACING-->
+			<div id="reimbdiv">
+				<!--DESIGNATES THE NAME OF THE DIV-->
+				<h3 class="text" id="dashboardwelcomeuser"></h3>
 
 
-                <h4>New Ticket</h4>
-                <div class="form-group">
-                    <input data-type="currency" id="reimb_amount" name="currency-field"
-                           pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="$1,000.00"
-                           type="text" value="">
-                </div>
-                <div class="form-group">
+				<h4>New Ticket</h4>
+				<div class="form-group">
+					<input data-type="currency" id="reimb_amount" name="currency-field"
+						pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="$1,000.00"
+						type="text" value="">
+				</div>
+				<div class="form-group">
 					<textarea class="text" cols="60" id="reimb_desc" maxlength="200"
-                              name="" placeholder="Enter a brief description (0/200)" rows="5"></textarea>
-                </div>
-                <div class="form-group">
-                    <select id="reimb_type" name="expense_type">
-                        <option value="1">Lodging</option>
-                        <option value="2">Travel</option>
-                        <option value="3">Food</option>
-                        <option value="4">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input id="requestsubmit" onclick="addReimbursement()" type="submit"
-                           value="Submit Request"/>
-                    <h3 id="logouttest" onclick="logout()">Click this to logout for
-                        now</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="divider">
-        <br> <br> <br> <br> <br> <br> <br>
-        <br> <img alt="" height="120" id="centerimg"
-                  src="Assets/Images/EELogo.png">
-    </div>
+						name="" placeholder="Enter a brief description (0/200)" rows="5"></textarea>
+				</div>
+				<div class="form-group">
+					<select id="reimb_type" name="expense_type">
+						<option value="1">Lodging</option>
+						<option value="2">Travel</option>
+						<option value="3">Food</option>
+						<option value="4">Other</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input id="requestsubmit" onclick="addReimbursement()"
+						type="submit" value="Submit Request" />
+						<br /><br /><br /><br />
+					<button id="logouttest" onclick="logout()">Logout</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="divider">
+		<br> <br> <br> <br> <br> <br> <br>
+		<br>
+	</div>
 
-    <div class="column light">
-        <div id="ticketdiv">
-        <button id="pasttickets" onclick="tableJSON( getTickets('pasttickets') )">Past Tickets</button>
-            <div id="admin"></div>
-            <table id="ticketview"></table>
-        </div>
-    </div>
+	<div class="column light">
+		<div id="ticketdiv">
+			<button id="pasttickets"
+				onclick="getTickets('pasttickets')">Past
+				Tickets</button>
+			<div id="admin"></div>
+			<table id="ticketview"></table>
+		</div>
+	</div>
 </div>
