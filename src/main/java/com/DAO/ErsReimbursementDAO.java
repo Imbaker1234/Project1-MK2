@@ -97,14 +97,15 @@ public class ErsReimbursementDAO {
 
 	public boolean updateReimbursementStatus(Principal user, int statusupdate, int reimbId) {
 		log.info("in reimb DAO updateReimbursementStatus method");
+		log.info(user + " " + statusupdate + " " + reimbId);
+		
 		try (Connection connect = ConnectionFactory.getInstance().getConnection()) {
 			connect.setAutoCommit(false);
-
-            String sql = "{ call RESOLVE_REIMB(?, ?, ?)}";
+            String sql = "{ call resolve_reimb(?, ?, ?)}";
             CallableStatement stmt = connect.prepareCall(sql);
-			stmt.setInt(3, reimbId);
+			stmt.setInt(1, reimbId);
 			stmt.setString(2, user.getUsername());
-			stmt.setInt(1, statusupdate);
+			stmt.setInt(3, statusupdate);
 
 			stmt.executeUpdate();
 			connect.commit();

@@ -37,16 +37,16 @@ function ajaxCall(method, endPoint, incoming, store, view, targetDiv) {
                 if (store) {
                     window.localStorage.setItem(store, xhr.responseText);
                     if (xhr.getResponseHeader("Authorization")) window.localStorage.setItem("jwt", xhr.getResponseHeader("Authorization"));
-
-                    if (targetDiv) {
-                        ajaxLoadDiv(view, targetDiv);
-                    }
-                    if(store === "tickets") {
-                    	tableJSON();
-                    }
+                    if (targetDiv) ajaxLoadDiv(view, targetDiv);
+                    
+                    if (store === "tickets") tableJSON();
+                    if ( (store === "add" || store === "resolve") && store === "true") alert("Success!");
+                    if ( (store === "add" || store === "resolve") && store === "false") alert("Invalid input.");
 
                 }
-
+            }
+            else {
+            	alert("Invalid input.");
             }
         }
     };
@@ -176,8 +176,7 @@ function addReimbursement() {
     }
     let content = [amt, desc, type];
 
-    ajaxCall("PUT", "dashboard", content, "addedticket");
-    console.log(timeStamp() + " " + window.localStorage.getItem("addedticket")); //DEBUG
+    ajaxCall("PUT", "dashboard", content, "add");
 
 }
 
@@ -189,7 +188,7 @@ function updateReimbursementStatus() {
     let newstatus = document.getElementById("approve_deny").value;
     let content = [reimb_id, newstatus];
 
-    ajaxCall("POST", "dashboard", content);
+    ajaxCall("POST", "dashboard", content, "resolve");
 
 }
 
