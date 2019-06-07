@@ -35,6 +35,7 @@ public class ErsReimbursementService {
 		int typeReformat;
 		try {
 			amtReformat = Double.parseDouble(amt);
+			amtReformat = (Math.floor(amtReformat*100))/100;
 			typeReformat = Integer.parseInt(type);
 			
 		} catch (NumberFormatException e) {
